@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="60.0dip"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="0.0dip"
+        android:layout_weight="1.0"
+        android:background="@color/white"
+        app:layout_scrollFlags="enterAlways|scroll">
+
+        <RelativeLayout
+            android:id="@+id/toolbarWrap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_Logo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/ic_launcher" />
+
+            <com.binaryic.beinsync.TextViewPrimary
+                android:id="@+id/toolbarTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/activity_10dp_margin"
+                android:layout_marginRight="@dimen/activity_5dp_margin"
+                android:layout_toRightOf="@+id/iv_Logo"
+                android:ellipsize="marquee"
+                android:lines="1"
+                android:singleLine="true"
+
+                android:text="Beinsync"
+                android:textAllCaps="true"
+                android:textColor="@color/textPrimary"
+                android:textSize="@dimen/activity_18dp_margin"
+                android:textStyle="bold" />
+
+
+
+
+            <RelativeLayout
+
+                android:id="@+id/btnCart"
+                android:layout_width="40.0dip"
+                android:layout_height="40.0dip"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:clickable="true"
+                android:foreground="?selectableItemBackground">
+
+                <ImageView
+                    android:id="@+id/imgCart"
+                    android:layout_width="24.0dip"
+                    android:layout_height="24.0dip"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ic_search_black_24px"
+                    />
+
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <View
+        android:id="@+id/toolbarShadow"
+        android:layout_width="match_parent"
+        android:layout_height="1.0dip"
+        android:background="@color/shop_Organic_Color"
+        android:visibility="visible" />
+</LinearLayout>
