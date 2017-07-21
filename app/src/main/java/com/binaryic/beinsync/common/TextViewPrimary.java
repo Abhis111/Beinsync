@@ -27,14 +27,14 @@ public class TextViewPrimary extends AppCompatTextView {
 
     public void a() {
         if (Build.VERSION.SDK_INT < 21) {
-            setTypeface(Typeface.createFromAsset(getContext().getAssets(), "Cairo-Regular.ttf"), 0);
+            setTypeface(Typeface.createFromAsset(getContext().getAssets(), "ProximaNova-Regular.ttf"), 0);
             return;
         }
         int i = getTypeface().getStyle();
         if (i == 1) {
-            setTypeface(Typeface.createFromAsset(getContext().getAssets(), "Cairo-Bold.ttf"), i);
+            setTypeface(Typeface.createFromAsset(getContext().getAssets(), "ProximaNova-Regular.ttf"), i);
             return;
         }
-        setTypeface(Typeface.createFromAsset(getContext().getAssets(), "Cairo-Regular.ttf"), 0);
+        setTypeface(Typeface.createFromAsset(getContext().getAssets(), "ProximaNova-Regular.ttf"), 0);
     }
 }

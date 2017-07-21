@@ -30,6 +30,7 @@ public class StoryViewActivity extends AppCompatActivity {
             bundle.putString("title", getIntent().getStringExtra("title"));
             bundle.putString("image", getIntent().getStringExtra("image"));
             bundle.putString("content", getIntent().getStringExtra("content"));
+            bundle.putString("url", getIntent().getStringExtra("url"));
             fragment.setArguments(bundle);
             Utils.addFragment(this, fragment, R.id.fl_Main);
         }

@@ -2,10 +2,10 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+        <!--   Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/theme_orange</item>
     </style>
 
     <style name="MyCustomToolbar" parent="ThemeOverlay.AppCompat.Light">
@@ -13,11 +13,20 @@
         <item name="android:background">@color/theme_blue</item>
         <item name="android:textColorSecondary">@color/white</item>
     </style>
+
     <style name="ToolbarColoredBackArrow" parent="AppTheme">
         <item name="android:textColorSecondary">@color/white</item>
     </style>
-    <style name="Widget.CardContent" parent="android:Widget">
-       <item name="android:paddingLeft">0dp</item>
+
+    <style name="Widget.CardHomeContent" parent="android:Widget">
+        <item name="android:paddingLeft">-4dp</item>
+        <item name="android:paddingRight">0dp</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">3dp</item>
+        <item name="android:orientation">vertical</item>
+
+    </style> <style name="Widget.CardContent" parent="android:Widget">
+        <item name="android:paddingLeft">0dp</item>
         <item name="android:paddingRight">0dp</item>
         <item name="android:paddingTop">16dp</item>
         <item name="android:paddingBottom">24dp</item>

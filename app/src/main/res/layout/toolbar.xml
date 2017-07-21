@@ -24,7 +24,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_centerVertical="true"
-                android:background="@drawable/logo" />
+                android:background="@drawable/logo_02" />
 
             <com.binaryic.beinsync.common.TextViewPrimary
                 android:id="@+id/toolbarTitle"

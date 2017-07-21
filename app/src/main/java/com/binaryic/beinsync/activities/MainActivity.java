@@ -11,9 +11,10 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.binaryic.beinsync.fragments.FragmentHome;
 import com.binaryic.beinsync.R;
 import com.binaryic.beinsync.common.Utils;
+import com.binaryic.beinsync.fragments.FragmentDrawer;
+import com.binaryic.beinsync.fragments.FragmentHome;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     public DrawerLayout drawer;
@@ -59,12 +60,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         toolbarTitle.setVisibility(View.GONE);
         addHomeFragment();
+        addDrawerFragment();
 
     }
 
     public void addHomeFragment() {
 
         Utils.addFragment(MainActivity.this, new FragmentHome(), R.id.fl_Main);
+    }
+
+    public void addDrawerFragment() {
+
+        Utils.addFragment(MainActivity.this, new FragmentDrawer(), R.id.fl_Main_Drawer);
     }
 
     @Override
