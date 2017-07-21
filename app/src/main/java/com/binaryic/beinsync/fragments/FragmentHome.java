@@ -36,7 +36,7 @@ public class FragmentHome extends Fragment {
         rv_Home = (RecyclerView) view.findViewById(R.id.rv_Home);
         swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
 
-
+//ll
         getDashboardData();
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
