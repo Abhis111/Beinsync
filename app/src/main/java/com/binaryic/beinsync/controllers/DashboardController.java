@@ -23,6 +23,7 @@ import java.util.Map;
 import static com.binaryic.beinsync.common.Constants.COLUMN_ID;
 import static com.binaryic.beinsync.common.Constants.COLUMN_IMAGE;
 import static com.binaryic.beinsync.common.Constants.COLUMN_INFO;
+import static com.binaryic.beinsync.common.Constants.COLUMN_LINK;
 import static com.binaryic.beinsync.common.Constants.COLUMN_TITLE;
 import static com.binaryic.beinsync.common.Constants.CONTENT_DASHBOARD;
 import static com.binaryic.beinsync.common.Constants.URL_DASHBOARD;
@@ -51,6 +52,7 @@ public class DashboardController {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             homeModel.setId(jsonObject.getString("id"));
                             homeModel.setTitle(jsonObject.getString("title"));
+                            homeModel.setUrl(jsonObject.getString("url"));
                             homeModel.setContent(jsonObject.getString("content"));
                             if (jsonObject.has("thumbnail_images")) {
                                 JSONObject imags_Object = jsonObject.getJSONObject("thumbnail_images");
@@ -110,6 +112,7 @@ public class DashboardController {
             homeModel.setId(cursor.getString(cursor.getColumnIndex(COLUMN_ID)));
             homeModel.setContent(cursor.getString(cursor.getColumnIndex(COLUMN_INFO)));
             homeModel.setTitle(cursor.getString(cursor.getColumnIndex(COLUMN_TITLE)));
+            homeModel.setUrl(cursor.getString(cursor.getColumnIndex(COLUMN_LINK)));
             homeModel.setImage(cursor.getString(cursor.getColumnIndex(COLUMN_IMAGE)));
 
             array_Data.add(homeModel);
@@ -127,6 +130,7 @@ public class DashboardController {
         values.put(COLUMN_IMAGE, homeModel.getImage());
         values.put(COLUMN_TITLE, homeModel.getTitle());
         values.put(COLUMN_INFO, homeModel.getContent());
+        values.put(COLUMN_LINK, homeModel.getUrl());
 
         if (cursor.getCount() > 0) {
             context.getContentResolver().update(CONTENT_DASHBOARD, values, selection, null);

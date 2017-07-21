@@ -34,9 +34,16 @@ public class FragmentHome extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_home, container, false);
         rv_Home = (RecyclerView) view.findViewById(R.id.rv_Home);
+
+        rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
 
 //ll
+        ArrayList<HomeModel> array_Data = new ArrayList<>();
+        array_Data = getDashboardDataFromDatabase(getActivity());
+        rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data));
+
+        swipeContainer.setRefreshing(false);
         getDashboardData();
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
