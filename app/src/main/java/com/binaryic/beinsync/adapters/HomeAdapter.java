@@ -2,6 +2,7 @@ package com.binaryic.beinsync.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.binaryic.beinsync.R;
+import com.binaryic.beinsync.activities.StoryViewActivity;
 import com.binaryic.beinsync.models.HomeModel;
 import com.bumptech.glide.Glide;
 
@@ -59,10 +61,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                  //  Intent intent = new Intent(context, StoryViewActivity.class);
-                   // intent.putExtra("title", list.get(getPosition()).getTitle());
-                  //  intent.putExtra("image", list.get(getPosition()).getImage());
-                   // intent.putExtra("content", list.get(getPosition()).getContent());
+                    Intent intent = new Intent(context, StoryViewActivity.class);
+                    intent.putExtra("title", list.get(getPosition()).getTitle());
+                    intent.putExtra("image", list.get(getPosition()).getImage());
+                    intent.putExtra("content", list.get(getPosition()).getContent());
+                    context.startActivity(intent);
                 }
             });
         }

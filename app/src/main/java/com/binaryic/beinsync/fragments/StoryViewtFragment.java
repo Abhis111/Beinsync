@@ -1,4 +1,4 @@
-package com.binaryic.beinsync.activities;
+package com.binaryic.beinsync.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

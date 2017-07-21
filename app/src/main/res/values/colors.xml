@@ -4,6 +4,11 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+//theme
+
+    <color name="theme_blue">#03458F</color>
+    <color name="theme_orange">#E67515</color>
+
 
     <color name="colorTextMediumDark">#383737</color>
     <color name="colorTextMedium">#5B5B5B</color>
