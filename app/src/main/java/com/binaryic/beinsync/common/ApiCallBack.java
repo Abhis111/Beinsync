@@ -1,4 +1,4 @@
-package com.binaryic.beinsync;
+package com.binaryic.beinsync.common;
 
 public interface ApiCallBack {
 

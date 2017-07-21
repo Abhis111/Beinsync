@@ -1,4 +1,4 @@
-package com.binaryic.beinsync;
+package com.binaryic.beinsync.common;
 
 import android.net.Uri;
 
@@ -21,10 +21,10 @@ public class Constants {
     public static final Uri CONTENT_USER = Uri.parse(CONTENT_PROTOCOL + AUTHORITY + "/" + PATH_USER);
 
     public static String TABLE_DASHBOARD = "TABLE_DASHBOARD";
-    public static String DASH_ID = "DASH_ID";
-    public static String DASH_TITLE = "DASH_TITLE";
-    public static String DASH_IMAGE = "DASH_IMAGE";
-    public static String DASH_INFO = "DASH_INFO";
+    public static String COLUMN_ID = "COLUMN_ID";
+    public static String COLUMN_TITLE = "COLUMN_TITLE";
+    public static String COLUMN_IMAGE = "COLUMN_IMAGE";
+    public static String COLUMN_INFO = "COLUMN_INFO";
 
     public static String TABLE_SECTOR = "TABLE_SECTOR";
     public static String SECTOR_ID = "SECTOR_ID";

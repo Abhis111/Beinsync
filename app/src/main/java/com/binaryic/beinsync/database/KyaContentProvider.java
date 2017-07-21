@@ -1,4 +1,4 @@
-package com.binaryic.beinsync;
+package com.binaryic.beinsync.database;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
@@ -7,7 +7,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.Nullable;
-import static com.binaryic.beinsync.Constants.*;
+
+import static com.binaryic.beinsync.common.Constants.AUTHORITY;
+import static com.binaryic.beinsync.common.Constants.PATH_DASHBOARD;
+import static com.binaryic.beinsync.common.Constants.PATH_SECTOR;
+import static com.binaryic.beinsync.common.Constants.PATH_USER;
+import static com.binaryic.beinsync.common.Constants.TABLE_DASHBOARD;
+import static com.binaryic.beinsync.common.Constants.TABLE_SECTOR;
+import static com.binaryic.beinsync.common.Constants.TABLE_USER;
 
 
 /**

@@ -1,4 +1,4 @@
-package com.binaryic.beinsync;
+package com.binaryic.beinsync.common;
 
 import android.content.Context;
 import android.graphics.Typeface;

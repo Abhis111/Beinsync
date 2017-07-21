@@ -1,4 +1,4 @@
-package com.binaryic.beinsync;
+package com.binaryic.beinsync.common;
 
 import android.app.Activity;
 import android.support.v4.app.Fragment;
@@ -28,7 +28,7 @@ public class Utils {
         transaction.add(containerId, fragment).addToBackStack(fragment.getClass().getName()).commit();
     }
 
-    public static void addFragment(int containerId, Fragment fragment, Activity context) {
+    public static void addFragment(Activity context, Fragment fragment,int containerId ) {
         FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
 

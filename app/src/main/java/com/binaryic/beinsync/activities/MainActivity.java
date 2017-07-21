@@ -11,9 +11,9 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.binaryic.beinsync.FragmentHome;
+import com.binaryic.beinsync.fragments.FragmentHome;
 import com.binaryic.beinsync.R;
-import com.binaryic.beinsync.Utils;
+import com.binaryic.beinsync.common.Utils;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     public DrawerLayout drawer;
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void addHomeFragment() {
 
-        Utils.addFragmentBackHome(MainActivity.this, new FragmentHome(), R.id.fl_Main);
+        Utils.addFragment(MainActivity.this, new FragmentHome(), R.id.fl_Main);
     }
 
     @Override

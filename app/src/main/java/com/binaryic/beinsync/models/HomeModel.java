@@ -1,4 +1,4 @@
-package com.binaryic.beinsync;
+package com.binaryic.beinsync.models;
 
 /**
  * Created by Binary_Apple on 7/20/17.
