@@ -15,7 +15,7 @@
     </style>
 
     <style name="ToolbarColoredBackArrow" parent="AppTheme">
-        <item name="android:textColorSecondary">@color/white</item>
+        <item name="android:textColorSecondary">@color/black</item>
     </style>
 
     <style name="Widget.CardHomeContent" parent="android:Widget">

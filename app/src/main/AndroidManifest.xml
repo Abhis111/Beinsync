@@ -3,6 +3,7 @@
     package="com.binaryic.beinsync">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".common.MyApplication"
         android:allowBackup="true"
@@ -25,6 +26,7 @@
             android:authorities="com.binaryic.beinsync"
             android:exported="true" />
 
+        <activity android:name=".activities.NewsActivity"></activity>
     </application>
 
 </manifest>

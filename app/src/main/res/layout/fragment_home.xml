@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@color/white"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <android.support.v4.widget.SwipeRefreshLayout
@@ -19,4 +19,14 @@
 
         </android.support.v7.widget.RecyclerView>
     </android.support.v4.widget.SwipeRefreshLayout>
+
+    <com.binaryic.beinsync.common.TextViewPrimary
+        android:id="@+id/tv_No_Data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="No Data Available...!!"
+        android:textSize="18dp" />
+
 </LinearLayout>

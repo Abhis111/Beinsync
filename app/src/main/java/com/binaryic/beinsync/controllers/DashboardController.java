@@ -26,7 +26,6 @@ import static com.binaryic.beinsync.common.Constants.COLUMN_INFO;
 import static com.binaryic.beinsync.common.Constants.COLUMN_LINK;
 import static com.binaryic.beinsync.common.Constants.COLUMN_TITLE;
 import static com.binaryic.beinsync.common.Constants.CONTENT_DASHBOARD;
-import static com.binaryic.beinsync.common.Constants.URL_DASHBOARD;
 
 /**
  * Created by Binary_Apple on 7/21/17.
@@ -35,9 +34,9 @@ import static com.binaryic.beinsync.common.Constants.URL_DASHBOARD;
 public class DashboardController {
 
 
-    public static void getDashboardApiCall(final Activity context, final ApiCallBack callback) {
+    public static void getDashboardApiCall(final Activity context, String url, final ApiCallBack callback) {
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_DASHBOARD, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.e("getDashboardApiCall", "response =" + response);
@@ -46,27 +45,62 @@ public class DashboardController {
                     JSONObject object = new JSONObject(response);
                     if (object.getString("status").matches("ok")) {
                         ArrayList<HomeModel> array_Data = new ArrayList<HomeModel>();
-                        JSONArray jsonArray = object.getJSONArray("posts");
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            HomeModel homeModel = new HomeModel();
-                            JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            homeModel.setId(jsonObject.getString("id"));
-                            homeModel.setTitle(jsonObject.getString("title"));
-                            homeModel.setUrl(jsonObject.getString("url"));
-                            homeModel.setContent(jsonObject.getString("content"));
-                            if (jsonObject.has("thumbnail_images")) {
-                                JSONObject imags_Object = jsonObject.getJSONObject("thumbnail_images");
-                                if (imags_Object.has("medium_large")) {
-                                    JSONObject medium_Images_Object = imags_Object.getJSONObject("medium_large");
-                                    if (medium_Images_Object.has("url")) {
-                                        homeModel.setImage(medium_Images_Object.getString("url"));
+                        if (object.has("posts")) {
+                            JSONArray jsonArray = object.getJSONArray("posts");
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                HomeModel homeModel = new HomeModel();
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                if (jsonObject.has("id"))
+                                    homeModel.setId(jsonObject.getString("id"));
+                                if (jsonObject.has("title"))
+                                    homeModel.setTitle(jsonObject.getString("title"));
+                                if (jsonObject.has("url"))
+                                    homeModel.setUrl(jsonObject.getString("url"));
+                                if (jsonObject.has("content"))
+                                    homeModel.setContent(jsonObject.getString("content"));
+                                if (jsonObject.has("thumbnail_images")) {
+                                    JSONObject imags_Object = jsonObject.getJSONObject("thumbnail_images");
+                                    if (imags_Object.has("medium_large")) {
+                                        JSONObject medium_Images_Object = imags_Object.getJSONObject("medium_large");
+                                        if (medium_Images_Object.has("url")) {
+                                            homeModel.setImage(medium_Images_Object.getString("url"));
 
+                                        }
                                     }
                                 }
-                            }
-                            addDashboardDataInDatabase(context, homeModel);
 
-                            array_Data.add(homeModel);
+                                addDashboardDataInDatabase(context, homeModel);
+
+                                array_Data.add(homeModel);
+                            }
+                        } else {
+                            JSONArray jsonArray = object.getJSONArray("page");
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                HomeModel homeModel = new HomeModel();
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                if (jsonObject.has("id"))
+                                    homeModel.setId(jsonObject.getString("id"));
+                                if (jsonObject.has("title"))
+                                    homeModel.setTitle(jsonObject.getString("title"));
+                                if (jsonObject.has("url"))
+                                    homeModel.setUrl(jsonObject.getString("url"));
+                                if (jsonObject.has("content"))
+                                    homeModel.setContent(jsonObject.getString("content"));
+                                if (jsonObject.has("thumbnail_images")) {
+                                    JSONObject imags_Object = jsonObject.getJSONObject("thumbnail_images");
+                                    if (imags_Object.has("medium_large")) {
+                                        JSONObject medium_Images_Object = imags_Object.getJSONObject("medium_large");
+                                        if (medium_Images_Object.has("url")) {
+                                            homeModel.setImage(medium_Images_Object.getString("url"));
+
+                                        }
+                                    }
+                                }
+
+                                addDashboardDataInDatabase(context, homeModel);
+
+                                array_Data.add(homeModel);
+                            }
                         }
                         callback.onSuccess(array_Data);
                     } else {
@@ -93,6 +127,109 @@ public class DashboardController {
                 params.put("client_name", "Seller App");
 
                 Log.e("getAccessTokenApiCall", "params" + params.toString());
+                return params;
+            }
+        };
+        MyApplication.getInstance().addToRequestQueue(stringRequest, "getAccessTokenApiCall");
+
+
+    }
+
+    public static void getNewsApiCall(final Activity context, String url, final ApiCallBack callback) {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.e("getDashboardApiCall", "response =" + response);
+
+                try {
+                    JSONObject object = new JSONObject(response);
+                    if (object.getString("status").matches("ok")) {
+                        ArrayList<HomeModel> array_Data = new ArrayList<HomeModel>();
+                        if (object.has("posts")) {
+
+                            JSONArray jsonArray = object.getJSONArray("posts");
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                HomeModel homeModel = new HomeModel();
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                if (jsonObject.has("id"))
+                                    homeModel.setId(jsonObject.getString("id"));
+                                if (jsonObject.has("title"))
+                                    homeModel.setTitle(jsonObject.getString("title"));
+                                if (jsonObject.has("url"))
+                                    homeModel.setUrl(jsonObject.getString("url"));
+                                if (jsonObject.has("content"))
+                                    homeModel.setContent(jsonObject.getString("content"));
+                                if (jsonObject.has("thumbnail_images")) {
+                                    try {
+                                        JSONObject imags_Object = jsonObject.getJSONObject("thumbnail_images");
+                                        if (imags_Object.has("medium_large")) {
+                                            JSONObject medium_Images_Object = imags_Object.getJSONObject("medium_large");
+                                            if (medium_Images_Object.has("url")) {
+                                                homeModel.setImage(medium_Images_Object.getString("url"));
+
+                                            }
+                                        }
+                                    } catch (Exception e) {
+                                    }
+                                }
+
+                                array_Data.add(homeModel);
+                            }
+                        } else {
+                            JSONArray jsonArray = object.getJSONArray("page");
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                HomeModel homeModel = new HomeModel();
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                if (jsonObject.has("id"))
+                                    homeModel.setId(jsonObject.getString("id"));
+                                if (jsonObject.has("title"))
+                                    homeModel.setTitle(jsonObject.getString("title"));
+                                if (jsonObject.has("url"))
+                                    homeModel.setUrl(jsonObject.getString("url"));
+                                if (jsonObject.has("content"))
+                                    homeModel.setContent(jsonObject.getString("content"));
+                                if (jsonObject.has("thumbnail_images")) {
+                                    try {
+                                        JSONObject imags_Object = jsonObject.getJSONObject("thumbnail_images");
+                                        if (imags_Object.has("medium_large")) {
+                                            JSONObject medium_Images_Object = imags_Object.getJSONObject("medium_large");
+                                            if (medium_Images_Object.has("url")) {
+                                                homeModel.setImage(medium_Images_Object.getString("url"));
+
+                                            }
+                                        }
+                                    } catch (Exception e) {
+                                    }
+                                }
+
+                                array_Data.add(homeModel);
+                            }
+                        }
+                        callback.onSuccess(array_Data);
+                    } else {
+                        callback.onError("success value is 0. please check responce");
+                    }
+
+                } catch (Exception e) {
+                    callback.onError(e.getMessage());
+                    Log.e("errrorrrr", e.toString());
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("getAccessTokenApiCall", error.toString());
+                callback.onError(error.getMessage());
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("client_name", "Seller App");
+
                 return params;
             }
         };

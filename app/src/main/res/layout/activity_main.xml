@@ -16,16 +16,17 @@
             android:id="@+id/fl_Main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/iv_add"
+            android:layout_above="@+id/iv_Add"
             android:layout_marginTop="61.0dip">
 
         </FrameLayout>
 
         <ImageView
-            android:id="@+id/iv_add"
+            android:id="@+id/iv_Add"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:layout_alignParentBottom="true" />
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/banner" />
 
         <include
             android:id="@+id/tb"

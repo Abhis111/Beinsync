@@ -14,7 +14,7 @@ public class Constants {
     public static final String PATH_SECTOR = "sector";
     public static final String PATH_USER = "user";
     public static final String URL = "http://www.beinsync.in/";
-    public static final String URL_DASHBOARD = URL+"?json=1";
+    public static final String URL_DASHBOARD = URL + "?json=1";
 
     public static final Uri CONTENT_DASHBOARD = Uri.parse(CONTENT_PROTOCOL + AUTHORITY + "/" + PATH_DASHBOARD);
     public static final Uri CONTENT_SECTOR = Uri.parse(CONTENT_PROTOCOL + AUTHORITY + "/" + PATH_SECTOR);

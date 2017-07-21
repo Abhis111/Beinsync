@@ -9,41 +9,35 @@ import android.widget.FrameLayout;
 
 import com.binaryic.beinsync.R;
 import com.binaryic.beinsync.common.Utils;
-import com.binaryic.beinsync.fragments.StoryViewtFragment;
+import com.binaryic.beinsync.fragments.FragmentNews;
 
-public class StoryViewActivity extends AppCompatActivity {
+public class NewsActivity extends AppCompatActivity {
     private FrameLayout fl_Main;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_story_view);
+        setContentView(R.layout.activity_news);
         init();
-
+        getExtra();
     }
 
     private void getExtra() {
-        if (getIntent().hasExtra("title")) {
-            Fragment fragment = new StoryViewtFragment();
+        if (getIntent().hasExtra("link")) {
+            Fragment fragment = new FragmentNews();
             Bundle bundle = new Bundle();
-            bundle.putString("title", getIntent().getStringExtra("title"));
-            bundle.putString("image", getIntent().getStringExtra("image"));
-            bundle.putString("content", getIntent().getStringExtra("content"));
-            bundle.putString("url", getIntent().getStringExtra("url"));
+            bundle.putString("link", getIntent().getStringExtra("link"));
             fragment.setArguments(bundle);
             Utils.addFragment(this, fragment, R.id.fl_Main);
         }
 
     }
 
+
     private void init() {
         fl_Main = (FrameLayout) findViewById(R.id.fl_Main);
         setToolBar();
-        getExtra();
-
     }
-
 
     private void setToolBar() {
 

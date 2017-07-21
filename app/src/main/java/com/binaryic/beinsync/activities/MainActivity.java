@@ -1,27 +1,33 @@
 package com.binaryic.beinsync.activities;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.binaryic.beinsync.R;
+import com.binaryic.beinsync.common.Constants;
 import com.binaryic.beinsync.common.Utils;
 import com.binaryic.beinsync.fragments.FragmentDrawer;
 import com.binaryic.beinsync.fragments.FragmentHome;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    public DrawerLayout drawer;
+    public static DrawerLayout drawer;
     public FrameLayout fl_Main;
     public FrameLayout fl_Main_Drawer;
     public TextView toolbarTitle;
     RelativeLayout btnCart;
+    private ImageView iv_Add;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +54,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    private void openLink() {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://binaryic.com/"));
+        startActivity(browserIntent);
+    }
+
     private void init() {
 
         fl_Main = (FrameLayout) findViewById(R.id.fl_Main);
         fl_Main_Drawer = (FrameLayout) findViewById(R.id.fl_Main_Drawer);
-
+        iv_Add = (ImageView) findViewById(R.id.iv_Add);
+        iv_Add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openLink();
+            }
+        });
         toolbarTitle = (TextView) findViewById(R.id.toolbarTitle);
         btnCart = (RelativeLayout) findViewById(R.id.btnCart);
 
@@ -65,8 +82,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void addHomeFragment() {
+        Fragment fragment = new FragmentHome();
+        Bundle bundle = new Bundle();
+        bundle.putString("link", Constants.URL_DASHBOARD);
+        fragment.setArguments(bundle);
+        Utils.addFragment(MainActivity.this, fragment, R.id.fl_Main);
 
-        Utils.addFragment(MainActivity.this, new FragmentHome(), R.id.fl_Main);
     }
 
     public void addDrawerFragment() {

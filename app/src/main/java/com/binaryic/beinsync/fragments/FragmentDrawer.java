@@ -32,27 +32,38 @@ public class FragmentDrawer extends Fragment {
         rv_Drawer.hasFixedSize();
         rv_Drawer.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        ArrayList<DrawerModel> array_Data = new ArrayList<DrawerModel>();
 
-        ArrayList<DrawerModel> array_Data = new ArrayList<>();
-        DrawerModel model = new DrawerModel();
-        model.setId("0");
-        model.setTitle("Marketing");
-        array_Data.add(model);
 
-        DrawerModel model1 = new DrawerModel();
-        model1.setId("1");
-        model1.setTitle("News");
-        array_Data.add(model1);
+        for (int i = 0; i < 3; i++) {
+            DrawerModel model = new DrawerModel();
+            switch (i) {
+                case 0:
+                    model.setId("category/marketing/");
+                    model.setTitle("Marketing");
+                    break;
+                case 1:
+                    model.setId("category/design-development/");
+                    model.setTitle("Design and Development");
+                    break;
+                case 2:
+                    model.setId("category/news/");
+                    model.setTitle("News");
+                    break;
+                case 3:
+                    model.setId("learning-lab/events/");
+                    model.setTitle("Events");
+                    break;
+                case 4:
+                    model.setId("learning-lab/webinar/");
+                    model.setTitle("Webinar");
+                    break;
 
-        DrawerModel model2 = new DrawerModel();
-        model2.setId("2");
-        model2.setTitle("Learning lab");
-        array_Data.add(model2);
 
-        DrawerModel model3 = new DrawerModel();
-        model3.setId("3");
-        model3.setTitle("Design and Development");
-        array_Data.add(model3);
+            }
+
+            array_Data.add(model);
+        }
 
 
         rv_Drawer.setAdapter(new DrawerAdapter(getActivity(), array_Data));

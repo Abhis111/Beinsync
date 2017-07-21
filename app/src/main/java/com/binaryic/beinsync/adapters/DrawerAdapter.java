@@ -2,7 +2,9 @@ package com.binaryic.beinsync.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +12,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.binaryic.beinsync.R;
+import com.binaryic.beinsync.activities.NewsActivity;
+import com.binaryic.beinsync.common.Constants;
 import com.binaryic.beinsync.models.DrawerModel;
 
 import java.util.ArrayList;
+
+import static com.binaryic.beinsync.activities.MainActivity.drawer;
 
 
 /**
@@ -56,13 +62,13 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+                    drawer.closeDrawer(Gravity.LEFT);
                     Toast.makeText(context, list.get(getPosition()).getTitle(), Toast.LENGTH_SHORT).show();
-                    /*Intent intent = new Intent(context, StoryViewActivity.class);
-                    intent.putExtra("title", list.get(getPosition()).getTitle());
-                    intent.putExtra("image", list.get(getPosition()).getImage());
-                    intent.putExtra("content", list.get(getPosition()).getContent());
-                    intent.putExtra("url", list.get(getPosition()).getUrl());
-                    context.startActivity(intent);*/
+
+                    Intent intent = new Intent(context, NewsActivity.class);
+                    intent.putExtra("link", Constants.URL + list.get(getPosition()).getId());
+                    context.startActivity(intent);
                 }
             });
         }
