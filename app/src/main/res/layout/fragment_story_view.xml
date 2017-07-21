@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_light_skin">
+
+        <TextView
+            android:id="@+id/tv_Story_Name"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_100dp_margin"
+            android:layout_marginLeft="@dimen/activity_16dp_margin"
+            android:gravity="center|start"
+            android:text="Story Name"
+            android:textColor="@color/white"
+            android:textSize="@dimen/activity_20dp_margin" />
+    </LinearLayout>
+
+    <android.support.v4.widget.NestedScrollView
+       android:layout_margin="@dimen/activity_16dp_margin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:background="@drawable/logo"
+                android:id="@+id/iv_StoryImage"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_150dp_margin" />
+
+            <RelativeLayout
+                android:id="@+id/sample_main_layout"
+                style="@style/Widget.CardContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <WebView
+                    android:id="@+id/webview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>
