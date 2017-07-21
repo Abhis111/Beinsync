@@ -1,4 +1,4 @@
-package com.binaryic.beinsync;
+package com.binaryic.beinsync.activities;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -11,10 +11,14 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.binaryic.beinsync.FragmentHome;
+import com.binaryic.beinsync.R;
+import com.binaryic.beinsync.Utils;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    public static DrawerLayout drawer;
-    public static FrameLayout layPager;
-    public static FrameLayout layPager_Drawer;
+    public DrawerLayout drawer;
+    public FrameLayout fl_Main;
+    public FrameLayout fl_Main_Drawer;
     public TextView toolbarTitle;
     RelativeLayout btnCart;
 
@@ -45,8 +49,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void init() {
 
-        layPager = (FrameLayout) findViewById(R.id.layPager);
-        layPager_Drawer = (FrameLayout) findViewById(R.id.layPager_Drawer);
+        fl_Main = (FrameLayout) findViewById(R.id.fl_Main);
+        fl_Main_Drawer = (FrameLayout) findViewById(R.id.fl_Main_Drawer);
 
         toolbarTitle = (TextView) findViewById(R.id.toolbarTitle);
         btnCart = (RelativeLayout) findViewById(R.id.btnCart);
@@ -60,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void addHomeFragment() {
 
-        Utils.addFragmentBackHome(MainActivity.this, new FragmentHome(), R.id.layPager_Drawer);
+        Utils.addFragmentBackHome(MainActivity.this, new FragmentHome(), R.id.fl_Main);
     }
 
     @Override

@@ -13,10 +13,10 @@
         android:layout_height="match_parent">
 
         <FrameLayout
-            android:id="@+id/layPager"
+            android:id="@+id/fl_Main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="56.0dip">
+            android:layout_marginTop="61.0dip">
 
         </FrameLayout>
 
@@ -41,7 +41,7 @@
             android:orientation="vertical">
 
             <FrameLayout
-                android:id="@+id/layPager_Drawer"
+                android:id="@+id/fl_Main_Drawer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
