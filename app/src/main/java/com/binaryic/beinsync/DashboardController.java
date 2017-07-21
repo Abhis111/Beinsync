@@ -11,6 +11,7 @@ import com.android.volley.toolbox.StringRequest;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,27 +34,28 @@ public class DashboardController {
                 try {
                     JSONObject object = new JSONObject(response);
                     if (object.getString("status").matches("ok")) {
-
+                        ArrayList<HomeModel> array_Data = new ArrayList<HomeModel>();
                         JSONArray jsonArray = object.getJSONArray("posts");
                         for (int i = 0; i < jsonArray.length(); i++) {
-
+                            HomeModel homeModel = new HomeModel();
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
-                            jsonObject.getString("id");
-                            jsonObject.getString("title");
-                            jsonObject.getString("content");
+                            homeModel.setId(jsonObject.getString("id"));
+                            homeModel.setTitle(jsonObject.getString("title"));
+                            homeModel.setContent(jsonObject.getString("content"));
                             if (jsonObject.has("thumbnail_images")) {
                                 JSONObject imags_Object = jsonObject.getJSONObject("thumbnail_images");
                                 if (imags_Object.has("medium_large")) {
                                     JSONObject medium_Images_Object = imags_Object.getJSONObject("medium_large");
                                     if (medium_Images_Object.has("url")) {
-                                        String image_Url = medium_Images_Object.getString("url");
+                                        homeModel.setImage(medium_Images_Object.getString("url"));
 
                                     }
                                 }
                             }
+                            array_Data.add(homeModel);
                         }
 
-                        callback.onSuccess(object.getInt("success"));
+                        callback.onSuccess(array_Data);
                     } else {
                         callback.onError("success value is 0. please check responce");
                     }
