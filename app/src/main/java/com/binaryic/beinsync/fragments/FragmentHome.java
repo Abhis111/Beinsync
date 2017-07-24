@@ -1,6 +1,8 @@
 package com.binaryic.beinsync.fragments;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -47,7 +49,6 @@ public class FragmentHome extends Fragment {
         ArrayList<HomeModel> array_Data = new ArrayList<>();
         array_Data = getDashboardDataFromDatabase(getActivity());
         rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data));
-
         swipeContainer.setRefreshing(false);
         getDashboardData();
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
@@ -57,9 +58,7 @@ public class FragmentHome extends Fragment {
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
                 getDashboardData();
-
             }
         });
 
@@ -71,7 +70,6 @@ public class FragmentHome extends Fragment {
             @Override
             public void onSuccess(Object success) {
                 ArrayList<HomeModel> array_Data = new ArrayList<>();
-
                 array_Data = getDashboardDataFromDatabase(getActivity());
                 if (array_Data.size() > 0) {
                     tv_No_Data.setVisibility(View.GONE);
@@ -97,6 +95,22 @@ public class FragmentHome extends Fragment {
                 rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data));
             }
         });
+    }
+
+    public void search(String search_text){
+        ArrayList<HomeModel> array_data = new ArrayList<>();
+        array_data = DashboardController.search(getActivity(),search_text);
+        if (array_data.size() > 0) {
+            tv_No_Data.setVisibility(View.GONE);
+            swipeContainer.setVisibility(View.VISIBLE);
+            swipeContainer.setRefreshing(false);
+            rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+            rv_Home.setAdapter(new HomeAdapter(getActivity(), array_data));
+        }else {
+            tv_No_Data.setVisibility(View.VISIBLE);
+            swipeContainer.setVisibility(View.GONE);
+        }
+
     }
 
 

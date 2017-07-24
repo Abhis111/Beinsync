@@ -2,7 +2,9 @@ package com.binaryic.beinsync.controllers;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -11,6 +13,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.binaryic.beinsync.common.ApiCallBack;
 import com.binaryic.beinsync.common.MyApplication;
+import com.binaryic.beinsync.database.MyDBHelper;
 import com.binaryic.beinsync.models.HomeModel;
 
 import org.json.JSONArray;
@@ -261,8 +264,6 @@ public class DashboardController {
         ContentValues values = new ContentValues();
         String selection = COLUMN_ID + "  = '" + homeModel.getId() + "'";
         Cursor cursor = context.getContentResolver().query(CONTENT_DASHBOARD, null, selection, null, null);
-
-
         values.put(COLUMN_ID, homeModel.getId());
         values.put(COLUMN_IMAGE, homeModel.getImage());
         values.put(COLUMN_TITLE, homeModel.getTitle());
@@ -275,6 +276,30 @@ public class DashboardController {
         } else {
             context.getContentResolver().insert(CONTENT_DASHBOARD, values);
         }
+    }
+
+    public static ArrayList<HomeModel> search(Context context,String search_text){
+        ArrayList<HomeModel> array_Data = new ArrayList<HomeModel>();
+        try{
+            MyDBHelper helper = new MyDBHelper(context);
+            SQLiteDatabase database = helper.getWritableDatabase();
+            Cursor cursor = database.rawQuery("Select COLUMN_ID,COLUMN_TITLE,COLUMN_LINK,COLUMN_IMAGE,COLUMN_INFO from TABLE_DASHBOARD where lower(COLUMN_TITLE) like '%" + search_text + "%'",null);
+            //Cursor cursor = context.getContentResolver().query(CONTENT_DASHBOARD, null, selection, null, null);
+            if(cursor.getCount() > 0){
+                for(int i =0;i < cursor.getCount();i++) {
+                    cursor.moveToNext();
+                    HomeModel homeModel = new HomeModel();
+                    homeModel.setContent(cursor.getString(cursor.getColumnIndex(COLUMN_INFO)));
+                    homeModel.setId(cursor.getString(cursor.getColumnIndex(COLUMN_ID)));
+                    homeModel.setImage(cursor.getString(cursor.getColumnIndex(COLUMN_IMAGE)));
+                    homeModel.setTitle(cursor.getString(cursor.getColumnIndex(COLUMN_TITLE)));
+                    homeModel.setUrl(cursor.getString(cursor.getColumnIndex(COLUMN_LINK)));
+                    array_Data.add(homeModel);
+                }
+            }
+        }catch (Exception ex){}
+        return array_Data;
+
     }
 
 }

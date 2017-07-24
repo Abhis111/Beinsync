@@ -5,10 +5,14 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -21,14 +25,16 @@ import com.binaryic.beinsync.common.Utils;
 import com.binaryic.beinsync.fragments.FragmentDrawer;
 import com.binaryic.beinsync.fragments.FragmentHome;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+import static android.R.attr.fragment;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener,SearchView.OnQueryTextListener {
     public static DrawerLayout drawer;
     public FrameLayout fl_Main;
     public FrameLayout fl_Main_Drawer;
     public TextView toolbarTitle;
     RelativeLayout btnCart;
     private ImageView iv_Add;
-
+    FragmentHome fragmentHome;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         toolbarTitle = (TextView) findViewById(R.id.toolbarTitle);
         btnCart = (RelativeLayout) findViewById(R.id.btnCart);
 
-        btnCart.setOnClickListener(this);
+//        btnCart.setOnClickListener(this);
 
         toolbarTitle.setVisibility(View.GONE);
         addHomeFragment();
@@ -82,21 +88,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void addHomeFragment() {
-        Fragment fragment = new FragmentHome();
+        fragmentHome = new FragmentHome();
         Bundle bundle = new Bundle();
         bundle.putString("link", Constants.URL_DASHBOARD);
-        fragment.setArguments(bundle);
-        Utils.addFragment(MainActivity.this, fragment, R.id.fl_Main);
+        fragmentHome.setArguments(bundle);
+        Utils.addFragment(MainActivity.this, fragmentHome, R.id.fl_Main);
 
     }
 
-    public void addDrawerFragment() {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
+        searchView.setOnQueryTextListener(this);
+        return true;
+    }
 
+    public void addDrawerFragment() {
         Utils.addFragment(MainActivity.this, new FragmentDrawer(), R.id.fl_Main_Drawer);
     }
 
     @Override
     public void onClick(View v) {
 
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        if(fragmentHome != null){
+            fragmentHome.search(newText);
+        }
+        return false;
     }
 }
