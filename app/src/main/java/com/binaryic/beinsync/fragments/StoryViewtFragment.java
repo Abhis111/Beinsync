@@ -19,7 +19,7 @@ import com.bumptech.glide.Glide;
  * Created by minakshi on 21/7/17.
  */
 
-public class StoryViewtFragment extends Fragment {
+public class  StoryViewtFragment extends Fragment {
     private TextView tv_Story_Name;
     private ImageView iv_StoryImage;
     private WebView webview;
