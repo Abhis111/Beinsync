@@ -8,6 +8,9 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,8 +45,27 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
-        holder.tv_Name.setText(list.get(position).getTitle());
+        if (list.get(position).isHeader()) {
+            holder.rl_child_item.setVisibility(View.GONE);
+            holder.rl_DrawerItem.setVisibility(View.VISIBLE);
+            if (list.get(position).isOpen()) {
+                holder.iv_expand.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_remove_black_24dp));
+            } else
+                holder.iv_expand.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_add));
+            holder.tv_Name.setText(list.get(position).getTitle());
+        } else if (list.get(position).isChild()) {
+            if (list.get(5).isOpen())
+                holder.rl_child_item.setVisibility(View.VISIBLE);
+            else
+                holder.rl_child_item.setVisibility(View.GONE);
+            holder.rl_DrawerItem.setVisibility(View.GONE);
+            holder.tv_child.setText(list.get(position).getTitle());
+        } else {
+            holder.rl_child_item.setVisibility(View.GONE);
+            holder.rl_DrawerItem.setVisibility(View.VISIBLE);
+            holder.iv_expand.setVisibility(View.GONE);
+            holder.tv_Name.setText(list.get(position).getTitle());
+        }
 
     }
 
@@ -54,21 +76,33 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tv_Name;
+        private TextView tv_Name, tv_child;
+        ImageView iv_expand;
+        LinearLayout rl_DrawerItem, rl_child_item;
 
         public ViewHolder(View view) {
             super(view);
             tv_Name = (TextView) view.findViewById(R.id.tv_Name);
+            tv_child = (TextView) view.findViewById(R.id.tv_child);
+            iv_expand = (ImageView) view.findViewById(R.id.iv_expand);
+            rl_DrawerItem = (LinearLayout) view.findViewById(R.id.rl_DrawerItem);
+            rl_child_item = (LinearLayout) view.findViewById(R.id.rl_child_item);
+
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    drawer.closeDrawer(Gravity.LEFT);
-                    Toast.makeText(context, list.get(getPosition()).getTitle(), Toast.LENGTH_SHORT).show();
+                    if(list.get(getPosition()).isHeader()){
+                        list.get(getPosition()).setOpen(!list.get(getPosition()).isOpen());
+                        notifyDataSetChanged();
+                    }else {
 
-                    Intent intent = new Intent(context, NewsActivity.class);
-                    intent.putExtra("link", Constants.URL + list.get(getPosition()).getId());
-                    context.startActivity(intent);
+                        drawer.closeDrawer(Gravity.LEFT);
+                        Toast.makeText(context, list.get(getPosition()).getTitle(), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(context, NewsActivity.class);
+                        intent.putExtra("link", Constants.URL + list.get(getPosition()).getId());
+                        context.startActivity(intent);
+                    }
                 }
             });
         }

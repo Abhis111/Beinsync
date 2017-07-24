@@ -2,41 +2,80 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="15dp"
     android:layout_marginLeft="15dp"
     android:layout_marginRight="15dp"
     android:orientation="vertical">
 
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/rl_DrawerItem"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center">
+        android:layout_height="wrap_content"
 
-        <LinearLayout
+        android:orientation="vertical">
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center|left"
             android:orientation="horizontal">
 
             <com.binaryic.beinsync.common.TextViewPrimary
                 android:id="@+id/tv_Name"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginBottom="@dimen/activity_15dp_margin"
+                android:layout_marginTop="@dimen/activity_15dp_margin"
                 android:text="Title"
-
                 android:textAllCaps="true"
                 android:textColor="@color/black"
                 android:textSize="@dimen/activity_16dp_margin" />
-        </LinearLayout>
+
+            <ImageView
+                android:id="@+id/iv_expand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_add" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/theme_orange" />
+
+    </LinearLayout>
 
 
-    </RelativeLayout>
-
-    <View
+    <LinearLayout
+        android:id="@+id/rl_child_item"
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginTop="@dimen/activity_15dp_margin"
-        android:background="@color/theme_orange" />
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|left"
+        android:layout_marginLeft="@dimen/activity_15dp_margin"
+        android:orientation="vertical">
+
+
+        <com.binaryic.beinsync.common.TextViewPrimary
+            android:id="@+id/tv_child"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginBottom="@dimen/activity_15dp_margin"
+            android:layout_marginTop="@dimen/activity_15dp_margin"
+            android:text="Title"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="@dimen/activity_16dp_margin" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/theme_orange" />
+
+    </LinearLayout>
+
+
 </LinearLayout>
