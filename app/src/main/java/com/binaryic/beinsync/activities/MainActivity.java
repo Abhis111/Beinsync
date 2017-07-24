@@ -93,7 +93,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bundle.putString("link", Constants.URL_DASHBOARD);
         fragmentHome.setArguments(bundle);
         Utils.addFragment(MainActivity.this, fragmentHome, R.id.fl_Main);
-
     }
 
     @Override
