@@ -10,9 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.binaryic.beinsync.R;
 import com.binaryic.beinsync.activities.NewsActivity;
@@ -92,13 +90,13 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
                 @Override
                 public void onClick(View v) {
 
-                    if(list.get(getPosition()).isHeader()){
+                    if (list.get(getPosition()).isHeader()) {
                         list.get(getPosition()).setOpen(!list.get(getPosition()).isOpen());
                         notifyDataSetChanged();
-                    }else {
+                    } else {
 
                         drawer.closeDrawer(Gravity.LEFT);
-                        Toast.makeText(context, list.get(getPosition()).getTitle(), Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(context, list.get(getPosition()).getTitle(), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(context, NewsActivity.class);
                         intent.putExtra("link", Constants.URL + list.get(getPosition()).getId());
                         context.startActivity(intent);
