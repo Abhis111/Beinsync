@@ -17,8 +17,6 @@ import com.binaryic.beinsync.models.HomeModel;
 
 import java.util.ArrayList;
 
-import static com.binaryic.beinsync.controllers.DashboardController.getDashboardDataFromDatabase;
-
 /**
  * Created by Asd on 27-09-2016.
  */
@@ -41,9 +39,9 @@ public class FragmentNews extends Fragment {
         if (bundle != null) {
             link = (bundle.getString("link"))+"?json=1";
         }
-        ArrayList<HomeModel> array_Data = new ArrayList<>();
+       /* ArrayList<HomeModel> array_Data = new ArrayList<>();
         array_Data = getDashboardDataFromDatabase(getActivity());
-        rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data));
+        rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data));*/
 
         swipeContainer.setRefreshing(false);
         getDashboardData();

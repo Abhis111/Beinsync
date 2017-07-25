@@ -36,8 +36,6 @@ public class LoginController {
 
                 try {
                     JSONObject object = new JSONObject(response);
-
-
                         callback.onSuccess(object);
 
             } catch (Exception e) {
