@@ -13,6 +13,7 @@ public class Constants {
     public static final String PATH_DASHBOARD = "dashboard";
     public static final String PATH_SECTOR = "sector";
     public static final String PATH_USER = "user";
+    public static final String PATH_SETTING = "PATH_SETTING";
     public static final String URL = "http://www.beinsync.in/";
     public static final String URL_DASHBOARD = URL + "?json=1";
     public static final String SEND_PHONE_DETAILS = "";
@@ -20,6 +21,7 @@ public class Constants {
     public static final Uri CONTENT_DASHBOARD = Uri.parse(CONTENT_PROTOCOL + AUTHORITY + "/" + PATH_DASHBOARD);
     public static final Uri CONTENT_SECTOR = Uri.parse(CONTENT_PROTOCOL + AUTHORITY + "/" + PATH_SECTOR);
     public static final Uri CONTENT_USER = Uri.parse(CONTENT_PROTOCOL + AUTHORITY + "/" + PATH_USER);
+    public static final Uri CONTENT_SETTING = Uri.parse(CONTENT_PROTOCOL + AUTHORITY + "/" + PATH_SETTING);
 
     public static String TABLE_DASHBOARD = "TABLE_DASHBOARD";
     public static String COLUMN_ID = "COLUMN_ID";
@@ -47,4 +49,17 @@ public class Constants {
     public static final String TRANSPORT_MODE = "TRANSPORT_MODE";
     public static final String VEHICLE_USED = "VEHICLE_USED";
     public static final String MOBILE_NO = "MOBILE_NO";
+
+
+     public static String TABLE_SETTING = "TABLE_SETTING";
+    public static final String COLUMN_TEXT_SIZE = "COLUMN_TEXT_SIZE";
+    public static final String COLUMN_TEXT_STYLE = "COLUMN_TEXT_STYLE";
+    public static final String COLUMN_TEXT_MODE = "COLUMN_TEXT_MODE";
+    public static final String COLUMN_TEXT_ALIGNMENT = "COLUMN_TEXT_ALIGNMENT";
+    public static final String COLUMN_LINE_SPACING = "COLUMN_LINE_SPACING";
+    public static final String COLUMN_BACKGROUND_COLOR = "COLUMN_BACKGROUND_COLOR";
+    public static final String COLUMN_FONT_NAME = "COLUMN_FONT_NAME";
+    public static final String COLUMN_TEXT_COLOR = "COLUMN_TEXT_COLOR";
+
+
 }

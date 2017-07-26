@@ -11,9 +11,11 @@ import android.support.annotation.Nullable;
 import static com.binaryic.beinsync.common.Constants.AUTHORITY;
 import static com.binaryic.beinsync.common.Constants.PATH_DASHBOARD;
 import static com.binaryic.beinsync.common.Constants.PATH_SECTOR;
+import static com.binaryic.beinsync.common.Constants.PATH_SETTING;
 import static com.binaryic.beinsync.common.Constants.PATH_USER;
 import static com.binaryic.beinsync.common.Constants.TABLE_DASHBOARD;
 import static com.binaryic.beinsync.common.Constants.TABLE_SECTOR;
+import static com.binaryic.beinsync.common.Constants.TABLE_SETTING;
 import static com.binaryic.beinsync.common.Constants.TABLE_USER;
 
 
@@ -25,6 +27,7 @@ public class KyaContentProvider extends ContentProvider {
     private static final int CODE_DASHBOARD = 1;
     private static final int CODE_SECTOR = 2;
     private static final int CODE_USER = 3;
+    private static final int CODE_SETTING = 4;
 
     private MyDBHelper helper;
     private SQLiteDatabase database;
@@ -37,6 +40,7 @@ public class KyaContentProvider extends ContentProvider {
         matcher.addURI(AUTHORITY, PATH_DASHBOARD, CODE_DASHBOARD);
         matcher.addURI(AUTHORITY, PATH_SECTOR, CODE_SECTOR);
         matcher.addURI(AUTHORITY, PATH_USER, CODE_USER);
+        matcher.addURI(AUTHORITY, PATH_SETTING, CODE_SETTING);
         return false;
     }
 
@@ -51,6 +55,8 @@ public class KyaContentProvider extends ContentProvider {
             cursor = database.query(TABLE_SECTOR, projection, selection, null, null, null, null);
         }else if (code == CODE_USER) {
             cursor = database.query(TABLE_USER, projection, selection, null, null, null, null);
+        }else if (code == CODE_SETTING) {
+            cursor = database.query(TABLE_SETTING, projection, selection, null, null, null, null);
         }
         return cursor;
     }
@@ -71,6 +77,8 @@ public class KyaContentProvider extends ContentProvider {
             database.insert(TABLE_SECTOR, null, values);
         }else if (code == CODE_USER) {
             database.insert(TABLE_USER, null, values);
+        }else if (code == CODE_SETTING) {
+            database.insert(TABLE_SETTING, null, values);
         }
         return null;
     }
@@ -85,6 +93,8 @@ public class KyaContentProvider extends ContentProvider {
             delete = database.delete(TABLE_SECTOR, selection, selectionArgs);
         }else if (code == CODE_USER) {
             delete = database.delete(TABLE_USER, selection, selectionArgs);
+        }else if (code == CODE_SETTING) {
+            delete = database.delete(TABLE_SETTING, selection, selectionArgs);
         }
         return delete;
     }
@@ -99,6 +109,8 @@ public class KyaContentProvider extends ContentProvider {
             row = database.update(TABLE_SECTOR, values, selection, selectionArgs);
         }else if (code == CODE_USER) {
             row = database.update(TABLE_USER, values, selection, selectionArgs);
+        }else if (code == CODE_SETTING) {
+            row = database.update(TABLE_SETTING, values, selection, selectionArgs);
         }
         return row;
     }

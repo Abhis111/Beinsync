@@ -43,6 +43,47 @@
                 android:textSize="@dimen/activity_18dp_margin"
                 android:textStyle="bold" />
 
+            <LinearLayout
+                android:id="@+id/ll_textFormatOptions"
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true">
+
+                <RelativeLayout
+                    android:id="@+id/rl_Setting"
+                    android:layout_width="40.0dip"
+                    android:layout_height="40.0dip"
+                    android:layout_toLeftOf="@+id/rl_Filter"
+                    android:clickable="true"
+                    android:foreground="?selectableItemBackground">
+
+                    <ImageView
+                        android:id="@+id/iv_Setting"
+                        android:layout_width="24.0dip"
+                        android:layout_height="24.0dip"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/ic_settings_black_24dp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_Filter"
+                    android:layout_width="40.0dip"
+                    android:layout_height="40.0dip"
+                    android:clickable="true"
+                    android:foreground="?selectableItemBackground">
+
+                    <ImageView
+                        android:id="@+id/iv_Filter"
+                        android:layout_width="24.0dip"
+                        android:layout_height="24.0dip"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/ic_filter_list_black_24dp" />
+
+
+                </RelativeLayout>
+            </LinearLayout>
 
             <RelativeLayout
 
@@ -51,10 +92,10 @@
                 android:layout_height="40.0dip"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:visibility="gone"
                 android:layout_marginRight="8dp"
                 android:clickable="true"
-                android:foreground="?selectableItemBackground">
+                android:foreground="?selectableItemBackground"
+                android:visibility="gone">
 
                 <ImageView
                     android:id="@+id/imgCart"

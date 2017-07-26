@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_Size"
+            android:layout_gravity="center|bottom"
+            android:layout_width="@dimen/activity_60dp_margin"
+            android:layout_height="@dimen/activity_35dp_margin"
+            android:gravity="center"
+            android:text="Size"
+            android:padding="@dimen/activity_5dp_margin"
+            android:textSize="@dimen/activity_17dp_margin" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/activity_0.5dp_margin"
+            android:layout_marginLeft="@dimen/activity_1dp_margin"
+            android:layout_marginRight="@dimen/activity_1dp_margin"
+            android:background="@color/lightGrey" />
+    </LinearLayout>
+</LinearLayout>
