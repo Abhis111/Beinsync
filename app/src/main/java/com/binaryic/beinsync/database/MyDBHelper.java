@@ -10,6 +10,7 @@ import static com.binaryic.beinsync.common.Constants.AGE;
 import static com.binaryic.beinsync.common.Constants.AHARCARDNO;
 import static com.binaryic.beinsync.common.Constants.AREA;
 import static com.binaryic.beinsync.common.Constants.COLUMN_BACKGROUND_COLOR;
+import static com.binaryic.beinsync.common.Constants.COLUMN_CATEGORY;
 import static com.binaryic.beinsync.common.Constants.COLUMN_FONT_NAME;
 import static com.binaryic.beinsync.common.Constants.COLUMN_ID;
 import static com.binaryic.beinsync.common.Constants.COLUMN_IMAGE;
@@ -46,10 +47,10 @@ import static com.binaryic.beinsync.common.Constants.VEHICLE_USED;
 public class MyDBHelper extends SQLiteOpenHelper {
 
     public static String DATABASE_NAME = "com.binaryic.beinsync";
-    public static int DATABASE_VERSION = 2;
+    public static int DATABASE_VERSION = 4;
 
     static String DATABASE_SETTING = "create table " + TABLE_SETTING + "( " + COLUMN_TEXT_SIZE + " text, " + COLUMN_TEXT_STYLE + " text, " + COLUMN_TEXT_MODE + " text, " + COLUMN_TEXT_ALIGNMENT + " text, " + COLUMN_LINE_SPACING + " text, " + COLUMN_BACKGROUND_COLOR + " text, " + COLUMN_FONT_NAME + " text, " + COLUMN_TEXT_COLOR + " text );";
-    static String CREATE_DASHBOARD = "create table " + TABLE_DASHBOARD + "( " + COLUMN_ID + " text, " + COLUMN_TITLE + " text, " + COLUMN_LINK + " text, " + COLUMN_IMAGE + " text, " + COLUMN_INFO + " text );";
+    static String CREATE_DASHBOARD = "create table " + TABLE_DASHBOARD + "( " + COLUMN_ID + " text, " + COLUMN_TITLE + " text, " + COLUMN_LINK + " text, " + COLUMN_IMAGE + " text, " + COLUMN_CATEGORY + " text, " + COLUMN_INFO + " text );";
     static String CREATE_SECTOR = "create table " + TABLE_SECTOR + "( " + SECTOR_ID + " text, " + SECTOR + " text, " + AREA + " text, " + LATITUDE + " text, " + LONGITUDE + " text );";
     static String CREATE_USER = "create table " + TABLE_USER + "( " + ID + " text, " + USER_NAME + " text, " + AHARCARDNO + " text, " + AGE + " text, " + CATEGORY + " text, " + OCCUPATION + " text, " + LOCATION_OF_WORK + " text, " + TIME_WORK + " text, " + TRANSPORT_MODE + " text, " + VEHICLE_USED + " text, " + MOBILE_NO + " text );";
 

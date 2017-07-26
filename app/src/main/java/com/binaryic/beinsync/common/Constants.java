@@ -26,6 +26,7 @@ public class Constants {
     public static String TABLE_DASHBOARD = "TABLE_DASHBOARD";
     public static String COLUMN_ID = "COLUMN_ID";
     public static String COLUMN_TITLE = "COLUMN_TITLE";
+    public static String COLUMN_CATEGORY = "COLUMN_CATEGORY";
     public static String COLUMN_LINK = "COLUMN_LINK";
     public static String COLUMN_IMAGE = "COLUMN_IMAGE";
     public static String COLUMN_INFO = "COLUMN_INFO";

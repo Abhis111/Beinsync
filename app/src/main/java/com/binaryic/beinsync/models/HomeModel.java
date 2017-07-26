@@ -11,6 +11,16 @@ public class HomeModel {
     private String content;
     private String image;
     private String url;
+    private String title_Category;
+
+
+    public String getTitle_Category() {
+        return title_Category;
+    }
+
+    public void setTitle_Category(String title_Category) {
+        this.title_Category = title_Category;
+    }
 
     public String getUrl() {
         return url;

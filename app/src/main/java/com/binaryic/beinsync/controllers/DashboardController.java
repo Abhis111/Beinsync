@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.binaryic.beinsync.common.Constants.COLUMN_CATEGORY;
 import static com.binaryic.beinsync.common.Constants.COLUMN_ID;
 import static com.binaryic.beinsync.common.Constants.COLUMN_IMAGE;
 import static com.binaryic.beinsync.common.Constants.COLUMN_INFO;
@@ -61,6 +62,19 @@ public class DashboardController {
                                     homeModel.setUrl(jsonObject.getString("url"));
                                 if (jsonObject.has("content"))
                                     homeModel.setContent(jsonObject.getString("content"));
+
+                                if (jsonObject.has("categories")) {
+                                    JSONArray array_Categories = jsonObject.getJSONArray("categories");
+
+                                    for (int j = 0; j < array_Categories.length(); j++) {
+                                        JSONObject jsonObject_Categories = array_Categories.getJSONObject(j);
+                                        String title = jsonObject_Categories.getString("title");
+                                        Log.e("category_Title", "==" + title);
+                                        homeModel.setTitle_Category(title);
+                                    }
+                                }
+
+
                                 if (jsonObject.has("thumbnail_images")) {
                                     JSONObject imags_Object = jsonObject.getJSONObject("thumbnail_images");
                                     if (imags_Object.has("medium_large")) {
@@ -253,6 +267,7 @@ public class DashboardController {
             homeModel.setContent(cursor.getString(cursor.getColumnIndex(COLUMN_INFO)));
             homeModel.setTitle(cursor.getString(cursor.getColumnIndex(COLUMN_TITLE)));
             homeModel.setUrl(cursor.getString(cursor.getColumnIndex(COLUMN_LINK)));
+            homeModel.setTitle_Category(cursor.getString(cursor.getColumnIndex(COLUMN_CATEGORY)));
             homeModel.setImage(cursor.getString(cursor.getColumnIndex(COLUMN_IMAGE)));
 
             array_Data.add(homeModel);
@@ -269,6 +284,7 @@ public class DashboardController {
         values.put(COLUMN_TITLE, homeModel.getTitle());
         values.put(COLUMN_INFO, homeModel.getContent());
         values.put(COLUMN_LINK, homeModel.getUrl());
+        values.put(COLUMN_CATEGORY, homeModel.getTitle_Category());
 
         if (cursor.getCount() > 0) {
             context.getContentResolver().update(CONTENT_DASHBOARD, values, selection, null);
@@ -278,15 +294,15 @@ public class DashboardController {
         }
     }
 
-    public static ArrayList<HomeModel> search(Context context,String search_text){
+    public static ArrayList<HomeModel> search(Context context, String search_text) {
         ArrayList<HomeModel> array_Data = new ArrayList<HomeModel>();
-        try{
+        try {
             MyDBHelper helper = new MyDBHelper(context);
             SQLiteDatabase database = helper.getWritableDatabase();
-            Cursor cursor = database.rawQuery("Select COLUMN_ID,COLUMN_TITLE,COLUMN_LINK,COLUMN_IMAGE,COLUMN_INFO from TABLE_DASHBOARD where lower(COLUMN_TITLE) like '%" + search_text + "%'",null);
+            Cursor cursor = database.rawQuery("Select COLUMN_ID,COLUMN_TITLE,COLUMN_LINK,COLUMN_IMAGE,COLUMN_INFO from TABLE_DASHBOARD where lower(COLUMN_TITLE) like '%" + search_text + "%'", null);
             //Cursor cursor = context.getContentResolver().query(CONTENT_DASHBOARD, null, selection, null, null);
-            if(cursor.getCount() > 0){
-                for(int i =0;i < cursor.getCount();i++) {
+            if (cursor.getCount() > 0) {
+                for (int i = 0; i < cursor.getCount(); i++) {
                     cursor.moveToNext();
                     HomeModel homeModel = new HomeModel();
                     homeModel.setContent(cursor.getString(cursor.getColumnIndex(COLUMN_INFO)));
@@ -294,10 +310,12 @@ public class DashboardController {
                     homeModel.setImage(cursor.getString(cursor.getColumnIndex(COLUMN_IMAGE)));
                     homeModel.setTitle(cursor.getString(cursor.getColumnIndex(COLUMN_TITLE)));
                     homeModel.setUrl(cursor.getString(cursor.getColumnIndex(COLUMN_LINK)));
+                    homeModel.setTitle_Category(cursor.getString(cursor.getColumnIndex(COLUMN_CATEGORY)));
                     array_Data.add(homeModel);
                 }
             }
-        }catch (Exception ex){}
+        } catch (Exception ex) {
+        }
         return array_Data;
 
     }
