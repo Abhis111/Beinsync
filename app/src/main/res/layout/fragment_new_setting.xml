@@ -30,7 +30,7 @@
                     android:paddingTop="@dimen/activity_10dp_margin"
                     android:text="Setting"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/activity_20dp_margin" />
+                    android:textSize="@dimen/activity_15dp_margin" />
 
                 <ImageView
                     android:id="@+id/ta_close"
@@ -39,7 +39,7 @@
                     android:layout_alignParentRight="true"
                     android:padding="@dimen/activity_10dp_margin"
                     android:src="@drawable/ic_close_black_24dp"
-                    android:textSize="@dimen/activity_20dp_margin" />
+                    android:textSize="@dimen/activity_15dp_margin" />
             </RelativeLayout>
 
             <View
@@ -56,7 +56,7 @@
                 android:paddingRight="@dimen/activity_5dp_margin"
                 android:text="Size"
                 android:textColor="@color/theme_orange"
-                android:textSize="@dimen/activity_18dp_margin" />
+                android:textSize="@dimen/activity_15dp_margin" />
 
             <LinearLayout
                 android:id="@+id/linear_Text"
@@ -84,7 +84,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="Aa"
-                    android:textSize="@dimen/activity_18dp_margin" />
+                    android:textSize="@dimen/activity_15dp_margin" />
 
                 <TextView
                     android:id="@+id/tv_Size20"
@@ -94,7 +94,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="Aa"
-                    android:textSize="@dimen/activity_20dp_margin" />
+                    android:textSize="@dimen/activity_15dp_margin" />
 
                 <TextView
                     android:id="@+id/tv_Size22"
@@ -148,7 +148,7 @@
                         android:paddingRight="@dimen/activity_5dp_margin"
                         android:text="Font"
                         android:textColor="@color/theme_orange"
-                        android:textSize="@dimen/activity_18dp_margin" />
+                        android:textSize="@dimen/activity_15dp_margin" />
 
                     <LinearLayout
                         android:id="@+id/ll_FontRobota"
@@ -162,8 +162,8 @@
 
                         <ImageView
                             android:id="@+id/ta_FontRobota"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/activity_15dp_margin"
+                            android:layout_height="@dimen/activity_15dp_margin"
                             android:src="@drawable/ic_check_circle_black_24dp"
                             android:textColor="@color/orange"
                             android:textSize="@dimen/activity_15dp_margin"
@@ -172,8 +172,8 @@
 
                         <ImageView
                             android:id="@+id/ta_blankFontRobota"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/activity_15dp_margin"
+                            android:layout_height="@dimen/activity_15dp_margin"
                             android:src="@drawable/ic_radio_button_unchecked_black_24dp"
                             android:textSize="@dimen/activity_15dp_margin" />
 
@@ -201,8 +201,8 @@
 
                         <ImageView
                             android:id="@+id/ta_FontPTSans"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/activity_15dp_margin"
+                            android:layout_height="@dimen/activity_15dp_margin"
                             android:src="@drawable/ic_check_circle_black_24dp"
                             android:textColor="@color/orange"
                             android:textSize="@dimen/activity_15dp_margin"
@@ -210,8 +210,8 @@
 
                         <ImageView
                             android:id="@+id/ta_blankFontPTSans"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/activity_15dp_margin"
+                            android:layout_height="@dimen/activity_15dp_margin"
                             android:src="@drawable/ic_radio_button_unchecked_black_24dp"
                             android:textSize="@dimen/activity_15dp_margin" />
 
@@ -236,8 +236,8 @@
 
                         <ImageView
                             android:id="@+id/ta_FontRobotaCondensed"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/activity_15dp_margin"
+                            android:layout_height="@dimen/activity_15dp_margin"
                             android:src="@drawable/ic_check_circle_black_24dp"
                             android:textColor="@color/orange"
                             android:textSize="@dimen/activity_15dp_margin"
@@ -245,8 +245,8 @@
 
                         <ImageView
                             android:id="@+id/ta_blankFontRobotaCondensed"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/activity_15dp_margin"
+                            android:layout_height="@dimen/activity_15dp_margin"
                             android:src="@drawable/ic_radio_button_unchecked_black_24dp"
                             android:textSize="@dimen/activity_15dp_margin" />
 
@@ -274,8 +274,8 @@
 
                         <ImageView
                             android:id="@+id/ta_FontDroidSans"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/activity_15dp_margin"
+                            android:layout_height="@dimen/activity_15dp_margin"
                             android:src="@drawable/ic_check_circle_black_24dp"
                             android:textColor="@color/orange"
                             android:textSize="@dimen/activity_15dp_margin"
@@ -283,8 +283,8 @@
 
                         <ImageView
                             android:id="@+id/ta_blankFontDroidSans"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/activity_15dp_margin"
+                            android:layout_height="@dimen/activity_15dp_margin"
                             android:src="@drawable/ic_radio_button_unchecked_black_24dp"
                             android:textSize="@dimen/activity_15dp_margin" />
 
@@ -306,7 +306,7 @@
                         android:paddingRight="@dimen/activity_5dp_margin"
                         android:text="Style"
                         android:textColor="@color/theme_orange"
-                        android:textSize="@dimen/activity_18dp_margin" />
+                        android:textSize="@dimen/activity_15dp_margin" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -323,7 +323,7 @@
                             android:background="@drawable/grey_background"
                             android:gravity="center"
                             android:text="B"
-                            android:textSize="@dimen/activity_20dp_margin"
+                            android:textSize="@dimen/activity_15dp_margin"
                             android:textStyle="bold" />
 
                         <TextView
@@ -335,7 +335,7 @@
                             android:background="@drawable/grey_background"
                             android:gravity="center"
                             android:text="I"
-                            android:textSize="@dimen/activity_20dp_margin"
+                            android:textSize="@dimen/activity_15dp_margin"
                             android:textStyle="italic" />
                     </LinearLayout>
 
@@ -348,7 +348,7 @@
                         android:paddingRight="@dimen/activity_5dp_margin"
                         android:text="Colour"
                         android:textColor="@color/theme_orange"
-                        android:textSize="@dimen/activity_18dp_margin" />
+                        android:textSize="@dimen/activity_15dp_margin" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -433,7 +433,7 @@
                             android:paddingRight="@dimen/activity_5dp_margin"
                             android:text="Reading Mode"
                             android:textColor="@color/theme_orange"
-                            android:textSize="@dimen/activity_18dp_margin" />
+                            android:textSize="@dimen/activity_15dp_margin" />
 
                         <LinearLayout
                             android:id="@+id/ll_Reading_DayMode"
@@ -447,8 +447,8 @@
 
                             <ImageView
                                 android:id="@+id/ta_Reading_DayMode"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="@dimen/activity_15dp_margin"
+                                android:layout_height="@dimen/activity_15dp_margin"
                                 android:src="@drawable/ic_check_circle_black_24dp"
                                 android:textColor="@color/orange"
                                 android:textSize="@dimen/activity_15dp_margin"
@@ -456,8 +456,8 @@
 
                             <ImageView
                                 android:id="@+id/ta_blankReading_DayMode"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="@dimen/activity_15dp_margin"
+                                android:layout_height="@dimen/activity_15dp_margin"
                                 android:src="@drawable/ic_radio_button_unchecked_black_24dp"
                                 android:textSize="@dimen/activity_15dp_margin" />
 
@@ -487,7 +487,7 @@
                         android:paddingRight="@dimen/activity_5dp_margin"
                         android:text="Alignment"
                         android:textColor="@color/theme_orange"
-                        android:textSize="@dimen/activity_18dp_margin" />
+                        android:textSize="@dimen/activity_15dp_margin" />
 
                     <LinearLayout
                         android:id="@+id/ll_AligmentLeft"
@@ -501,8 +501,8 @@
 
                         <ImageView
                             android:id="@+id/ta_AligmentLeft"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/activity_15dp_margin"
+                            android:layout_height="@dimen/activity_15dp_margin"
                             android:src="@drawable/ic_check_circle_black_24dp"
                             android:textColor="@color/orange"
                             android:textSize="@dimen/activity_15dp_margin"
@@ -510,14 +510,14 @@
 
                         <ImageView
                             android:id="@+id/ta_blankAligmentLeft"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/activity_15dp_margin"
+                            android:layout_height="@dimen/activity_15dp_margin"
                             android:src="@drawable/ic_radio_button_unchecked_black_24dp"
                             android:textSize="@dimen/activity_15dp_margin" />
 
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/activity_13dp_margin"
+                            android:layout_height="@dimen/activity_13dp_margin"
                             android:layout_marginLeft="@dimen/activity_10dp_margin"
                             android:src="@drawable/ic_format_align_left_black_24dp"
                             android:textSize="@dimen/activity_15dp_margin" />
@@ -543,8 +543,8 @@
 
                         <ImageView
                             android:id="@+id/ta_AligmentCenter"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/activity_15dp_margin"
+                            android:layout_height="@dimen/activity_15dp_margin"
                             android:src="@drawable/ic_check_circle_black_24dp"
                             android:textColor="@color/orange"
                             android:textSize="@dimen/activity_15dp_margin"
@@ -552,14 +552,14 @@
 
                         <ImageView
                             android:id="@+id/ta_blankAligmentCenter"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/activity_15dp_margin"
+                            android:layout_height="@dimen/activity_15dp_margin"
                             android:src="@drawable/ic_radio_button_unchecked_black_24dp"
                             android:textSize="@dimen/activity_15dp_margin" />
 
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/activity_13dp_margin"
+                            android:layout_height="@dimen/activity_13dp_margin"
                             android:layout_marginLeft="@dimen/activity_10dp_margin"
                             android:src="@drawable/ic_format_align_center_black_24dp"
 
@@ -585,8 +585,8 @@
 
                         <ImageView
                             android:id="@+id/ta_AligmentRight"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/activity_15dp_margin"
+                            android:layout_height="@dimen/activity_15dp_margin"
                             android:src="@drawable/ic_check_circle_black_24dp"
                             android:textColor="@color/orange"
                             android:textSize="@dimen/activity_15dp_margin"
@@ -594,14 +594,14 @@
 
                         <ImageView
                             android:id="@+id/ta_blankAligmentRight"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/activity_15dp_margin"
+                            android:layout_height="@dimen/activity_15dp_margin"
                             android:src="@drawable/ic_radio_button_unchecked_black_24dp"
                             android:textSize="@dimen/activity_15dp_margin" />
 
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/activity_13dp_margin"
+                            android:layout_height="@dimen/activity_13dp_margin"
                             android:layout_marginLeft="@dimen/activity_10dp_margin"
                             android:src="@drawable/ic_format_align_right_black_24dp"
                             android:textSize="@dimen/activity_15dp_margin" />
@@ -626,8 +626,8 @@
 
                         <ImageView
                             android:id="@+id/ta_AligmentJustify"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/activity_15dp_margin"
+                            android:layout_height="@dimen/activity_15dp_margin"
                             android:src="@drawable/ic_check_circle_black_24dp"
                             android:textColor="@color/orange"
                             android:textSize="@dimen/activity_15dp_margin"
@@ -635,14 +635,14 @@
 
                         <ImageView
                             android:id="@+id/ta_blankAligmentJustify"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/activity_15dp_margin"
+                            android:layout_height="@dimen/activity_15dp_margin"
                             android:src="@drawable/ic_radio_button_unchecked_black_24dp"
                             android:textSize="@dimen/activity_15dp_margin" />
 
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="@dimen/activity_13dp_margin"
+                            android:layout_height="@dimen/activity_13dp_margin"
                             android:layout_marginLeft="@dimen/activity_10dp_margin"
                             android:src="@drawable/ic_format_align_justify_black_24dp"
                             android:textSize="@dimen/activity_15dp_margin" />
@@ -664,7 +664,7 @@
                         android:paddingRight="@dimen/activity_5dp_margin"
                         android:text="Line Spacing"
                         android:textColor="@color/theme_orange"
-                        android:textSize="@dimen/activity_18dp_margin" />
+                        android:textSize="@dimen/activity_15dp_margin" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -699,7 +699,7 @@
                             android:maxLength="4"
                             android:maxLines="1"
                             android:text="1.5"
-                            android:textSize="@dimen/activity_20dp_margin"
+                            android:textSize="@dimen/activity_15dp_margin"
                             android:visibility="gone" />
 
                         <TextView
@@ -708,7 +708,7 @@
                             android:layout_gravity="bottom"
                             android:gravity="bottom"
                             android:text="x"
-                            android:textSize="@dimen/activity_20dp_margin"
+                            android:textSize="@dimen/activity_15dp_margin"
                             android:visibility="gone" />
                     </LinearLayout>
 
@@ -720,7 +720,7 @@
                         android:paddingRight="@dimen/activity_5dp_margin"
                         android:text="Colour"
                         android:textColor="@color/theme_orange"
-                        android:textSize="@dimen/activity_18dp_margin"
+                        android:textSize="@dimen/activity_15dp_margin"
                         android:visibility="invisible" />
 
                     <LinearLayout
@@ -805,7 +805,7 @@
                             android:paddingRight="@dimen/activity_5dp_margin"
                             android:text="Reading Mode"
                             android:textColor="@color/theme_orange"
-                            android:textSize="@dimen/activity_18dp_margin"
+                            android:textSize="@dimen/activity_15dp_margin"
                             android:visibility="invisible" />
 
                         <LinearLayout
@@ -820,8 +820,8 @@
 
                             <ImageView
                                 android:id="@+id/ta_Reading_NightMode"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="@dimen/activity_15dp_margin"
+                                android:layout_height="@dimen/activity_15dp_margin"
                                 android:src="@drawable/ic_check_circle_black_24dp"
                                 android:textColor="@color/orange"
                                 android:textSize="@dimen/activity_15dp_margin"
@@ -829,8 +829,8 @@
 
                             <ImageView
                                 android:id="@+id/ta_blankReading_NightMode"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="@dimen/activity_15dp_margin"
+                                android:layout_height="@dimen/activity_15dp_margin"
                                 android:src="@drawable/ic_radio_button_unchecked_black_24dp"
                                 android:textSize="@dimen/activity_15dp_margin" />
 
@@ -860,7 +860,7 @@
                 android:text="Apply"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="@dimen/activity_18dp_margin" />
+                android:textSize="@dimen/activity_15dp_margin" />
         </RelativeLayout>
     </ScrollView>
 </LinearLayout>

@@ -254,7 +254,7 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
         bt_apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Fragment fragmentAllStory = AllStoryListFragment.newInstance();
+               /*Fragment fragmentAllStory = AllStoryListFragment.newInstance();
                 Cursor cursor = getActivity().getContentResolver().query(CONTENT_REGISTER, null, null, null, null);
                 ContentValues contentValues = new ContentValues();
                 contentValues.put(COLUMN_STYLE_CHECK, "1");
@@ -265,14 +265,14 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
                 }
                 if (select_Setting.matches("main_Page")) {
 
-                    replaceFragmentBack(MainActivity.lay_main.getId(), fragmentAllStory);
+                    replaceFragmentBack(MainActivity.fl_Main.getId(), fragmentAllStory);
 
                 } else {
                     getActivity().finish();
                     Intent intent=new Intent(getActivity(), MainActivity.class);
                     intent.putExtra("callFromActivity","back");
                     startActivity(intent);
-                    getActivity().overridePendingTransition(R.anim.enter, R.anim.exit);
+                  //  getActivity().overridePendingTransition(R.anim.enter, R.anim.exit);
 
                 }*/
             }
@@ -295,10 +295,9 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
                 addData(COLUMN_FONT_NAME, "DroidSans");
                 addData(COLUMN_TEXT_COLOR, "" + "#2D292B");
                 addData(COLUMN_BACKGROUND_COLOR, "" + "#EEEAF0");
-               /* fragment = AllStoryListFragment.newInstance();
-                if (!TextUtils.isEmpty(strSettingComeFrom)) {
+               /* if (!TextUtils.isEmpty(strSettingComeFrom)) {
                     if (strSettingComeFrom.matches("MainActivity")) {
-                        replaceFragmentBack(MainActivity.lay_main.getId(), fragment);
+                        replaceFragmentBack(MainActivity.fl_Main.getId(), fragment);
                     } else {
                         replaceFragmentBack(ShowStoryActivity.fragment_container.getId(), fragment);
                     }
