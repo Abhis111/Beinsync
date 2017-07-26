@@ -34,7 +34,6 @@ public class FragmentDrawer extends Fragment {
 
         ArrayList<DrawerModel> array_Data = new ArrayList<DrawerModel>();
 
-
         for (int i = 0; i < 31; i++) {
             switch (i) {
                 case 0:
