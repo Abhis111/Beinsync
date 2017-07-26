@@ -340,10 +340,11 @@
                     </LinearLayout>
 
                     <TextView
+
                         android:id="@+id/tv_Color_Header"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/activity_5dp_margin"
+                        android:layout_marginTop="@dimen/activity_10dp_margin"
                         android:paddingLeft="@dimen/activity_5dp_margin"
                         android:paddingRight="@dimen/activity_5dp_margin"
                         android:text="Colour"
