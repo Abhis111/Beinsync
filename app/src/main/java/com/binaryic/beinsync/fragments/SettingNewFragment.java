@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ import android.widget.TextView;
 import com.binaryic.beinsync.R;
 import com.binaryic.beinsync.activities.MainActivity;
 import com.binaryic.beinsync.adapters.TestSizeAdapter;
+import com.binaryic.beinsync.common.Constants;
 
 import java.util.ArrayList;
 
@@ -240,8 +242,10 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
         spinner_LineSpacing.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position != 0)
+                if (position != 0) {
+                    Log.e("SettingFragment", "line==" + list.get(position));
                     addData(COLUMN_LINE_SPACING, list.get(position));
+                }
             }
 
             @Override
@@ -254,27 +258,14 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
         bt_apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /*Fragment fragmentAllStory = AllStoryListFragment.newInstance();
-                Cursor cursor = getActivity().getContentResolver().query(CONTENT_REGISTER, null, null, null, null);
-                ContentValues contentValues = new ContentValues();
-                contentValues.put(COLUMN_STYLE_CHECK, "1");
-                if (cursor.getCount() > 0) {
-                    getActivity().getContentResolver().update(CONTENT_REGISTER, contentValues, null, null);
-                } else {
-                    getActivity().getContentResolver().insert(CONTENT_REGISTER, contentValues);
-                }
-                if (select_Setting.matches("main_Page")) {
+                Fragment fragment = new FragmentHome();
+                Bundle bundle = new Bundle();
+                bundle.putString("link", Constants.URL_DASHBOARD);
+                fragment.setArguments(bundle);
 
-                    replaceFragmentBack(MainActivity.fl_Main.getId(), fragmentAllStory);
+                replaceFragmentBack(MainActivity.fl_Main.getId(), fragment);
 
-                } else {
-                    getActivity().finish();
-                    Intent intent=new Intent(getActivity(), MainActivity.class);
-                    intent.putExtra("callFromActivity","back");
-                    startActivity(intent);
-                  //  getActivity().overridePendingTransition(R.anim.enter, R.anim.exit);
 
-                }*/
             }
         });
 
@@ -917,6 +908,6 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
         super.onResume();
 
         // Tracking the screen view
-       // MyApplication.getInstance().trackScreenView("SettingFragment");
+        // MyApplication.getInstance().trackScreenView("SettingFragment");
     }
 }
