@@ -1,5 +1,6 @@
 package com.binaryic.beinsync.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -8,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -30,7 +32,7 @@ import com.binaryic.beinsync.fragments.SettingNewFragment;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, SearchView.OnQueryTextListener {
     public static DrawerLayout drawer;
-    public FrameLayout fl_Main;
+    public static FrameLayout fl_Main;
     public FrameLayout fl_Main_Drawer;
     public TextView toolbarTitle;
     RelativeLayout btnCart;
@@ -86,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         rl_Setting = (RelativeLayout) findViewById(R.id.rl_Setting);
         rl_Filter = (RelativeLayout) findViewById(R.id.rl_Filter);
 
-//        btnCart.setOnClickListener(this);
+        ll_textFormatOptions.setVisibility(View.VISIBLE);
         rl_Filter.setOnClickListener(this);
         rl_Setting.setOnClickListener(this);
 
@@ -162,5 +164,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             fragmentHome.search(newText);
         }
         return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+
+            Fragment f = getSupportFragmentManager().findFragmentById(R.id.fl_Main);
+
+            if (f instanceof FragmentHome) {
+               alertForExit();
+            } else {
+                super.onBackPressed();
+            }
+
+    }
+    private void alertForExit() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Do you want to Exit ?")
+                .setCancelable(false)
+                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                    }
+                })
+                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finishAffinity();
+                    }
+                });
+
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }
