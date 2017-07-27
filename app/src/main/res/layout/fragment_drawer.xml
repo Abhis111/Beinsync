@@ -21,10 +21,12 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_Drawer"
-
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/activity_15dp_margin">
-
-    </android.support.v7.widget.RecyclerView>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_15dp_margin"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_sub_drawer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
 </LinearLayout>
