@@ -199,7 +199,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
 
         Fragment f = getSupportFragmentManager().findFragmentById(R.id.fl_Main);
-
+        ll_textFormatOptions.setVisibility(View.VISIBLE);
         if (f instanceof FragmentHome) {
             alertForExit();
         } else {
