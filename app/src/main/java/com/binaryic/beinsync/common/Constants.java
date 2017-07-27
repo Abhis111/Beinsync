@@ -14,6 +14,7 @@ public class Constants {
     public static final String PATH_SECTOR = "sector";
     public static final String PATH_USER = "user";
     public static final String PATH_SETTING = "PATH_SETTING";
+    public static final String PATH_TAGS = "PATH_TAGS";
     public static final String URL = "http://www.beinsync.in/";
     public static final String URL_DASHBOARD = URL + "?json=1";
     public static final String SEND_PHONE_DETAILS = "";
@@ -22,10 +23,12 @@ public class Constants {
     public static final Uri CONTENT_SECTOR = Uri.parse(CONTENT_PROTOCOL + AUTHORITY + "/" + PATH_SECTOR);
     public static final Uri CONTENT_USER = Uri.parse(CONTENT_PROTOCOL + AUTHORITY + "/" + PATH_USER);
     public static final Uri CONTENT_SETTING = Uri.parse(CONTENT_PROTOCOL + AUTHORITY + "/" + PATH_SETTING);
+    public static final Uri CONTENT_TAGS = Uri.parse(CONTENT_PROTOCOL + AUTHORITY + "/" + PATH_TAGS);
 
     public static String TABLE_DASHBOARD = "TABLE_DASHBOARD";
     public static String COLUMN_ID = "COLUMN_ID";
     public static String COLUMN_TITLE = "COLUMN_TITLE";
+    public static String COLUMN_TAGS = "COLUMN_TAGS";
     public static String COLUMN_CATEGORY = "COLUMN_CATEGORY";
     public static String COLUMN_LINK = "COLUMN_LINK";
     public static String COLUMN_IMAGE = "COLUMN_IMAGE";
@@ -39,6 +42,7 @@ public class Constants {
     public static String LONGITUDE = "LONGITUDE";
 
     public static String TABLE_USER = "TABLE_USER";
+    public static String TABLE_TAGS = "TABLE_TAGS";
     public static final String ID = "ID";
     public static final String USER_NAME = "USER_NAME";
     public static final String AGE = "AGE";

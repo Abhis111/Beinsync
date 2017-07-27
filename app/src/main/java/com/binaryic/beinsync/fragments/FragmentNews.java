@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -68,7 +69,7 @@ public class FragmentNews extends Fragment {
                 ArrayList<HomeModel> array_Data = (ArrayList<HomeModel>) (success);
 
                 swipeContainer.setRefreshing(false);
-                rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+                rv_Home.setLayoutManager(new LinearLayoutManager(getActivity() ));
                 rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data));
             }
 
