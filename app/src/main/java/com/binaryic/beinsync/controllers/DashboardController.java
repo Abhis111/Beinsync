@@ -68,13 +68,17 @@ public class DashboardController {
 
                                 if (jsonObject.has("categories")) {
                                     JSONArray array_Categories = jsonObject.getJSONArray("categories");
-
+                                    String title = "";
                                     for (int j = 0; j < array_Categories.length(); j++) {
                                         JSONObject jsonObject_Categories = array_Categories.getJSONObject(j);
-                                        String title = jsonObject_Categories.getString("title");
-                                        Log.e("category_Title", "==" + title);
+                                        if (j == 0)
+                                            title = jsonObject_Categories.getString("title");
+                                        else
+                                            title = title + " , " + jsonObject_Categories.getString("title");
                                         homeModel.setTitle_Category(title);
                                     }
+                                    Log.e("category_Title", "==" + title);
+
                                 }
 
                                 if (jsonObject.has("tags")) {
@@ -85,7 +89,7 @@ public class DashboardController {
                                         TagModel tagModel = new TagModel();
                                         tagModel.setId(jsonObject.getString("id"));
                                         tagModel.setTag(jsonObject_Tags.getString("title"));
-                                        tagModel.setTag(jsonObject.getString("title"));
+                                        tagModel.setTitle(jsonObject.getString("title"));
                                         addTagsDataInDatabase(context, tagModel);
 
                                     }
@@ -323,6 +327,24 @@ public class DashboardController {
         } else {
             context.getContentResolver().insert(CONTENT_TAGS, values);
         }
+    }
+
+
+    public static ArrayList<String> getSpecificTagStories(Activity context, String tag) {
+
+        String selection = COLUMN_TAGS + "  = '" + tag + "'";
+        ArrayList<String> array_Data = new ArrayList<String>();
+        Cursor cursor = context.getContentResolver().query(CONTENT_TAGS, null, selection, null, null);
+
+        for (int i = 0; i < cursor.getCount(); i++) {
+            cursor.moveToNext();
+
+            array_Data.add(cursor.getString(cursor.getColumnIndex(COLUMN_ID)));
+
+
+        }
+
+        return array_Data;
     }
 
     public static ArrayList<HomeModel> search(Context context, String search_text) {
