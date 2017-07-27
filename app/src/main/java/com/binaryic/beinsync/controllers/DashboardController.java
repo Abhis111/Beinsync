@@ -15,6 +15,7 @@ import com.binaryic.beinsync.common.ApiCallBack;
 import com.binaryic.beinsync.common.MyApplication;
 import com.binaryic.beinsync.database.MyDBHelper;
 import com.binaryic.beinsync.models.HomeModel;
+import com.binaryic.beinsync.models.TagModel;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -28,8 +29,10 @@ import static com.binaryic.beinsync.common.Constants.COLUMN_ID;
 import static com.binaryic.beinsync.common.Constants.COLUMN_IMAGE;
 import static com.binaryic.beinsync.common.Constants.COLUMN_INFO;
 import static com.binaryic.beinsync.common.Constants.COLUMN_LINK;
+import static com.binaryic.beinsync.common.Constants.COLUMN_TAGS;
 import static com.binaryic.beinsync.common.Constants.COLUMN_TITLE;
 import static com.binaryic.beinsync.common.Constants.CONTENT_DASHBOARD;
+import static com.binaryic.beinsync.common.Constants.CONTENT_TAGS;
 
 /**
  * Created by Binary_Apple on 7/21/17.
@@ -74,7 +77,19 @@ public class DashboardController {
                                     }
                                 }
 
+                                if (jsonObject.has("tags")) {
+                                    JSONArray array_Tags = jsonObject.getJSONArray("tags");
+                                    for (int j = 0; j < array_Tags.length(); j++) {
+                                        JSONObject jsonObject_Tags = array_Tags.getJSONObject(j);
+                                        homeModel.setTitle_Category(jsonObject_Tags.getString("title"));
+                                        TagModel tagModel = new TagModel();
+                                        tagModel.setId(jsonObject.getString("id"));
+                                        tagModel.setTag(jsonObject_Tags.getString("title"));
+                                        tagModel.setTag(jsonObject.getString("title"));
+                                        addTagsDataInDatabase(context, tagModel);
 
+                                    }
+                                }
                                 if (jsonObject.has("thumbnail_images")) {
                                     JSONObject imags_Object = jsonObject.getJSONObject("thumbnail_images");
                                     if (imags_Object.has("medium_large")) {
@@ -291,6 +306,22 @@ public class DashboardController {
 
         } else {
             context.getContentResolver().insert(CONTENT_DASHBOARD, values);
+        }
+    }
+
+    public static void addTagsDataInDatabase(Activity context, TagModel tagModel) {
+        ContentValues values = new ContentValues();
+        String selection = COLUMN_ID + "  = '" + tagModel.getId() + "' AND " + COLUMN_TAGS + " = '" + tagModel.getTag() + "'";
+        Cursor cursor = context.getContentResolver().query(CONTENT_TAGS, null, selection, null, null);
+        values.put(COLUMN_ID, tagModel.getId());
+        values.put(COLUMN_TAGS, tagModel.getTag());
+        values.put(COLUMN_TITLE, tagModel.getTitle());
+
+        if (cursor.getCount() > 0) {
+            context.getContentResolver().update(CONTENT_TAGS, values, selection, null);
+
+        } else {
+            context.getContentResolver().insert(CONTENT_TAGS, values);
         }
     }
 
