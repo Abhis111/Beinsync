@@ -586,7 +586,6 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
         ta_blankReading_DayMode.setVisibility(View.VISIBLE);
     }
 
-
     private void lastChanges() {
         Cursor cursor = getActivity().getContentResolver().query(CONTENT_SETTING, null, null, null, null);
         if (cursor.getCount() > 0) {
@@ -911,4 +910,7 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
         // Tracking the screen view
         // MyApplication.getInstance().trackScreenView("SettingFragment");
     }
+
+
+
 }
