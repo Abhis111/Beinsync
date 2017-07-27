@@ -82,7 +82,7 @@ public class StoryViewtFragment extends Fragment {
     private void applySetting() {
         ColorDrawable colorDrawable = null;
         String strLineSpacing = "", strMode = "", strColor = "", strBgcolor = "", font_Name = "";
-
+//
         Cursor cursorSetFont = getActivity().getContentResolver().query(CONTENT_SETTING, null, null, null, null);
         String open_Tag = "";
         String close_Tag = "";
@@ -93,9 +93,8 @@ public class StoryViewtFragment extends Fragment {
             }
             if (cursorSetFont.getString(cursorSetFont.getColumnIndex(COLUMN_TEXT_SIZE)) != null) {
 
-                webview.loadDataWithBaseURL(null, "<html><body><head><link href='https://fonts.googleapis.com/css?family=" + cursorSetFont.getString(cursorSetFont.getColumnIndex(COLUMN_FONT_NAME)) + "' rel='stylesheet' type='text/css'><style>div {text-align: justify;text-justify: inter-word;color:#7f7f7f;font-family: '" + cursorSetFont.getString(cursorSetFont.getColumnIndex(COLUMN_FONT_NAME)) + "', sans-serif;font-size:"
-                        + cursorSetFont.getString(cursorSetFont.getColumnIndex(COLUMN_TEXT_SIZE)) + ";margin:0 0 5px;padding:0;}</style></head><div>"
-                        +content + "</div></br></body></html>", "text/html", "utf-8", null);
+                String data = "<html><body><head><link href='https://fonts.googleapis.com/css?family=" + cursorSetFont.getString(cursorSetFont.getColumnIndex(COLUMN_FONT_NAME)) + "' rel='stylesheet' type='text/css'><style>div {text-align: justify;text-justify: inter-word;color:#7f7f7f;font-family: '" + cursorSetFont.getString(cursorSetFont.getColumnIndex(COLUMN_FONT_NAME)) + "', sans-serif;font-size:"+ cursorSetFont.getString(cursorSetFont.getColumnIndex(COLUMN_TEXT_SIZE)) + ";margin:0 0 5px;padding:0;}.sharedaddy.sd-sharing-enabled{display:none;}</style></head><div>"+content +"</div></br></body></html>";
+                webview.loadDataWithBaseURL(null, data, "text/html", "utf-8", null);
 
                 if (cursorSetFont.getString(cursorSetFont.getColumnIndex(COLUMN_TEXT_STYLE)) != null) {
 
@@ -126,11 +125,8 @@ public class StoryViewtFragment extends Fragment {
                             close_Tag = "<\b>";
                             break;
                     }
-                    webview.loadDataWithBaseURL(null, "<html><body><head><link href='https://fonts.googleapis.com/css?family=" + font_Name + "' rel='stylesheet' type='text/css'><style>div {text-align: justify;text-justify: inter-word;font-family: '" + font_Name + "',font-style: '"
-                            + cursorSetFont.getString(cursorSetFont.getColumnIndex(COLUMN_TEXT_STYLE)) + "' ,font-weight: "
-                            + cursorSetFont.getString(cursorSetFont.getColumnIndex(COLUMN_TEXT_STYLE)) + ",sans-serif;font-size:"
-                            + cursorSetFont.getString(cursorSetFont.getColumnIndex(COLUMN_TEXT_SIZE)) + ";margin:0 0 5px;padding:0;}</style></head><div>"
-                            +content + "</div></br></body></html>", "text/html", "utf-8", null);
+                    String data1 = "<html><body><head><link href='https://fonts.googleapis.com/css?family=\" + font_Name + \"' rel='stylesheet' type='text/css'><style>div {text-align: justify;text-justify: inter-word;font-family: '\" + font_Name + \"',font-style: '"+ cursorSetFont.getString(cursorSetFont.getColumnIndex(COLUMN_TEXT_STYLE)) + "',font-weight:"+ cursorSetFont.getString(cursorSetFont.getColumnIndex(COLUMN_TEXT_STYLE)) + ",sans-serif;font-size:"+ cursorSetFont.getString(cursorSetFont.getColumnIndex(COLUMN_TEXT_SIZE)) + ";margin:0 0 5px;padding:0;}.sharedaddy.sd-sharing-enabled{display:none;}</style></head><div>"+content +"</div></br></body></html>";
+                    webview.loadDataWithBaseURL(null, data1, "text/html", "utf-8", null);
 
                     if (cursorSetFont.getString(cursorSetFont.getColumnIndex(COLUMN_TEXT_ALIGNMENT)) != null ||
                             cursorSetFont.getString(cursorSetFont.getColumnIndex(COLUMN_LINE_SPACING)) != null) {
@@ -155,13 +151,13 @@ public class StoryViewtFragment extends Fragment {
                         Log.e("strColor", "==" + strColor);
                         Log.e("open_Tag", "==" + open_Tag);
                         rl_MainLayout.setBackground(colorDrawable);
-                        
-                        webview.loadDataWithBaseURL(null, "<html><body><head><link href='https://fonts.googleapis.com/css?family=" + font_Name + "' rel='stylesheet' type='text/css'><style>div {text-align: "
+                        String data2 = "<html><body><head><link href='https://fonts.googleapis.com/css?family=" + font_Name + "' rel='stylesheet' type='text/css'><style>div {text-align: "
                                 + cursorSetFont.getString(cursorSetFont.getColumnIndex(COLUMN_TEXT_ALIGNMENT)) + ";text-justify: inter-word; color: " + strColor + "; background-color: " + strBgcolor + ";font-family: '" + font_Name + "',font-style: '"
                                 + cursorSetFont.getString(cursorSetFont.getColumnIndex(COLUMN_TEXT_STYLE)) + "' ,font-weight: "
                                 + cursorSetFont.getString(cursorSetFont.getColumnIndex(COLUMN_TEXT_STYLE)) + ",sans-serif;font-size:"
-                                + cursorSetFont.getString(cursorSetFont.getColumnIndex(COLUMN_TEXT_SIZE)) + "; line-height: " + strLineSpacing + ";margin:0 0 5px;padding:0;} body {background-color: " + strBgcolor + ";}}</style></head><div>"
-                                + open_Tag +content + close_Tag + "</div></br></body></html>", "text/html", "utf-8", null);
+                                + cursorSetFont.getString(cursorSetFont.getColumnIndex(COLUMN_TEXT_SIZE)) + "; line-height: " + strLineSpacing + ";margin:0 0 5px;padding:0;} body {background-color: " + strBgcolor + ";}.sharedaddy.sd-sharing-enabled{display:none;}</style></head><div>"
+                                + open_Tag +content + close_Tag + "</div></br></body></html>";
+                        webview.loadDataWithBaseURL(null, data2, "text/html", "utf-8", null);
 
                     }
                 }
