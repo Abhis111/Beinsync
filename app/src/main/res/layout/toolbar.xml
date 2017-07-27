@@ -20,10 +20,10 @@
 
             <ImageView
                 android:id="@+id/iv_Logo"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:background="@drawable/logo" />
+                android:background="@drawable/logo_100x100" />
 
             <com.binaryic.beinsync.common.TextViewPrimary
                 android:id="@+id/toolbarTitle"
