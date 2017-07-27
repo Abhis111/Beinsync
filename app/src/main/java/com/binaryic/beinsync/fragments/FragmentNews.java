@@ -44,6 +44,7 @@ public class FragmentNews extends Fragment {
         array_Data = getDashboardDataFromDatabase(getActivity());
         rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data));*/
 
+
         swipeContainer.setRefreshing(false);
         getDashboardData();
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
