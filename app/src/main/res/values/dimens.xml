@@ -75,4 +75,5 @@
     <dimen name="grid_width_130dp">130dp</dimen>
     <dimen name="grid_height_180dp">180dp</dimen>
     <dimen name="activity_7dp_margin">7dp</dimen>
+    <dimen name="dim_160">160dp</dimen>
 </resources>

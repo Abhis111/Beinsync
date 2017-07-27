@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,8 +43,10 @@ public class FragmentHome extends Fragment {
         ll_MainLayout = (LinearLayout) view.findViewById(R.id.ll_MainLayout);
         rv_Home = (RecyclerView) view.findViewById(R.id.rv_Home);
         tv_No_Data = (TextView) view.findViewById(R.id.tv_No_Data);
-
-        rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        linearLayoutManager.setAutoMeasureEnabled(true);
+        rv_Home.setLayoutManager(linearLayoutManager);
+        //rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
         Bundle bundle = this.getArguments();
         if (bundle != null) {
@@ -78,7 +81,10 @@ public class FragmentHome extends Fragment {
                     tv_No_Data.setVisibility(View.GONE);
                     swipeContainer.setVisibility(View.VISIBLE);
                     swipeContainer.setRefreshing(false);
-                    rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+                    linearLayoutManager.setAutoMeasureEnabled(true);
+                    rv_Home.setLayoutManager(linearLayoutManager);
+                    //rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
                     rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data));
                 } else {
                     tv_No_Data.setVisibility(View.VISIBLE);
@@ -94,7 +100,10 @@ public class FragmentHome extends Fragment {
                 array_Data = getDashboardDataFromDatabase(getActivity());
 
                 swipeContainer.setRefreshing(false);
-                rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+                linearLayoutManager.setAutoMeasureEnabled(true);
+                rv_Home.setLayoutManager(linearLayoutManager);
+                //rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
                 rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data));
             }
         });
@@ -107,7 +116,10 @@ public class FragmentHome extends Fragment {
             tv_No_Data.setVisibility(View.GONE);
             swipeContainer.setVisibility(View.VISIBLE);
             swipeContainer.setRefreshing(false);
-            rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+            linearLayoutManager.setAutoMeasureEnabled(true);
+            rv_Home.setLayoutManager(linearLayoutManager);
+            //rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
             rv_Home.setAdapter(new HomeAdapter(getActivity(), array_data));
         } else {
             tv_No_Data.setVisibility(View.VISIBLE);

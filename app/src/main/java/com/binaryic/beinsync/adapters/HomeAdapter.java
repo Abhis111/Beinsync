@@ -38,7 +38,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_item_layout, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_item_layout_new, parent, false);
         return new ViewHolder(view);
     }
 
@@ -58,16 +58,16 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tv_Name;
-        private WebView tv_Content;
+        //private WebView tv_Content;
         private ImageView iv_Image;
-        private LinearLayout ll_MainLayout;
+        //private LinearLayout ll_MainLayout;
 
         public ViewHolder(View view) {
             super(view);
-            tv_Content = (WebView) view.findViewById(webview);
+          //  tv_Content = (WebView) view.findViewById(webview);
             tv_Name = (TextView) view.findViewById(R.id.tv_Name);
             iv_Image = (ImageView) view.findViewById(R.id.iv_Image);
-            ll_MainLayout = (LinearLayout) view.findViewById(R.id.ll_MainLayout);
+            //ll_MainLayout = (LinearLayout) view.findViewById(R.id.ll_MainLayout);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

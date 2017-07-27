@@ -37,7 +37,7 @@
             android:layout_height="60dp"
             android:layout_below="@+id/tv_Name"
             android:background="@color/white"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <WebView
                 android:id="@+id/webview"
