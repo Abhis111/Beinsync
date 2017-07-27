@@ -37,7 +37,7 @@ public class FragmentNews extends Fragment {
         swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            link = (bundle.getString("link"))+"?json=1";
+            link = (bundle.getString("link")) + "?json=1";
         }
        /* ArrayList<HomeModel> array_Data = new ArrayList<>();
         array_Data = getDashboardDataFromDatabase(getActivity());
@@ -65,7 +65,7 @@ public class FragmentNews extends Fragment {
         DashboardController.getNewsApiCall(getActivity(), link, new ApiCallBack() {
             @Override
             public void onSuccess(Object success) {
-                ArrayList<HomeModel> array_Data =  (ArrayList<HomeModel>)(success);
+                ArrayList<HomeModel> array_Data = (ArrayList<HomeModel>) (success);
 
                 swipeContainer.setRefreshing(false);
                 rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));

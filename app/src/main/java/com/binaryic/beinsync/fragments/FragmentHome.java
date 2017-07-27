@@ -1,8 +1,6 @@
 package com.binaryic.beinsync.fragments;
 
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -10,9 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.binaryic.beinsync.R;
+import com.binaryic.beinsync.activities.MainActivity;
 import com.binaryic.beinsync.adapters.HomeAdapter;
 import com.binaryic.beinsync.common.ApiCallBack;
 import com.binaryic.beinsync.controllers.DashboardController;
@@ -27,6 +27,7 @@ import static com.binaryic.beinsync.controllers.DashboardController.getDashboard
  */
 public class FragmentHome extends Fragment {
 
+    public static LinearLayout ll_MainLayout;
     private RecyclerView rv_Home;
     private SwipeRefreshLayout swipeContainer;
     private String link = "";
@@ -35,8 +36,10 @@ public class FragmentHome extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = null;
+        MainActivity.ll_textFormatOptions.setVisibility(View.VISIBLE);
 
         view = inflater.inflate(R.layout.fragment_home, container, false);
+        ll_MainLayout = (LinearLayout) view.findViewById(R.id.ll_MainLayout);
         rv_Home = (RecyclerView) view.findViewById(R.id.rv_Home);
         tv_No_Data = (TextView) view.findViewById(R.id.tv_No_Data);
 
@@ -97,16 +100,16 @@ public class FragmentHome extends Fragment {
         });
     }
 
-    public void search(String search_text){
+    public void search(String search_text) {
         ArrayList<HomeModel> array_data = new ArrayList<>();
-        array_data = DashboardController.search(getActivity(),search_text);
+        array_data = DashboardController.search(getActivity(), search_text);
         if (array_data.size() > 0) {
             tv_No_Data.setVisibility(View.GONE);
             swipeContainer.setVisibility(View.VISIBLE);
             swipeContainer.setRefreshing(false);
             rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
             rv_Home.setAdapter(new HomeAdapter(getActivity(), array_data));
-        }else {
+        } else {
             tv_No_Data.setVisibility(View.VISIBLE);
             swipeContainer.setVisibility(View.GONE);
         }

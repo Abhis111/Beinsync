@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ import android.widget.TextView;
 import com.binaryic.beinsync.R;
 import com.binaryic.beinsync.activities.MainActivity;
 import com.binaryic.beinsync.adapters.TestSizeAdapter;
+import com.binaryic.beinsync.common.Constants;
 
 import java.util.ArrayList;
 
@@ -240,8 +242,10 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
         spinner_LineSpacing.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position != 0)
-                    addData(COLUMN_LINE_SPACING, list.get(position));
+                if (position != 0) {
+                    Log.e("SettingFragment", "line==" + list.get(position));
+                    addData(getActivity(), COLUMN_LINE_SPACING, list.get(position));
+                }
             }
 
             @Override
@@ -254,27 +258,15 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
         bt_apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /*Fragment fragmentAllStory = AllStoryListFragment.newInstance();
-                Cursor cursor = getActivity().getContentResolver().query(CONTENT_REGISTER, null, null, null, null);
-                ContentValues contentValues = new ContentValues();
-                contentValues.put(COLUMN_STYLE_CHECK, "1");
-                if (cursor.getCount() > 0) {
-                    getActivity().getContentResolver().update(CONTENT_REGISTER, contentValues, null, null);
-                } else {
-                    getActivity().getContentResolver().insert(CONTENT_REGISTER, contentValues);
-                }
-                if (select_Setting.matches("main_Page")) {
+                MainActivity.ll_textFormatOptions.setVisibility(View.VISIBLE);
+                Fragment fragment = new FragmentHome();
+                Bundle bundle = new Bundle();
+                bundle.putString("link", Constants.URL_DASHBOARD);
+                fragment.setArguments(bundle);
 
-                    replaceFragmentBack(MainActivity.fl_Main.getId(), fragmentAllStory);
+                replaceFragmentBack(MainActivity.fl_Main.getId(), fragment);
 
-                } else {
-                    getActivity().finish();
-                    Intent intent=new Intent(getActivity(), MainActivity.class);
-                    intent.putExtra("callFromActivity","back");
-                    startActivity(intent);
-                  //  getActivity().overridePendingTransition(R.anim.enter, R.anim.exit);
 
-                }*/
             }
         });
 
@@ -287,14 +279,14 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
                 clearFont();
                 clearStyle();
                 clearAlignments();
-                addData(COLUMN_TEXT_SIZE, "16");
-                addData(COLUMN_LINE_SPACING, "1.5");
-                addData(COLUMN_TEXT_STYLE, "normal");
-                addData(COLUMN_TEXT_MODE, "day");
-                addData(COLUMN_TEXT_ALIGNMENT, "justify");
-                addData(COLUMN_FONT_NAME, "DroidSans");
-                addData(COLUMN_TEXT_COLOR, "" + "#2D292B");
-                addData(COLUMN_BACKGROUND_COLOR, "" + "#EEEAF0");
+                addData(getActivity(), COLUMN_TEXT_SIZE, "16");
+                addData(getActivity(), COLUMN_LINE_SPACING, "1.5");
+                addData(getActivity(), COLUMN_TEXT_STYLE, "normal");
+                addData(getActivity(), COLUMN_TEXT_MODE, "day");
+                addData(getActivity(), COLUMN_TEXT_ALIGNMENT, "justify");
+                addData(getActivity(), COLUMN_FONT_NAME, "DroidSans");
+                addData(getActivity(), COLUMN_TEXT_COLOR, "" + "#2D292B");
+                addData(getActivity(), COLUMN_BACKGROUND_COLOR, "" + "#EEEAF0");
                /* if (!TextUtils.isEmpty(strSettingComeFrom)) {
                     if (strSettingComeFrom.matches("MainActivity")) {
                         replaceFragmentBack(MainActivity.fl_Main.getId(), fragment);
@@ -310,7 +302,7 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
                 clearFont();
                 ta_FontRobota.setVisibility(View.VISIBLE);
                 ta_blankFontRobota.setVisibility(View.GONE);
-                addData(COLUMN_FONT_NAME, "Roboto");
+                addData(getActivity(), COLUMN_FONT_NAME, "Roboto");
             }
         });
         ll_FontPTSans.setOnClickListener(new View.OnClickListener() {
@@ -319,7 +311,7 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
                 clearFont();
                 ta_FontPTSans.setVisibility(View.VISIBLE);
                 ta_blankFontPTSans.setVisibility(View.GONE);
-                addData(COLUMN_FONT_NAME, "PT Sans");
+                addData(getActivity(), COLUMN_FONT_NAME, "PT Sans");
             }
         });
         ll_FontRobotaCondensed.setOnClickListener(new View.OnClickListener() {
@@ -328,7 +320,7 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
                 clearFont();
                 ta_FontRobotaCondensed.setVisibility(View.VISIBLE);
                 ta_blankFontRobotaCondensed.setVisibility(View.GONE);
-                addData(COLUMN_FONT_NAME, "Roboto Condensed");
+                addData(getActivity(), COLUMN_FONT_NAME, "Roboto Condensed");
             }
         });
         ll_FontDroidSans.setOnClickListener(new View.OnClickListener() {
@@ -337,7 +329,7 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
                 clearFont();
                 ta_FontDroidSans.setVisibility(View.VISIBLE);
                 ta_blankFontDroidSans.setVisibility(View.GONE);
-                addData(COLUMN_FONT_NAME, "Droid Sans");
+                addData(getActivity(), COLUMN_FONT_NAME, "Droid Sans");
             }
         });
         ll_AligmentLeft.setOnClickListener(new View.OnClickListener() {
@@ -346,7 +338,7 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
                 clearAlignments();
                 ta_AligmentLeft.setVisibility(View.VISIBLE);
                 ta_blankAligmentLeft.setVisibility(View.GONE);
-                addData(COLUMN_TEXT_ALIGNMENT, "left");
+                addData(getActivity(), COLUMN_TEXT_ALIGNMENT, "left");
             }
         });
         ll_AligmentRight.setOnClickListener(new View.OnClickListener() {
@@ -355,7 +347,7 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
                 clearAlignments();
                 ta_AligmentRight.setVisibility(View.VISIBLE);
                 ta_blankAligmentRight.setVisibility(View.GONE);
-                addData(COLUMN_TEXT_ALIGNMENT, "right");
+                addData(getActivity(), COLUMN_TEXT_ALIGNMENT, "right");
             }
         });
         ll_AligmentCenter.setOnClickListener(new View.OnClickListener() {
@@ -364,7 +356,7 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
                 clearAlignments();
                 ta_AligmentCenter.setVisibility(View.VISIBLE);
                 ta_blankAligmentCenter.setVisibility(View.GONE);
-                addData(COLUMN_TEXT_ALIGNMENT, "center");
+                addData(getActivity(), COLUMN_TEXT_ALIGNMENT, "center");
             }
         });
         ll_AligmentJustify.setOnClickListener(new View.OnClickListener() {
@@ -373,7 +365,7 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
                 clearAlignments();
                 ta_AligmentJustify.setVisibility(View.VISIBLE);
                 ta_blankAligmentJustify.setVisibility(View.GONE);
-                addData(COLUMN_TEXT_ALIGNMENT, "justify");
+                addData(getActivity(), COLUMN_TEXT_ALIGNMENT, "justify");
             }
         });
         tv_StyleBold.setOnClickListener(new View.OnClickListener() {
@@ -383,12 +375,12 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
                     booleanBold = 1;
                     tv_StyleBold.setTextColor(getResources().getColor(R.color.white));
                     tv_StyleBold.setBackground(getResources().getDrawable(R.drawable.orange_rounded_background));
-                    addData(COLUMN_TEXT_STYLE, "bold");
+                    addData(getActivity(), COLUMN_TEXT_STYLE, "bold");
                 } else {
                     booleanBold = 0;
                     tv_StyleBold.setTextColor(getResources().getColor(R.color.darkgrey));
                     tv_StyleBold.setBackground(getResources().getDrawable(R.drawable.grey_background));
-                    addData(COLUMN_TEXT_STYLE, "boldnormal");
+                    addData(getActivity(), COLUMN_TEXT_STYLE, "boldnormal");
                 }
                 setStyle();
 
@@ -401,12 +393,12 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
                     booleanItalic = 1;
                     tv_StyleItalic.setTextColor(getResources().getColor(R.color.white));
                     tv_StyleItalic.setBackground(getResources().getDrawable(R.drawable.orange_rounded_background));
-                    addData(COLUMN_TEXT_STYLE, "italic");
+                    addData(getActivity(), COLUMN_TEXT_STYLE, "italic");
                 } else {
                     booleanItalic = 0;
                     tv_StyleItalic.setTextColor(getResources().getColor(R.color.darkgrey));
                     tv_StyleItalic.setBackground(getResources().getDrawable(R.drawable.grey_background));
-                    addData(COLUMN_TEXT_STYLE, "italicnormal");
+                    addData(getActivity(), COLUMN_TEXT_STYLE, "italicnormal");
                 }
                 setStyle();
 
@@ -419,7 +411,7 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
                 clearMode();
                 ta_Reading_DayMode.setVisibility(View.VISIBLE);
                 ta_blankReading_DayMode.setVisibility(View.GONE);
-                addData(COLUMN_TEXT_MODE, "day");
+                addData(getActivity(), COLUMN_TEXT_MODE, "day");
             }
         });
         ll_Reading_NightMode.setOnClickListener(new View.OnClickListener() {
@@ -429,7 +421,7 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
                 clearMode();
                 ta_Reading_NightMode.setVisibility(View.VISIBLE);
                 ta_blankReading_NightMode.setVisibility(View.GONE);
-                addData(COLUMN_TEXT_MODE, "night");
+                addData(getActivity(), COLUMN_TEXT_MODE, "night");
             }
         });
         tv_Size16.setOnClickListener(new View.OnClickListener() {
@@ -437,7 +429,7 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
             public void onClick(View v) {
                 clearSize();
                 tv_Size16.setTextColor(getResources().getColor(R.color.orange));
-                addData(COLUMN_TEXT_SIZE, "16");
+                addData(getActivity(), COLUMN_TEXT_SIZE, "16");
             }
         });
         tv_Size18.setOnClickListener(new View.OnClickListener() {
@@ -445,7 +437,7 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
             public void onClick(View v) {
                 clearSize();
                 tv_Size18.setTextColor(getResources().getColor(R.color.orange));
-                addData(COLUMN_TEXT_SIZE, "18");
+                addData(getActivity(), COLUMN_TEXT_SIZE, "18");
             }
         });
         tv_Size20.setOnClickListener(new View.OnClickListener() {
@@ -453,7 +445,7 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
             public void onClick(View v) {
                 clearSize();
                 tv_Size20.setTextColor(getResources().getColor(R.color.orange));
-                addData(COLUMN_TEXT_SIZE, "20");
+                addData(getActivity(), COLUMN_TEXT_SIZE, "20");
             }
         });
         tv_Size22.setOnClickListener(new View.OnClickListener() {
@@ -461,7 +453,7 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
             public void onClick(View v) {
                 clearSize();
                 tv_Size22.setTextColor(getResources().getColor(R.color.orange));
-                addData(COLUMN_TEXT_SIZE, "22");
+                addData(getActivity(), COLUMN_TEXT_SIZE, "22");
             }
         });
         tv_Size24.setOnClickListener(new View.OnClickListener() {
@@ -469,7 +461,7 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
             public void onClick(View v) {
                 clearSize();
                 tv_Size24.setTextColor(getResources().getColor(R.color.orange));
-                addData(COLUMN_TEXT_SIZE, "24");
+                addData(getActivity(), COLUMN_TEXT_SIZE, "24");
             }
         });
         tv_Size26.setOnClickListener(new View.OnClickListener() {
@@ -477,7 +469,7 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
             public void onClick(View v) {
                 clearSize();
                 tv_Size26.setTextColor(getResources().getColor(R.color.orange));
-                addData(COLUMN_TEXT_SIZE, "26");
+                addData(getActivity(), COLUMN_TEXT_SIZE, "26");
             }
         });
         tv_ColorGreen.setOnClickListener(new View.OnClickListener() {
@@ -485,7 +477,7 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
             public void onClick(View v) {
                 removeTextColor();
                 tv_ColorGreen.setBackground(getResources().getDrawable(R.drawable.green_background_red_border));
-                addData(COLUMN_TEXT_COLOR, "" + "#2D292B");
+                addData(getActivity(), COLUMN_TEXT_COLOR, "" + "#2D292B");
             }
         });
         tv_ColorRed.setOnClickListener(new View.OnClickListener() {
@@ -494,7 +486,7 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
                 removeTextColor();
                 tv_ColorRed.setBackground(getResources().getDrawable(R.drawable.red_background_red_background));
 
-                addData(COLUMN_TEXT_COLOR, "" + "#641214");
+                addData(getActivity(), COLUMN_TEXT_COLOR, "" + "#641214");
             }
         });
         tv_ColorBlue.setOnClickListener(new View.OnClickListener() {
@@ -503,7 +495,7 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
                 removeTextColor();
                 tv_ColorBlue.setBackground(getResources().getDrawable(R.drawable.blue_background_red_border));
 
-                addData(COLUMN_TEXT_COLOR, "" + "#025178");
+                addData(getActivity(), COLUMN_TEXT_COLOR, "" + "#025178");
             }
         });
         tv_ColorPink.setOnClickListener(new View.OnClickListener() {
@@ -512,7 +504,7 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
                 removeTextColor();
                 tv_ColorPink.setBackground(getResources().getDrawable(R.drawable.pink_background_red_border));
 
-                addData(COLUMN_TEXT_COLOR, "" + "#6E0054");
+                addData(getActivity(), COLUMN_TEXT_COLOR, "" + "#6E0054");
             }
         });
         tv_ColorLightGreen.setOnClickListener(new View.OnClickListener() {
@@ -521,7 +513,7 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
                 removeTextColor();
                 tv_ColorLightGreen.setBackground(getResources().getDrawable(R.drawable.light_green_background_red_border));
 
-                addData(COLUMN_TEXT_COLOR, "" + "#023710");
+                addData(getActivity(), COLUMN_TEXT_COLOR, "" + "#023710");
             }
         });
         tv_ColorLighterGreen.setOnClickListener(new View.OnClickListener() {
@@ -530,7 +522,7 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
                 removeBackground();
                 tv_ColorLighterGreen.setBackground(getResources().getDrawable(R.drawable.lighter_green_background_red_border));
 
-                addData(COLUMN_BACKGROUND_COLOR, "" + "#CAEAD2");
+                addData(getActivity(), COLUMN_BACKGROUND_COLOR, "" + "#CAEAD2");
             }
         });
         tv_ColorLightBlue.setOnClickListener(new View.OnClickListener() {
@@ -539,7 +531,7 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
                 removeBackground();
                 tv_ColorLightBlue.setBackground(getResources().getDrawable(R.drawable.light_blue_background_red_border));
 
-                addData(COLUMN_BACKGROUND_COLOR, "" + "#CBD9E6");
+                addData(getActivity(), COLUMN_BACKGROUND_COLOR, "" + "#CBD9E6");
             }
         });
         tv_ColorLightPink.setOnClickListener(new View.OnClickListener() {
@@ -548,7 +540,7 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
                 removeBackground();
                 tv_ColorLightPink.setBackground(getResources().getDrawable(R.drawable.light_pink_background_red_background));
 
-                addData(COLUMN_BACKGROUND_COLOR, "" + "#E3D1DD");
+                addData(getActivity(), COLUMN_BACKGROUND_COLOR, "" + "#E3D1DD");
             }
         });
         tv_ColorLightYellow.setOnClickListener(new View.OnClickListener() {
@@ -557,7 +549,7 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
                 removeBackground();
                 tv_ColorLightYellow.setBackground(getResources().getDrawable(R.drawable.light_yellow_background_red_border));
 
-                addData(COLUMN_BACKGROUND_COLOR, "" + "#E3D5BB");
+                addData(getActivity(), COLUMN_BACKGROUND_COLOR, "" + "#E3D5BB");
             }
         });
         tv_ColorWhite.setOnClickListener(new View.OnClickListener() {
@@ -566,7 +558,7 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
                 removeBackground();
                 tv_ColorWhite.setBackground(getResources().getDrawable(R.drawable.white_background_red_border));
 
-                addData(COLUMN_BACKGROUND_COLOR, "" + "#EEEAF0");
+                addData(getActivity(), COLUMN_BACKGROUND_COLOR, "" + "#EEEAF0");
             }
         });
         return view;
@@ -574,10 +566,10 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
 
     private void setStyle() {
         if (booleanBold == 1 && booleanItalic == 1) {
-            addData(COLUMN_TEXT_STYLE, "bold_italic");
+            addData(getActivity(), COLUMN_TEXT_STYLE, "bold_italic");
 
         } else if (booleanBold == 0 && booleanItalic == 0) {
-            addData(COLUMN_TEXT_STYLE, "normal");
+            addData(getActivity(), COLUMN_TEXT_STYLE, "normal");
 
         }
     }
@@ -621,12 +613,12 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
                         break;
                 }
             } else {
-                addData(COLUMN_TEXT_SIZE, "16");
+                addData(getActivity(), COLUMN_TEXT_SIZE, "16");
             }
             if (cursor.getString(cursor.getColumnIndex(COLUMN_LINE_SPACING)) != null) {
                 spinner_LineSpacing.setSelection(list.indexOf(cursor.getString(cursor.getColumnIndex(COLUMN_LINE_SPACING))));
             } else {
-                addData(COLUMN_LINE_SPACING, "1.5");
+                addData(getActivity(), COLUMN_LINE_SPACING, "1.5");
                 spinner_LineSpacing.setSelection(5);
 
             }
@@ -678,7 +670,7 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
                 tv_StyleItalic.setTextColor(getResources().getColor(R.color.darkgrey));
                 tv_StyleItalic.setBackground(getResources().getDrawable(R.drawable.grey_background));
 
-                addData(COLUMN_TEXT_STYLE, "normal");
+                addData(getActivity(), COLUMN_TEXT_STYLE, "normal");
             }
             if (cursor.getString(cursor.getColumnIndex(COLUMN_TEXT_MODE)) != null) {
                 switch ((cursor.getString(cursor.getColumnIndex(COLUMN_TEXT_MODE)))) {
@@ -695,7 +687,7 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
                         break;
                 }
             } else {
-                addData(COLUMN_TEXT_MODE, "day");
+                addData(getActivity(), COLUMN_TEXT_MODE, "day");
             }
             if (cursor.getString(cursor.getColumnIndex(COLUMN_TEXT_ALIGNMENT)) != null) {
                 switch (cursor.getString(cursor.getColumnIndex(COLUMN_TEXT_ALIGNMENT))) {
@@ -717,7 +709,7 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
                         break;
                 }
             } else {
-                addData(COLUMN_TEXT_ALIGNMENT, "justify");
+                addData(getActivity(), COLUMN_TEXT_ALIGNMENT, "justify");
             }
             if (cursor.getString(cursor.getColumnIndex(COLUMN_FONT_NAME)) != null) {
                 switch (cursor.getString(cursor.getColumnIndex(COLUMN_FONT_NAME))) {
@@ -739,7 +731,7 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
                         break;
                 }
             } else {
-                addData(COLUMN_FONT_NAME, "Roboto");
+                addData(getActivity(), COLUMN_FONT_NAME, "Roboto");
             }
             if (cursor.getString(cursor.getColumnIndex(COLUMN_TEXT_COLOR)) != null) {
                 switch (cursor.getString(cursor.getColumnIndex(COLUMN_TEXT_COLOR))) {
@@ -765,7 +757,7 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
                         break;
                 }
             } else {
-                addData(COLUMN_TEXT_COLOR, "" + "#2D292B");
+                addData(getActivity(), COLUMN_TEXT_COLOR, "" + "#2D292B");
             }
             if (cursor.getString(cursor.getColumnIndex(COLUMN_BACKGROUND_COLOR)) != null) {
                 switch (cursor.getString(cursor.getColumnIndex(COLUMN_BACKGROUND_COLOR))) {
@@ -792,20 +784,20 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
                         break;
                 }
             } else {
-                addData(COLUMN_BACKGROUND_COLOR, "" + "#EEEAF0");
+                addData(getActivity(), COLUMN_BACKGROUND_COLOR, "" + "#EEEAF0");
             }
         }
         cursor.close();
     }
 
-    private void addData(final String COLUMN_NAME, String value) {
+    private void addData(Activity context, final String COLUMN_NAME, String value) {
         ContentValues values = new ContentValues();
         values.put(COLUMN_NAME, value.trim());
-        Cursor cursor = getContext().getContentResolver().query(CONTENT_SETTING, null, null, null, null);
+        Cursor cursor = context.getContentResolver().query(CONTENT_SETTING, null, null, null, null);
         if (cursor.getCount() > 0) {
-            getContext().getContentResolver().update(CONTENT_SETTING, values, null, null);
+            context.getContentResolver().update(CONTENT_SETTING, values, null, null);
         } else {
-            getContext().getContentResolver().insert(CONTENT_SETTING, values);
+            context.getContentResolver().insert(CONTENT_SETTING, values);
         }
 
         cursor.moveToLast();
@@ -917,6 +909,6 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
         super.onResume();
 
         // Tracking the screen view
-       // MyApplication.getInstance().trackScreenView("SettingFragment");
+        // MyApplication.getInstance().trackScreenView("SettingFragment");
     }
 }

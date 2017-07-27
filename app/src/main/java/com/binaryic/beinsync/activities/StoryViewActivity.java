@@ -42,6 +42,7 @@ public class StoryViewActivity extends AppCompatActivity {
         setToolBar();
         getExtra();
 
+
     }
 
 
@@ -76,5 +77,6 @@ public class StoryViewActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
     }
+
 
 }
