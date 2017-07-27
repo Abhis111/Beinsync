@@ -330,7 +330,7 @@ public class DashboardController {
         try {
             MyDBHelper helper = new MyDBHelper(context);
             SQLiteDatabase database = helper.getWritableDatabase();
-            Cursor cursor = database.rawQuery("Select COLUMN_ID,COLUMN_TITLE,COLUMN_LINK,COLUMN_IMAGE,COLUMN_INFO from TABLE_DASHBOARD where lower(COLUMN_TITLE) like '%" + search_text + "%'", null);
+            Cursor cursor = database.rawQuery("Select COLUMN_ID,COLUMN_TITLE,COLUMN_LINK,COLUMN_CATEGORY,COLUMN_IMAGE,COLUMN_INFO from TABLE_DASHBOARD where lower(COLUMN_TITLE) like '%" + search_text + "%'", null);
             //Cursor cursor = context.getContentResolver().query(CONTENT_DASHBOARD, null, selection, null, null);
             if (cursor.getCount() > 0) {
                 for (int i = 0; i < cursor.getCount(); i++) {
@@ -346,6 +346,7 @@ public class DashboardController {
                 }
             }
         } catch (Exception ex) {
+            Log.e("DashboardController", "error ==" + ex.getMessage());
         }
         return array_Data;
 

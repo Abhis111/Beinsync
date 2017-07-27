@@ -142,17 +142,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         MenuItem menuItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
         searchView.setOnQueryTextListener(this);
-       /* switch (menuItem.getItemId()) {
-            case R.id.action_search:
-                Toast.makeText(this, "search", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.action_filter:
-                Toast.makeText(this, "filter", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.action_setting:
-                Toast.makeText(this, "setting", Toast.LENGTH_SHORT).show();
-                break;
-        }*/
+
         return true;
     }
 
