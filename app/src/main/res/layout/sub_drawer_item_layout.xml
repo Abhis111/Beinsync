@@ -23,7 +23,7 @@
             android:layout_marginTop="@dimen/activity_15dp_margin"
             android:text="Title"
             android:textAllCaps="true"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="@dimen/activity_16dp_margin" />
 
         <View
