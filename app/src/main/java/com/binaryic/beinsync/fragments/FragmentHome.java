@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.binaryic.beinsync.R;
-import com.binaryic.beinsync.activities.MainActivity;
 import com.binaryic.beinsync.adapters.HomeAdapter;
 import com.binaryic.beinsync.common.ApiCallBack;
 import com.binaryic.beinsync.controllers.DashboardController;
@@ -38,7 +37,7 @@ public class FragmentHome extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = null;
-        MainActivity.ll_textFormatOptions.setVisibility(View.VISIBLE);
+      //  MainActivity.ll_textFormatOptions.setVisibility(View.VISIBLE);
 
         view = inflater.inflate(R.layout.fragment_home, container, false);
         ll_MainLayout = (LinearLayout) view.findViewById(R.id.ll_MainLayout);

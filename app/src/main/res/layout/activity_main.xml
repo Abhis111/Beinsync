@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/iv_Add"
-            android:layout_marginTop="61.0dip">
+            android:layout_marginTop="55.0dip">
 
         </FrameLayout>
 
