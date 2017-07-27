@@ -12,7 +12,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dim_160">
+        android:layout_height="@dimen/grid_height_180dp">
         <ImageView
             android:id="@+id/iv_Image"
             android:layout_width="match_parent"

@@ -90,7 +90,6 @@ public class DashboardController {
                                     JSONArray array_Tags = jsonObject.getJSONArray("tags");
                                     for (int j = 0; j < array_Tags.length(); j++) {
                                         JSONObject jsonObject_Tags = array_Tags.getJSONObject(j);
-                                        homeModel.setTitle_Category(jsonObject_Tags.getString("title"));
                                         TagModel tagModel = new TagModel();
                                         tagModel.setId(jsonObject.getString("id"));
                                         tagModel.setTag(jsonObject_Tags.getString("title"));
@@ -282,14 +281,17 @@ public class DashboardController {
 
     public static ArrayList<HomeModel> getDashboardDataFromDatabase(Activity context, String category) {
         String selection = COLUMN_CATEGORY + " like  '" + "%" + category + "%" + "'";
+        MyDBHelper helper = new MyDBHelper(context);
+        SQLiteDatabase database = helper.getWritableDatabase();
+        Cursor cursor = database.rawQuery("Select COLUMN_ID,COLUMN_TITLE,COLUMN_LINK,COLUMN_CATEGORY,COLUMN_IMAGE,COLUMN_INFO from TABLE_DASHBOARD where lower(COLUMN_CATEGORY) like '%" + category.toLowerCase() + "%'", null);
 
         ArrayList<HomeModel> array_Data = new ArrayList<HomeModel>();
-        Cursor cursor_test = context.getContentResolver().query(CONTENT_DASHBOARD, null, null, null, null);
-        Log.e("DashboardContro1ller", "cursor==" + cursor_test.getCount());
+        //Cursor cursor_test = context.getContentResolver().query(CONTENT_DASHBOARD, null, null, null, null);
+       // Log.e("DashboardContro1ller", "cursor==" + cursor_test.getCount());
 
 
-        Cursor cursor = context.getContentResolver().query(CONTENT_DASHBOARD, null, selection, null, null);
-        Log.e("DashboardContro1ller", "cursor==" + cursor.getCount());
+       // Cursor cursor = context.getContentResolver().query(CONTENT_DASHBOARD, null, selection, null, null);
+       // Log.e("DashboardContro1ller", "cursor==" + cursor.getCount());
         for (int i = 0; i < cursor.getCount(); i++) {
             cursor.moveToNext();
 
@@ -301,7 +303,6 @@ public class DashboardController {
             homeModel.setTitle_Category(cursor.getString(cursor.getColumnIndex(COLUMN_CATEGORY)));
             homeModel.setImage(cursor.getString(cursor.getColumnIndex(COLUMN_IMAGE)));
             array_Data.add(homeModel);
-
         }
         return array_Data;
     }
@@ -316,6 +317,7 @@ public class DashboardController {
         values.put(COLUMN_INFO, homeModel.getContent());
         values.put(COLUMN_LINK, homeModel.getUrl());
         values.put(COLUMN_CATEGORY, homeModel.getTitle_Category());
+        Log.e("Insert == ","Insert into TABLE_DASHBOARD(COLUMN_CATEGORY) values ('"+homeModel.getTitle_Category()+"')");
 
         if (cursor.getCount() > 0) {
             context.getContentResolver().update(CONTENT_DASHBOARD, values, selection, null);

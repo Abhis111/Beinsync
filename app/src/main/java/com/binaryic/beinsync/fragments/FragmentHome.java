@@ -58,7 +58,7 @@ public class FragmentHome extends Fragment {
         array_Data = getDashboardDataFromDatabase(getActivity(), category);
         rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data));
         swipeContainer.setRefreshing(false);
-        getDashboardData(array_Data);
+    //    getDashboardData(array_Data);
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
