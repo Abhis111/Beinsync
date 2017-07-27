@@ -3,7 +3,6 @@ package com.binaryic.beinsync.fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -32,7 +31,9 @@ public class FragmentHome extends Fragment {
     private RecyclerView rv_Home;
     private SwipeRefreshLayout swipeContainer;
     private String link = "";
+    private String category = "";
     private TextView tv_No_Data;
+    ArrayList<HomeModel> array_Data = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,12 +52,13 @@ public class FragmentHome extends Fragment {
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             link = (bundle.getString("link"));
+            category = (bundle.getString("category"));
         }
-        ArrayList<HomeModel> array_Data = new ArrayList<>();
-        array_Data = getDashboardDataFromDatabase(getActivity());
+
+        array_Data = getDashboardDataFromDatabase(getActivity(), category);
         rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data));
         swipeContainer.setRefreshing(false);
-        getDashboardData();
+        getDashboardData(array_Data);
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
@@ -64,19 +66,21 @@ public class FragmentHome extends Fragment {
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getDashboardData();
+                getDashboardData(array_Data);
             }
         });
 
         return view;
     }
 
-    private void getDashboardData() {
+    private void getDashboardData(ArrayList<HomeModel> array_Data) {
+
+
         DashboardController.getDashboardApiCall(getActivity(), link, new ApiCallBack() {
             @Override
             public void onSuccess(Object success) {
                 ArrayList<HomeModel> array_Data = new ArrayList<>();
-                array_Data = getDashboardDataFromDatabase(getActivity());
+                array_Data = getDashboardDataFromDatabase(getActivity(), category);
                 if (array_Data.size() > 0) {
                     tv_No_Data.setVisibility(View.GONE);
                     swipeContainer.setVisibility(View.VISIBLE);
@@ -97,16 +101,24 @@ public class FragmentHome extends Fragment {
                 ArrayList<HomeModel> array_Data = new ArrayList<>();
                 tv_No_Data.setVisibility(View.VISIBLE);
                 swipeContainer.setVisibility(View.GONE);
-                array_Data = getDashboardDataFromDatabase(getActivity());
+                array_Data = getDashboardDataFromDatabase(getActivity(), category);
+                if (array_Data.size() > 0) {
+                    tv_No_Data.setVisibility(View.GONE);
+                    swipeContainer.setVisibility(View.VISIBLE);
+                    swipeContainer.setRefreshing(false);
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+                    linearLayoutManager.setAutoMeasureEnabled(true);
+                    rv_Home.setLayoutManager(linearLayoutManager);
+                    //rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+                    rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data));
+                } else {
+                    tv_No_Data.setVisibility(View.VISIBLE);
+                    swipeContainer.setVisibility(View.GONE);
+                }
 
-                swipeContainer.setRefreshing(false);
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-                linearLayoutManager.setAutoMeasureEnabled(true);
-                rv_Home.setLayoutManager(linearLayoutManager);
-                //rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-                rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data));
             }
         });
+
     }
 
     public void search(String search_text) {

@@ -40,7 +40,7 @@ public class FragmentStories extends Fragment {
 
 
         ArrayList<HomeModel> array_Data = new ArrayList<>();
-        array_Data = getDashboardDataFromDatabase(getActivity());
+        array_Data = getDashboardDataFromDatabase(getActivity(), "");
         rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data));
 
         swipeContainer.setRefreshing(false);
@@ -67,7 +67,7 @@ public class FragmentStories extends Fragment {
             public void onSuccess(Object success) {
                 ArrayList<HomeModel> array_Data = new ArrayList<>();
 
-                array_Data = getDashboardDataFromDatabase(getActivity());
+                array_Data = getDashboardDataFromDatabase(getActivity(), "");
                 swipeContainer.setRefreshing(false);
                 rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
                 rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data));
@@ -77,7 +77,7 @@ public class FragmentStories extends Fragment {
             public void onError(String error) {
                 ArrayList<HomeModel> array_Data = new ArrayList<>();
 
-                array_Data = getDashboardDataFromDatabase(getActivity());
+                array_Data = getDashboardDataFromDatabase(getActivity(), "");
 
                 swipeContainer.setRefreshing(false);
                 rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));

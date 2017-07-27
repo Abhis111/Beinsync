@@ -69,15 +69,20 @@ public class DashboardController {
                                 if (jsonObject.has("categories")) {
                                     JSONArray array_Categories = jsonObject.getJSONArray("categories");
                                     String title = "";
-                                    for (int j = 0; j < array_Categories.length(); j++) {
+                                    homeModel.setTitle_Category(array_Categories.toString());
+                                    /*for (int j = 0; j < array_Categories.length(); j++) {
                                         JSONObject jsonObject_Categories = array_Categories.getJSONObject(j);
-                                        if (j == 0)
+                                        if (j == 0) {
                                             title = jsonObject_Categories.getString("title");
-                                        else
-                                            title = title + " , " + jsonObject_Categories.getString("title");
-                                        homeModel.setTitle_Category(title);
-                                    }
-                                    Log.e("category_Title", "==" + title);
+                                            arrayList.add(jsonObject_Categories.getString("title"));
+                                        } else {
+                                            arrayList.add(jsonObject_Categories.getString("title"));
+                                            title = title + "," + jsonObject_Categories.getString("title");
+                                        }
+                                        homeModel.setTitle_Category(arrayList.toString());
+                                        //homeModel.setTitle_Category(title);
+                                    }*/
+                                    Log.e("category_Title", "==" + array_Categories.toString());
 
                                 }
 
@@ -275,21 +280,28 @@ public class DashboardController {
     }
 
 
-    public static ArrayList<HomeModel> getDashboardDataFromDatabase(Activity context) {
+    public static ArrayList<HomeModel> getDashboardDataFromDatabase(Activity context, String category) {
+        String selection = COLUMN_CATEGORY + " like  '" + "%" + category + "%" + "'";
+
         ArrayList<HomeModel> array_Data = new ArrayList<HomeModel>();
-        Cursor cursor = context.getContentResolver().query(CONTENT_DASHBOARD, null, null, null, null);
+        Cursor cursor_test = context.getContentResolver().query(CONTENT_DASHBOARD, null, null, null, null);
+        Log.e("DashboardContro1ller", "cursor==" + cursor_test.getCount());
+
+
+        Cursor cursor = context.getContentResolver().query(CONTENT_DASHBOARD, null, selection, null, null);
+        Log.e("DashboardContro1ller", "cursor==" + cursor.getCount());
         for (int i = 0; i < cursor.getCount(); i++) {
             cursor.moveToNext();
-            HomeModel homeModel = new HomeModel();
 
+            HomeModel homeModel = new HomeModel();
             homeModel.setId(cursor.getString(cursor.getColumnIndex(COLUMN_ID)));
             homeModel.setContent(cursor.getString(cursor.getColumnIndex(COLUMN_INFO)));
             homeModel.setTitle(cursor.getString(cursor.getColumnIndex(COLUMN_TITLE)));
             homeModel.setUrl(cursor.getString(cursor.getColumnIndex(COLUMN_LINK)));
             homeModel.setTitle_Category(cursor.getString(cursor.getColumnIndex(COLUMN_CATEGORY)));
             homeModel.setImage(cursor.getString(cursor.getColumnIndex(COLUMN_IMAGE)));
-
             array_Data.add(homeModel);
+
         }
         return array_Data;
     }

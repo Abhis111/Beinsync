@@ -16,6 +16,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,11 +31,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.binaryic.beinsync.R;
+import com.binaryic.beinsync.common.ApiCallBack;
 import com.binaryic.beinsync.common.Constants;
 import com.binaryic.beinsync.common.Utils;
+import com.binaryic.beinsync.controllers.DashboardController;
 import com.binaryic.beinsync.fragments.FilterFragment;
 import com.binaryic.beinsync.fragments.FragmentDrawer;
 import com.binaryic.beinsync.fragments.FragmentHome;
+import com.binaryic.beinsync.fragments.MainFragment;
 import com.binaryic.beinsync.fragments.SettingNewFragment;
 
 import static com.binaryic.beinsync.common.Constants.COLUMN_BACKGROUND_COLOR;
@@ -58,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static LinearLayout ll_textFormatOptions;
     private ImageView iv_Add;
     FragmentHome fragmentHome;
+    MainFragment mainFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,9 +115,52 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         rl_Setting.setOnClickListener(this);
         toolbarTitle.setVisibility(View.GONE);
         defaultSetting();
-        addHomeFragment();
+        getDashboardData();
+        //addHomeFragment();
         addDrawerFragment();
 
+    }
+    private void getDashboardData() {
+        DashboardController.getDashboardApiCall(this, Constants.URL_DASHBOARD, new ApiCallBack() {
+            @Override
+            public void onSuccess(Object success) {
+                addTabsFragment();
+
+                /*ArrayList<HomeModel> array_Data = new ArrayList<>();
+                array_Data = getDashboardDataFromDatabase(getActivity());
+                if (array_Data.size() > 0) {
+                    tv_No_Data.setVisibility(View.GONE);
+                    swipeContainer.setVisibility(View.VISIBLE);
+                    swipeContainer.setRefreshing(false);
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+                    linearLayoutManager.setAutoMeasureEnabled(true);
+                    rv_Home.setLayoutManager(linearLayoutManager);
+                    //rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+                    rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data));
+                } else {
+                    tv_No_Data.setVisibility(View.VISIBLE);
+                    swipeContainer.setVisibility(View.GONE);
+                }*/
+            }
+
+            @Override
+            public void onError(String error) {
+                addTabsFragment();
+
+                Log.e("MainActivity","errror=="+error);
+               /* ArrayList<HomeModel> array_Data = new ArrayList<>();
+                tv_No_Data.setVisibility(View.VISIBLE);
+                swipeContainer.setVisibility(View.GONE);
+                array_Data = getDashboardDataFromDatabase(getActivity());
+
+                swipeContainer.setRefreshing(false);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+                linearLayoutManager.setAutoMeasureEnabled(true);
+                rv_Home.setLayoutManager(linearLayoutManager);
+                //rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+                rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data));*/
+            }
+        });
     }
 
     private void defaultSetting() {
@@ -140,6 +188,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Utils.addFragment(MainActivity.this, fragmentHome, R.id.fl_Main);
     }
 
+    public void addTabsFragment() {
+        mainFragment = new MainFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("link", Constants.URL_DASHBOARD);
+        mainFragment.setArguments(bundle);
+        Utils.addFragment(MainActivity.this, mainFragment, R.id.fl_Main);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -153,15 +209,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.rate_us){
+        if (item.getItemId() == R.id.rate_us) {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + MainActivity.this.getPackageName())));
-        }else if(item.getItemId() == R.id.share_app){
+        } else if (item.getItemId() == R.id.share_app) {
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
             sendIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.share_msg));
             sendIntent.setType("text/plain");
             startActivity(Intent.createChooser(sendIntent, getResources().getString(R.string.share_app)));
-        }else if(item.getItemId() == R.id.about_us){
+        } else if (item.getItemId() == R.id.about_us) {
             aboutDialog();
         }
         return super.onOptionsItemSelected(item);
