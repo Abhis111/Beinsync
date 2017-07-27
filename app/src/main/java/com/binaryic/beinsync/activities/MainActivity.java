@@ -1,7 +1,9 @@
 package com.binaryic.beinsync.activities;
 
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -29,6 +31,16 @@ import com.binaryic.beinsync.fragments.FilterFragment;
 import com.binaryic.beinsync.fragments.FragmentDrawer;
 import com.binaryic.beinsync.fragments.FragmentHome;
 import com.binaryic.beinsync.fragments.SettingNewFragment;
+
+import static com.binaryic.beinsync.common.Constants.COLUMN_BACKGROUND_COLOR;
+import static com.binaryic.beinsync.common.Constants.COLUMN_FONT_NAME;
+import static com.binaryic.beinsync.common.Constants.COLUMN_LINE_SPACING;
+import static com.binaryic.beinsync.common.Constants.COLUMN_TEXT_ALIGNMENT;
+import static com.binaryic.beinsync.common.Constants.COLUMN_TEXT_COLOR;
+import static com.binaryic.beinsync.common.Constants.COLUMN_TEXT_MODE;
+import static com.binaryic.beinsync.common.Constants.COLUMN_TEXT_SIZE;
+import static com.binaryic.beinsync.common.Constants.COLUMN_TEXT_STYLE;
+import static com.binaryic.beinsync.common.Constants.CONTENT_SETTING;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, SearchView.OnQueryTextListener {
     public static DrawerLayout drawer;
@@ -91,11 +103,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ll_textFormatOptions.setVisibility(View.VISIBLE);
         rl_Filter.setOnClickListener(this);
         rl_Setting.setOnClickListener(this);
-
         toolbarTitle.setVisibility(View.GONE);
+        defaultSetting();
         addHomeFragment();
         addDrawerFragment();
 
+    }
+
+    private void defaultSetting() {
+        Cursor cursor = getContentResolver().query(CONTENT_SETTING, null, null, null, null);
+        if (cursor.getCount() <= 0) {
+            ContentValues values = new ContentValues();
+            values.put(COLUMN_TEXT_SIZE, "16");
+            values.put(COLUMN_LINE_SPACING, "1.5");
+            values.put(COLUMN_TEXT_STYLE, "normal");
+            values.put(COLUMN_TEXT_MODE, "day");
+            values.put(COLUMN_TEXT_ALIGNMENT, "justify");
+            values.put(COLUMN_FONT_NAME, "Roboto");
+            values.put(COLUMN_TEXT_COLOR, "" + "#2D292B");
+            values.put(COLUMN_BACKGROUND_COLOR, "" + "#EEEAF0");
+            getContentResolver().insert(CONTENT_SETTING, values);
+        }
+        cursor.close();
     }
 
     public void addHomeFragment() {
@@ -169,15 +198,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onBackPressed() {
 
-            Fragment f = getSupportFragmentManager().findFragmentById(R.id.fl_Main);
+        Fragment f = getSupportFragmentManager().findFragmentById(R.id.fl_Main);
 
-            if (f instanceof FragmentHome) {
-               alertForExit();
-            } else {
-                super.onBackPressed();
-            }
+        if (f instanceof FragmentHome) {
+            alertForExit();
+        } else {
+            super.onBackPressed();
+        }
 
     }
+
     private void alertForExit() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

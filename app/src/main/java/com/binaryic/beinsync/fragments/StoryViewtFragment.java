@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.binaryic.beinsync.R;
@@ -33,6 +34,7 @@ import static com.binaryic.beinsync.common.Constants.CONTENT_SETTING;
  */
 
 public class StoryViewtFragment extends Fragment {
+    private RelativeLayout rl_MainLayout;
     private TextView tv_Story_Name;
     private ImageView iv_StoryImage;
     private WebView webview;
@@ -78,7 +80,7 @@ public class StoryViewtFragment extends Fragment {
     }
 
     private void applySetting() {
-        ColorDrawable colorDrawable;
+        ColorDrawable colorDrawable = null;
         String strLineSpacing = "", strMode = "", strColor = "", strBgcolor = "", font_Name = "";
 
         Cursor cursorSetFont = getActivity().getContentResolver().query(CONTENT_SETTING, null, null, null, null);
@@ -152,6 +154,8 @@ public class StoryViewtFragment extends Fragment {
                         Log.e("strBgcolor", "==" + strBgcolor);
                         Log.e("strColor", "==" + strColor);
                         Log.e("open_Tag", "==" + open_Tag);
+                        rl_MainLayout.setBackground(colorDrawable);
+                        
                         webview.loadDataWithBaseURL(null, "<html><body><head><link href='https://fonts.googleapis.com/css?family=" + font_Name + "' rel='stylesheet' type='text/css'><style>div {text-align: "
                                 + cursorSetFont.getString(cursorSetFont.getColumnIndex(COLUMN_TEXT_ALIGNMENT)) + ";text-justify: inter-word; color: " + strColor + "; background-color: " + strBgcolor + ";font-family: '" + font_Name + "',font-style: '"
                                 + cursorSetFont.getString(cursorSetFont.getColumnIndex(COLUMN_TEXT_STYLE)) + "' ,font-weight: "
@@ -170,6 +174,7 @@ public class StoryViewtFragment extends Fragment {
     }
 
     private void init(View view) {
+        rl_MainLayout = (RelativeLayout) view.findViewById(R.id.rl_MainLayout);
         tv_Story_Name = (TextView) view.findViewById(R.id.tv_Story_Name);
         iv_StoryImage = (ImageView) view.findViewById(R.id.iv_StoryImage);
         webview = (WebView) view.findViewById(R.id.webview);
