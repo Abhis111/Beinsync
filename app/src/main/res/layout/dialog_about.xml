@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <com.binaryic.beinsync.common.TextViewPrimary
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:padding="@dimen/activity_10dp_margin"
+        android:text="about us"
+        android:textAllCaps="true"
+        android:textColor="@color/textPrimary"
+        android:textSize="@dimen/text_18" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorDividerGray" />
+
+    <com.binaryic.beinsync.common.TextViewPrimary
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:padding="@dimen/activity_10dp_margin"
+        android:text="Beinsync was founded in January 2017 in Mumbai, India. Its mission is to provide down-to-earth articles and commentary to empower ecommerce businesses."
+        android:textColor="@color/colorTextMedium"
+        android:textSize="14sp" />
+</LinearLayout>

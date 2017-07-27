@@ -2,5 +2,7 @@
     <string name="app_name">Beinsync</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="share_msg">Share message</string>
+    <string name="share_app">share title</string>
 
 </resources>

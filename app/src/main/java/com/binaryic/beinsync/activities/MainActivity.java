@@ -1,5 +1,6 @@
 package com.binaryic.beinsync.activities;
 
+import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,9 +16,13 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -146,6 +151,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.rate_us){
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + MainActivity.this.getPackageName())));
+        }else if(item.getItemId() == R.id.share_app){
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.share_msg));
+            sendIntent.setType("text/plain");
+            startActivity(Intent.createChooser(sendIntent, getResources().getString(R.string.share_app)));
+        }else if(item.getItemId() == R.id.about_us){
+            aboutDialog();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     public void addDrawerFragment() {
         Utils.addFragment(MainActivity.this, new FragmentDrawer(), R.id.fl_Main_Drawer);
     }
@@ -216,5 +237,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         AlertDialog alert = builder.create();
         alert.show();
+    }
+
+    public void aboutDialog() {
+        final Dialog msgDialog = new Dialog(MainActivity.this);
+        msgDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        msgDialog.setContentView(R.layout.dialog_about);
+        WindowManager.LayoutParams wmlp = msgDialog.getWindow().getAttributes();
+        wmlp.gravity = Gravity.CENTER | Gravity.CENTER;
+        wmlp.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        msgDialog.setCanceledOnTouchOutside(true);
+        msgDialog.show();
     }
 }
