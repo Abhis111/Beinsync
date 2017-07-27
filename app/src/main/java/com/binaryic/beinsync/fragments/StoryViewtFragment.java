@@ -82,7 +82,7 @@ public class StoryViewtFragment extends Fragment {
     private void applySetting() {
         ColorDrawable colorDrawable = null;
         String strLineSpacing = "", strMode = "", strColor = "", strBgcolor = "", font_Name = "";
-
+//
         Cursor cursorSetFont = getActivity().getContentResolver().query(CONTENT_SETTING, null, null, null, null);
         String open_Tag = "";
         String close_Tag = "";
