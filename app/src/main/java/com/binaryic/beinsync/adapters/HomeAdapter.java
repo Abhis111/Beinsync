@@ -6,19 +6,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.binaryic.beinsync.R;
 import com.binaryic.beinsync.activities.StoryViewActivity;
+import com.binaryic.beinsync.common.Utils;
 import com.binaryic.beinsync.models.HomeModel;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
-
-import static com.binaryic.beinsync.R.id.webview;
 
 
 /**
@@ -27,7 +24,6 @@ import static com.binaryic.beinsync.R.id.webview;
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     public ArrayList<HomeModel> list;
     Activity context;
-
 
 
     public HomeAdapter(Activity context, ArrayList<HomeModel> list) {
@@ -44,10 +40,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Glide.with(context).load(list.get(position).getImage()).into(holder.iv_Image);
         holder.tv_Name.setText(list.get(position).getTitle());
+        int width = Utils.getScreenWidth(context);
+        int height = (int) (758*Utils.getScreenWidth(context)/474);
+        Glide.with(context).load(list.get(position).getImage()).override(width,250).into(holder.iv_Image);
     }
-
 
 
     @Override
@@ -64,9 +61,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
         public ViewHolder(View view) {
             super(view);
-          //  tv_Content = (WebView) view.findViewById(webview);
+            //  tv_Content = (WebView) view.findViewById(webview);
             tv_Name = (TextView) view.findViewById(R.id.tv_Name);
             iv_Image = (ImageView) view.findViewById(R.id.iv_Image);
+
             //ll_MainLayout = (LinearLayout) view.findViewById(R.id.ll_MainLayout);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override

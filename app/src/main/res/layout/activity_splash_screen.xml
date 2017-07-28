@@ -16,10 +16,11 @@
 
         <ImageView
             android:id="@+id/iv_Logo"
-            android:layout_width="100dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/logo_02" />
+            android:layout_marginBottom="@dimen/activity_20dp_margin"
+            android:background="@drawable/logo_250" />
 
 
         <com.binaryic.beinsync.common.TextViewPrimary
