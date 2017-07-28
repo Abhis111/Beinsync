@@ -8,7 +8,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.binaryic.beinsync.R;
@@ -50,11 +50,11 @@ public class SubDrawerAdapter extends RecyclerView.Adapter<SubDrawerAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView  tv_child;
-        LinearLayout rl_child_item;
+        RelativeLayout rl_child_item;
         public ViewHolder(View itemView) {
             super(itemView);
             tv_child = (TextView) itemView.findViewById(R.id.tv_child);
-            rl_child_item = (LinearLayout) itemView.findViewById(R.id.rl_child_item);
+            rl_child_item = (RelativeLayout) itemView.findViewById(R.id.rl_child_item);
             rl_child_item.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

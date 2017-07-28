@@ -1,13 +1,24 @@
 package com.binaryic.beinsync.common;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import com.binaryic.beinsync.R;
+
+import static com.binaryic.beinsync.activities.MainActivity.downloading_Dialog;
 
 /**
  * Created by Binary_Apple on 7/20/17.
@@ -53,5 +64,21 @@ public class Utils {
                 .show();
     }
 
+    public static void createDialog(Activity context) {
+        // Create custom dialog object
+        downloading_Dialog = new Dialog(context);
+        // Include dialog.xml file
+        downloading_Dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        downloading_Dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        downloading_Dialog.setContentView(R.layout.downloading_dialogue);
+        TextView textDialog = (TextView) downloading_Dialog.findViewById(R.id.textDialog);
+        ProgressBar progressBar_Downloading = (ProgressBar) downloading_Dialog.findViewById(R.id.progressBar_Downloading);
+        // textDialog.setText("Downloading...");
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        context.getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+        int width = (int) ((int) displaymetrics.widthPixels);
+        int height = (int) ((int) displaymetrics.heightPixels);
+        downloading_Dialog.getWindow().setLayout(width, height);
 
+    }
 }
