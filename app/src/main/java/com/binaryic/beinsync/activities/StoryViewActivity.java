@@ -58,7 +58,7 @@ public class StoryViewActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        setActionBarTitle(category.toString());
+      //  setActionBarTitle(category.toString());
     }
 
     void setActionBarTitle(String title) {

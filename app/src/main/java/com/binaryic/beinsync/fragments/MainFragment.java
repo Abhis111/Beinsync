@@ -132,9 +132,11 @@ public class MainFragment extends Fragment {
             fragmentHome2.setArguments(bundle2);
 
 
-            adapter.addFragment(fragmentHome, "News");
-            adapter.addFragment(fragmentHome1, "Marketing");
-            adapter.addFragment(fragmentHome2, "D&D");
+            adapter.addFragment(new FragmentHome(), "News");
+            adapter.addFragment(new FragmentHome(), "Marketing");
+            adapter.addFragment(new FragmentHome(), "Design & Development");
+            adapter.addFragment(new FragmentHome(), "Ecommerce");
+            adapter.addFragment(new FragmentHome(), "Event");
 
             viewpager.setAdapter(adapter);
         }

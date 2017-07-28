@@ -56,7 +56,7 @@ import static com.binaryic.beinsync.common.Constants.VEHICLE_USED;
 public class MyDBHelper extends SQLiteOpenHelper {
 
     public static String DATABASE_NAME = "com.binaryic.beinsync";
-    public static int DATABASE_VERSION = 8;
+    public static int DATABASE_VERSION = 9;
 
     static String DATABASE_SETTING = "create table " + TABLE_SETTING + "( " + COLUMN_TEXT_SIZE + " text, " + COLUMN_TEXT_STYLE + " text, " + COLUMN_TEXT_MODE + " text, " + COLUMN_TEXT_ALIGNMENT + " text, " + COLUMN_LINE_SPACING + " text, " + COLUMN_BACKGROUND_COLOR + " text, " + COLUMN_FONT_NAME + " text, " + COLUMN_TEXT_COLOR + " text );";
     static String CREATE_DASHBOARD = "create table " + TABLE_DASHBOARD + "( " + COLUMN_ID + " text, " + COLUMN_TITLE + " text, " + COLUMN_LINK + " text, " + COLUMN_IMAGE + " text, " + COLUMN_CATEGORY + " text, " + COLUMN_INFO + " text );";

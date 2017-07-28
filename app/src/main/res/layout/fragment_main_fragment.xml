@@ -9,9 +9,10 @@
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:background="@color/theme_orange"
-        app:tabIndicatorColor="@color/theme_blue"
-        app:tabSelectedTextColor="@color/white"
+        android:background="@color/white"
+        app:tabMode="scrollable"
+        app:tabIndicatorColor="@color/theme_orange"
+        app:tabSelectedTextColor="@color/theme_orange"
         app:tabIndicatorHeight="@dimen/activity_2dp_margin"
         app:tabTextColor="@color/colorMediumGray" />
 
