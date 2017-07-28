@@ -27,6 +27,8 @@ public class StoryViewActivity extends AppCompatActivity {
         if (getIntent().hasExtra("title")) {
             Fragment fragment = new StoryViewtFragment();
             Bundle bundle = new Bundle();
+            bundle.putString("id", getIntent().getStringExtra("id"));
+            bundle.putString("category", getIntent().getStringExtra("category"));
             bundle.putString("title", getIntent().getStringExtra("title"));
             bundle.putString("image", getIntent().getStringExtra("image"));
             bundle.putString("content", getIntent().getStringExtra("content"));

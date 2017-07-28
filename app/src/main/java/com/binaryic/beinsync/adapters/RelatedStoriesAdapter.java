@@ -20,37 +20,37 @@ import java.util.ArrayList;
 /**
  * Created by Asd on 10-10-2016.
  */
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
+public class RelatedStoriesAdapter extends RecyclerView.Adapter<RelatedStoriesAdapter.ViewHolder> {
     public ArrayList<HomeModel> list;
     Activity context;
+    int size;
     String category;
 
 
-
-    public HomeAdapter(Activity context, ArrayList<HomeModel> list,String category) {
+    public RelatedStoriesAdapter(Activity context, ArrayList<HomeModel> list, String category, int size) {
         this.context = context;
         this.list = list;
+        this.size = size;
         this.category = category;
     }
 
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.home_item_layout_new, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.related_item_layout_new, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Glide.with(context).load(list.get(position).getImage()).into(holder.iv_Image);
+        Glide.with(context).load(list.get(position).getImage()).override(80, 80).into(holder.iv_Image);
         holder.tv_Name.setText(list.get(position).getTitle());
     }
 
 
-
     @Override
     public int getItemCount() {
-        return list.size();
+        return size;
     }
 
 
@@ -62,7 +62,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
         public ViewHolder(View view) {
             super(view);
-          //  tv_Content = (WebView) view.findViewById(webview);
+            //  tv_Content = (WebView) view.findViewById(webview);
             tv_Name = (TextView) view.findViewById(R.id.tv_Name);
             iv_Image = (ImageView) view.findViewById(R.id.iv_Image);
             //ll_MainLayout = (LinearLayout) view.findViewById(R.id.ll_MainLayout);
@@ -70,7 +70,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, StoryViewActivity.class);
-                    intent.putExtra("category",category);
+                    intent.putExtra("category", category);
                     intent.putExtra("id", list.get(getPosition()).getId());
                     intent.putExtra("title", list.get(getPosition()).getTitle());
                     intent.putExtra("image", list.get(getPosition()).getImage());

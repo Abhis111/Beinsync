@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    app:cardCornerRadius="3dp">
+
+    <RelativeLayout
+        android:layout_marginLeft="@dimen/activity_8dp_margin"
+        android:layout_marginBottom="@dimen/activity_8dp_margin"
+        android:layout_marginRight="@dimen/activity_8dp_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_Image"
+            android:layout_width="@dimen/activity_80dp_margin"
+            android:layout_height="@dimen/activity_50dp_margin"
+            android:scaleType="fitXY"
+            android:src="@drawable/logo" />
+
+        <RelativeLayout
+            android:layout_width="@dimen/activity_80dp_margin"
+            android:layout_height="@dimen/activity_50dp_margin"
+            android:background="#77000000"></RelativeLayout>
+
+        <com.binaryic.beinsync.common.TextViewPrimary
+            android:id="@+id/tv_Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_toRightOf="@+id/iv_Image"
+            android:text="Name"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+</RelativeLayout>

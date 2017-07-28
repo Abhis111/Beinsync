@@ -70,8 +70,8 @@ public class FragmentNews extends Fragment {
                 ArrayList<HomeModel> array_Data = (ArrayList<HomeModel>) (success);
 
                 swipeContainer.setRefreshing(false);
-                rv_Home.setLayoutManager(new LinearLayoutManager(getActivity() ));
-                rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data));
+                rv_Home.setLayoutManager(new LinearLayoutManager(getActivity()));
+                rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data, array_Data.get(0).getTitle()));
             }
 
             @Override
@@ -81,7 +81,7 @@ public class FragmentNews extends Fragment {
 
                 swipeContainer.setRefreshing(false);
                 rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-                rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data));
+                rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data, array_Data.get(0).getTitle()));
             }
         });
     }

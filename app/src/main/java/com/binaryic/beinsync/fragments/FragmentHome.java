@@ -37,7 +37,7 @@ public class FragmentHome extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = null;
-      //  MainActivity.ll_textFormatOptions.setVisibility(View.VISIBLE);
+        //  MainActivity.ll_textFormatOptions.setVisibility(View.VISIBLE);
 
         view = inflater.inflate(R.layout.fragment_home, container, false);
         ll_MainLayout = (LinearLayout) view.findViewById(R.id.ll_MainLayout);
@@ -55,9 +55,9 @@ public class FragmentHome extends Fragment {
         }
 
         array_Data = getDashboardDataFromDatabase(getActivity(), category);
-        rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data));
+        rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data, category));
         swipeContainer.setRefreshing(false);
-    //    getDashboardData(array_Data);
+        //    getDashboardData(array_Data);
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
@@ -88,7 +88,7 @@ public class FragmentHome extends Fragment {
                     linearLayoutManager.setAutoMeasureEnabled(true);
                     rv_Home.setLayoutManager(linearLayoutManager);
                     //rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-                    rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data));
+                    rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data, category));
                 } else {
                     tv_No_Data.setVisibility(View.VISIBLE);
                     swipeContainer.setVisibility(View.GONE);
@@ -109,7 +109,7 @@ public class FragmentHome extends Fragment {
                     linearLayoutManager.setAutoMeasureEnabled(true);
                     rv_Home.setLayoutManager(linearLayoutManager);
                     //rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-                    rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data));
+                    rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data, category));
                 } else {
                     tv_No_Data.setVisibility(View.VISIBLE);
                     swipeContainer.setVisibility(View.GONE);
@@ -131,7 +131,7 @@ public class FragmentHome extends Fragment {
             linearLayoutManager.setAutoMeasureEnabled(true);
             rv_Home.setLayoutManager(linearLayoutManager);
             //rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-            rv_Home.setAdapter(new HomeAdapter(getActivity(), array_data));
+            rv_Home.setAdapter(new HomeAdapter(getActivity(), array_data, category));
         } else {
             tv_No_Data.setVisibility(View.VISIBLE);
             swipeContainer.setVisibility(View.GONE);

@@ -97,6 +97,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
                         Intent intent = new Intent(context, NewsActivity.class);
                         intent.putExtra("link", Constants.URL + list.get(getPosition()).getId());
                         context.startActivity(intent);
+
                     }
                 }
             });
