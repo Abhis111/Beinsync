@@ -258,8 +258,8 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
         bt_apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // MainActivity.ll_textFormatOptions.setVisibility(View.VISIBLE);
-                Fragment fragment = new FragmentHome();
+                MainActivity.ll_textFormatOptions.setVisibility(View.VISIBLE);
+                Fragment fragment = new MainFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString("link", Constants.URL_DASHBOARD);
                 fragment.setArguments(bundle);
@@ -910,7 +910,6 @@ public class SettingNewFragment extends Fragment implements View.OnClickListener
         // Tracking the screen view
         // MyApplication.getInstance().trackScreenView("SettingFragment");
     }
-
 
 
 }

@@ -292,7 +292,7 @@ public class DashboardController {
 
                 } catch (Exception e) {
                     callback.onError(e.getMessage());
-                    Log.e("errrorrrr", e.toString());
+                    Log.e("errroeerrrrr", e.toString());
                 }
 
             }
@@ -494,7 +494,7 @@ public class DashboardController {
             if (cursor.getCount() > 0) {
                 for (int i = 0; i < cursor.getCount(); i++) {
                     cursor.moveToNext();
-                    list.add(new TagModel(cursor.getString(cursor.getColumnIndex(COLUMN_TAGS)),cursor.getString(cursor.getColumnIndex(COLUMN_TAGS)),"",""));
+                    list.add(new TagModel(cursor.getString(cursor.getColumnIndex(COLUMN_TAGS)), cursor.getString(cursor.getColumnIndex(COLUMN_TAGS)), "", ""));
                 }
             }
         } catch (Exception ex) {
@@ -521,7 +521,7 @@ public class DashboardController {
                     homeModel.setUrl(cursor.getString(cursor.getColumnIndex(COLUMN_LINK)));
                     homeModel.setTitle_Category(cursor.getString(cursor.getColumnIndex(COLUMN_CATEGORY)));
                     array_Data.add(homeModel);
-                    Log.e("id",cursor.getString(cursor.getColumnIndex(COLUMN_ID)));
+                    Log.e("id", cursor.getString(cursor.getColumnIndex(COLUMN_ID)));
                 }
             }
         } catch (Exception ex) {
@@ -530,7 +530,6 @@ public class DashboardController {
         return array_Data;
 
     }
-
 
 
     public static ArrayList<String> getSpecificTagStories(Activity context, String tag) {

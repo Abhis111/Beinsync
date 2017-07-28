@@ -63,13 +63,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView iv_Add;
     FragmentHome fragmentHome;
     MainFragment mainFragment;
-    public static Dialog downloading_Dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Utils.createDialog(MainActivity.this);
+        Utils.createDialog(this);
         setSideMenu();
     }
 
@@ -127,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         DashboardController.getDashboardApiCall(this, Constants.URL_DASHBOARD, new ApiCallBack() {
             @Override
             public void onSuccess(Object success) {
+                Utils.downloading_Dialog.dismiss();
                 addTabsFragment();
 
                 /*ArrayList<HomeModel> array_Data = new ArrayList<>();
@@ -148,6 +148,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onError(String error) {
+                Utils.downloading_Dialog.dismiss();
+
                 addTabsFragment();
 
                 Log.e("MainActivity", "errror==" + error);
@@ -222,8 +224,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(Intent.createChooser(sendIntent, getResources().getString(R.string.share_app)));
         } else if (item.getItemId() == R.id.about_us) {
             aboutDialog();
-        }else if (item.getItemId() == R.id.sync) {
-            aboutDialog();
+        } else if (item.getItemId() == R.id.sync) {
+            Utils.downloading_Dialog.show();
+            getDashboardData();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -277,10 +280,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
 
         Fragment f = getSupportFragmentManager().findFragmentById(R.id.fl_Main);
-         ll_textFormatOptions.setVisibility(View.VISIBLE);
-        if (f instanceof FragmentHome) {
+        ll_textFormatOptions.setVisibility(View.VISIBLE);
+        if (f instanceof MainFragment) {
             alertForExit();
         } else {
+
             super.onBackPressed();
         }
 

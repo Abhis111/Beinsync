@@ -25,6 +25,7 @@ import com.binaryic.beinsync.models.HomeModel;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import static com.binaryic.beinsync.common.Constants.COLUMN_BACKGROUND_COLOR;
 import static com.binaryic.beinsync.common.Constants.COLUMN_FONT_NAME;
@@ -194,16 +195,17 @@ public class StoryViewtFragment extends Fragment {
         rv_RelatedStories.hasFixedSize();
         rv_RelatedStories.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
 
-        Log.e("StoryViewFragment", "id==" + id);
         ArrayList<HomeModel> temp_array = DashboardController.getDashboardDataFromDatabase(getActivity(), category);
 
         rv_RelatedStories.setVisibility(View.VISIBLE);
 
         for (int i = 0; i < temp_array.size(); i++) {
-            Log.e("StoryViewFragment", "id==" + temp_array.get(i).getId());
+            int j = new Random().nextInt(temp_array.size());
 
-            if (!id.matches(temp_array.get(i).getId())) {
-                array_Related.add(temp_array.get(i));
+            if (!id.matches(temp_array.get(j).getId())) {
+                if (!array_Related.contains(temp_array.get(j))) {
+                    array_Related.add(temp_array.get(j));
+                }
             }
         }
         if (array_Related.size() == 0) {

@@ -18,13 +18,12 @@ import android.widget.TextView;
 
 import com.binaryic.beinsync.R;
 
-import static com.binaryic.beinsync.activities.MainActivity.downloading_Dialog;
-
 /**
  * Created by Binary_Apple on 7/20/17.
  */
 
 public class Utils {
+    public static Dialog downloading_Dialog;
 
     public static void addFragmentBackHome(Activity context, Fragment fragment, int containerId) {
         FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();

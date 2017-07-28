@@ -34,38 +34,34 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-
             android:layout_height="match_parent"
             android:background="@color/white"
             android:orientation="vertical">
-
-            <ImageView
+            <com.binaryic.beinsync.common.ImageViewBanner
                 android:id="@+id/iv_StoryImage"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/activity_200dp_margin"
-                android:background="@color/white"
-                android:scaleType="fitXY"
-                android:src="@drawable/logo" />
+                android:layout_height="wrap_content"
+                />
 
             <RelativeLayout
                 android:id="@+id/sample_main_layout"
 
                 style="@style/Widget.CardContent"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="@color/white">
 
                 <WebView
                     android:id="@+id/webview"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="match_parent" />
 
             </RelativeLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_RelatedStories"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/activity_200dp_margin"></android.support.v7.widget.RecyclerView>
+                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
         </LinearLayout>
 
