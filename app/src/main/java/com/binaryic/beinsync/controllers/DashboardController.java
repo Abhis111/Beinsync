@@ -17,6 +17,7 @@ import com.binaryic.beinsync.database.MyDBHelper;
 import com.binaryic.beinsync.models.CategoryModel;
 import com.binaryic.beinsync.models.HomeModel;
 import com.binaryic.beinsync.models.TagModel;
+import com.binaryic.beinsync.models.TopicModel;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 import static com.binaryic.beinsync.common.Constants.COLUMN_CATEGORY;
 import static com.binaryic.beinsync.common.Constants.COLUMN_ID;
 import static com.binaryic.beinsync.common.Constants.COLUMN_IMAGE;
@@ -34,7 +36,12 @@ import static com.binaryic.beinsync.common.Constants.COLUMN_TAGS;
 import static com.binaryic.beinsync.common.Constants.COLUMN_TITLE;
 import static com.binaryic.beinsync.common.Constants.CONTENT_DASHBOARD;
 import static com.binaryic.beinsync.common.Constants.CONTENT_TAGS;
+import static com.binaryic.beinsync.common.Constants.CONTENT_TOPICS;
 import static com.binaryic.beinsync.common.Constants.STORY_ID;
+import static com.binaryic.beinsync.common.Constants.TOPIC_COUNT;
+import static com.binaryic.beinsync.common.Constants.TOPIC_ID;
+import static com.binaryic.beinsync.common.Constants.TOPIC_SLUG;
+import static com.binaryic.beinsync.common.Constants.TOPIC_TITLE;
 
 /**
  * Created by Binary_Apple on 7/21/17.
@@ -44,7 +51,6 @@ public class DashboardController {
 
 
     public static void getCategoriesApiCall(final Activity context, String url, final ApiCallBack callback) {
-
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -94,6 +100,87 @@ public class DashboardController {
         MyApplication.getInstance().addToRequestQueue(stringRequest, "getAccessTokenApiCall");
 
 
+    }
+    public static void getTopicsApiCall(final Activity context, String url, final ApiCallBack callback) {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.e("getDashboardApiCall", "response =" + response);
+                try {
+                    JSONObject object = new JSONObject(response);
+                    if (object.getString("status").matches("ok")) {
+                        JSONArray jsonArray_Categorues = object.getJSONArray("categories");
+                        for (int i = 0; i < jsonArray_Categorues.length(); i++) {
+                            JSONObject jsonObject = jsonArray_Categorues.getJSONObject(i);
+                            TopicModel topicModel = new TopicModel();
+                            topicModel.setId(jsonObject.getString("id"));
+                            topicModel.setPost_count(jsonObject.getString("post_count"));
+                            topicModel.setSlug(jsonObject.getString("slug"));
+                            topicModel.setTitle(jsonObject.getString("title"));
+                            addTopicInDatabase(context,topicModel);
+                        }
+                        callback.onSuccess("success");
+                    } else {
+                        callback.onError("success value is 0. please check responce");
+                    }
+
+                } catch (Exception e) {
+                    callback.onError(e.getMessage());
+                    Log.e("errrorrrr", e.toString());
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("getAccessTokenApiCall", error.toString());
+                callback.onError(error.getMessage());
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("client_name", "Seller App");
+                Log.e("getAccessTokenApiCall", "params" + params.toString());
+                return params;
+            }
+        };
+        MyApplication.getInstance().addToRequestQueue(stringRequest, "getAccessTokenApiCall");
+
+    }
+    public static void addTopicInDatabase(Activity context, TopicModel topicModel) {
+        ContentValues values = new ContentValues();
+        String selection = TOPIC_ID + "  = '" + topicModel.getId() + "'";
+        Cursor cursor = context.getContentResolver().query(CONTENT_TOPICS, null, selection, null, null);
+        values.put(TOPIC_ID, topicModel.getId());
+        values.put(TOPIC_SLUG, topicModel.getSlug());
+        values.put(TOPIC_TITLE, topicModel.getTitle());
+        values.put(TOPIC_COUNT, topicModel.getPost_count());
+        if (cursor.getCount() > 0) {
+            context.getContentResolver().update(CONTENT_TOPICS, values, selection, null);
+        } else {
+            context.getContentResolver().insert(CONTENT_TOPICS, values);
+        }
+    }
+
+    public static ArrayList<TopicModel> getTopics(Activity context){
+        ArrayList<TopicModel> list = new ArrayList<>();
+        try{
+            Cursor cursor = context.getContentResolver().query(CONTENT_TOPICS, null, null, null, null);
+            if(cursor.getCount() > 0){
+                for(int i = 0;i < cursor.getCount();i++){
+                    cursor.moveToNext();
+                    TopicModel topicModel = new TopicModel();
+                    topicModel.setSlug(cursor.getString(cursor.getColumnIndex(TOPIC_SLUG)));
+                    topicModel.setId(cursor.getString(cursor.getColumnIndex(TOPIC_ID)));
+                    topicModel.setTitle(cursor.getString(cursor.getColumnIndex(TOPIC_TITLE)));
+                    topicModel.setPost_count(cursor.getString(cursor.getColumnIndex(TOPIC_COUNT)));
+                    list.add(topicModel);
+                }
+            }
+        }catch (Exception ex){}
+        return list;
     }
 
     public static void getDashboardApiCall(final Activity context, String url, final ApiCallBack callback) {

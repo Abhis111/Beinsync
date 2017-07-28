@@ -15,7 +15,10 @@ import android.widget.Toast;
 import com.binaryic.beinsync.R;
 import com.binaryic.beinsync.common.ApiCallBack;
 import com.binaryic.beinsync.common.InternetConnectionDetector;
+import com.binaryic.beinsync.common.Utils;
+import com.binaryic.beinsync.controllers.DashboardController;
 import com.binaryic.beinsync.controllers.LoginController;
+import com.bumptech.glide.util.Util;
 
 public class SplashScreen extends AppCompatActivity {
     RelativeLayout rl_Splash;
@@ -25,16 +28,25 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         rl_Splash = (RelativeLayout) findViewById(R.id.rl_Splash);
-        downTimer.start();
+        getTopics();
+    }
+    private void getTopics(){
+        DashboardController.getTopicsApiCall(SplashScreen.this, "http://www.beinsync.in/?json=get_category_index", new ApiCallBack() {
+            @Override
+            public void onSuccess(Object success) {
+                downTimer.start();
+            }
+            @Override
+            public void onError(String error) {
+                downTimer.start();
+            }
+        });
     }
 
     CountDownTimer downTimer = new CountDownTimer(3000, 1000) {
         @Override
         public void onTick(long millisUntilFinished) {
-
         }
-
-
         @Override
         public void onFinish() {
 

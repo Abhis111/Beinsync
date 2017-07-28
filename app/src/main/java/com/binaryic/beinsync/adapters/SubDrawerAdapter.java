@@ -15,6 +15,7 @@ import com.binaryic.beinsync.R;
 import com.binaryic.beinsync.activities.NewsActivity;
 import com.binaryic.beinsync.common.Constants;
 import com.binaryic.beinsync.models.DrawerModel;
+import com.binaryic.beinsync.models.TopicModel;
 
 import java.util.ArrayList;
 
@@ -25,10 +26,10 @@ import static com.binaryic.beinsync.activities.MainActivity.drawer;
  */
 
 public class SubDrawerAdapter extends RecyclerView.Adapter<SubDrawerAdapter.ViewHolder> {
-    public ArrayList<DrawerModel> list;
+    public ArrayList<TopicModel> list;
     Context context;
 
-    public SubDrawerAdapter(Activity context, ArrayList<DrawerModel> list) {
+    public SubDrawerAdapter(Activity context, ArrayList<TopicModel> list) {
         this.context = context;
         this.list = list;
     }
@@ -61,7 +62,9 @@ public class SubDrawerAdapter extends RecyclerView.Adapter<SubDrawerAdapter.View
                     drawer.closeDrawer(Gravity.LEFT);
                     // Toast.makeText(context, list.get(getPosition()).getTitle(), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(context, NewsActivity.class);
-                    intent.putExtra("link", Constants.URL + list.get(getPosition()).getId());
+                    //intent.putExtra("link", Constants.URL + list.get(getPosition()).getId());
+                    intent.putExtra("id",list.get(getPosition()).getId());
+                    intent.putExtra("page_count",list.get(getPosition()).getPost_count());
                     context.startActivity(intent);
                 }
             });

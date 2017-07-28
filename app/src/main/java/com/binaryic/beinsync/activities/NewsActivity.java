@@ -23,10 +23,11 @@ public class NewsActivity extends AppCompatActivity {
     }
 
     private void getExtra() {
-        if (getIntent().hasExtra("link")) {
+        if (getIntent().hasExtra("id")) {
             Fragment fragment = new FragmentNews();
             Bundle bundle = new Bundle();
-            bundle.putString("link", getIntent().getStringExtra("link"));
+            bundle.putString("id", getIntent().getStringExtra("id"));
+            bundle.putString("page_count", getIntent().getStringExtra("page_count"));
             fragment.setArguments(bundle);
             Utils.addFragment(this, fragment, R.id.fl_Main);
         }
@@ -40,7 +41,6 @@ public class NewsActivity extends AppCompatActivity {
     }
 
     private void setToolBar() {
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_group_chat);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
@@ -58,11 +58,9 @@ public class NewsActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
         if (id == android.R.id.home) {
             onBackPressed();
         }
-
         return super.onOptionsItemSelected(item);
     }
 

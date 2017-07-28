@@ -13,11 +13,13 @@ import static com.binaryic.beinsync.common.Constants.PATH_DASHBOARD;
 import static com.binaryic.beinsync.common.Constants.PATH_SECTOR;
 import static com.binaryic.beinsync.common.Constants.PATH_SETTING;
 import static com.binaryic.beinsync.common.Constants.PATH_TAGS;
+import static com.binaryic.beinsync.common.Constants.PATH_TOPICS;
 import static com.binaryic.beinsync.common.Constants.PATH_USER;
 import static com.binaryic.beinsync.common.Constants.TABLE_DASHBOARD;
 import static com.binaryic.beinsync.common.Constants.TABLE_SECTOR;
 import static com.binaryic.beinsync.common.Constants.TABLE_SETTING;
 import static com.binaryic.beinsync.common.Constants.TABLE_TAGS;
+import static com.binaryic.beinsync.common.Constants.TABLE_TOPICS;
 import static com.binaryic.beinsync.common.Constants.TABLE_USER;
 
 
@@ -31,6 +33,7 @@ public class KyaContentProvider extends ContentProvider {
     private static final int CODE_USER = 3;
     private static final int CODE_SETTING = 4;
     private static final int CODE_TAGS = 5;
+    private static final int CODE_TOPIC = 6;
 
     private MyDBHelper helper;
     private SQLiteDatabase database;
@@ -46,6 +49,7 @@ public class KyaContentProvider extends ContentProvider {
         matcher.addURI(AUTHORITY, PATH_USER, CODE_USER);
         matcher.addURI(AUTHORITY, PATH_SETTING, CODE_SETTING);
         matcher.addURI(AUTHORITY, PATH_TAGS, CODE_TAGS);
+        matcher.addURI(AUTHORITY, PATH_TOPICS, CODE_TOPIC);
         return false;
     }
 
@@ -64,6 +68,8 @@ public class KyaContentProvider extends ContentProvider {
             cursor = database.query(TABLE_SETTING, projection, selection, null, null, null, null);
         } else if (code == CODE_TAGS) {
             cursor = database.query(TABLE_TAGS, projection, selection, null, null, null, null);
+        } else if (code == CODE_TOPIC) {
+            cursor = database.query(TABLE_TOPICS, projection, selection, null, null, null, null);
         }
         return cursor;
     }
@@ -88,6 +94,8 @@ public class KyaContentProvider extends ContentProvider {
             database.insert(TABLE_SETTING, null, values);
         } else if (code == CODE_TAGS) {
             database.insert(TABLE_TAGS, null, values);
+        } else if (code == CODE_TOPIC) {
+            database.insert(TABLE_TOPICS, null, values);
         }
         return null;
     }
@@ -106,6 +114,8 @@ public class KyaContentProvider extends ContentProvider {
             delete = database.delete(TABLE_SETTING, selection, selectionArgs);
         } else if (code == CODE_TAGS) {
             delete = database.delete(TABLE_TAGS, selection, selectionArgs);
+        } else if (code == CODE_TOPIC) {
+            delete = database.delete(TABLE_TOPICS, selection, selectionArgs);
         }
         return delete;
     }
@@ -124,6 +134,8 @@ public class KyaContentProvider extends ContentProvider {
             row = database.update(TABLE_SETTING, values, selection, selectionArgs);
         } else if (code == CODE_TAGS) {
             row = database.update(TABLE_TAGS, values, selection, selectionArgs);
+        } else if (code == CODE_TOPIC) {
+            row = database.update(TABLE_TOPICS, values, selection, selectionArgs);
         }
         return row;
     }

@@ -15,6 +15,7 @@ public class Constants {
     public static final String PATH_USER = "user";
     public static final String PATH_SETTING = "PATH_SETTING";
     public static final String PATH_TAGS = "PATH_TAGS";
+    public static final String PATH_TOPICS = "PATH_TAGS";
     public static final String URL = "http://www.beinsync.in/";
     public static final String URL_DASHBOARD = URL + "?json=1";
     public static final String SEND_PHONE_DETAILS = "";
@@ -24,6 +25,7 @@ public class Constants {
     public static final Uri CONTENT_USER = Uri.parse(CONTENT_PROTOCOL + AUTHORITY + "/" + PATH_USER);
     public static final Uri CONTENT_SETTING = Uri.parse(CONTENT_PROTOCOL + AUTHORITY + "/" + PATH_SETTING);
     public static final Uri CONTENT_TAGS = Uri.parse(CONTENT_PROTOCOL + AUTHORITY + "/" + PATH_TAGS);
+    public static final Uri CONTENT_TOPICS = Uri.parse(CONTENT_PROTOCOL + AUTHORITY + "/" + PATH_TOPICS);
 
     public static String TABLE_DASHBOARD = "TABLE_DASHBOARD";
     public static String TABLE_CATEGORY = "TABLE_CATEGORY";
@@ -71,6 +73,12 @@ public class Constants {
     public static final String COLUMN_BACKGROUND_COLOR = "COLUMN_BACKGROUND_COLOR";
     public static final String COLUMN_FONT_NAME = "COLUMN_FONT_NAME";
     public static final String COLUMN_TEXT_COLOR = "COLUMN_TEXT_COLOR";
+
+    public static String TABLE_TOPICS = "TABLE_TOPICS";
+    public static String TOPIC_ID = "TOPIC_ID";
+    public static String TOPIC_SLUG = "TOPIC_SLUG";
+    public static String TOPIC_TITLE = "TOPIC_TITLE";
+    public static String TOPIC_COUNT = "TOPIC_COUNT";
 
 
 }

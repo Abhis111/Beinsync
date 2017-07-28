@@ -13,7 +13,9 @@ import android.widget.ImageView;
 import com.binaryic.beinsync.R;
 import com.binaryic.beinsync.adapters.DrawerAdapter;
 import com.binaryic.beinsync.adapters.SubDrawerAdapter;
+import com.binaryic.beinsync.controllers.DashboardController;
 import com.binaryic.beinsync.models.DrawerModel;
+import com.binaryic.beinsync.models.TopicModel;
 
 import java.util.ArrayList;
 
@@ -70,90 +72,10 @@ public class FragmentDrawer extends Fragment {
             }
 
         }
-        ArrayList<DrawerModel> array_data_sub = new ArrayList<DrawerModel>();
-        for (int j = 1; j < 27; j++) {
-            switch (j) {
-                case 1:
-                    array_data_sub.add(new DrawerModel("category/marketing/advertising/", "Advertising", false, false, true));
-                    break;
-                case 2:
-                    array_data_sub.add(new DrawerModel("category/marketing/affiliate/", "Affiliate", false, false, true));
-                    break;
-                case 3:
-                    array_data_sub.add(new DrawerModel("category/marketing/analytics/", "Analytics", false, false, true));
-                    break;
-                case 4:
-                    array_data_sub.add(new DrawerModel("category/marketing/automation/", "Automation", false, false, true));
-                    break;
-                case 5:
-                    array_data_sub.add(new DrawerModel("category/marketing/blogging/", "Blogging", false, false, true));
-                    break;
-                case 6:
-                    array_data_sub.add(new DrawerModel("category/marketing/branding/", "Branding", false, false, true));
-                    break;
-                case 7:
-                    array_data_sub.add(new DrawerModel("category/marketing/content-marketing/", "Content Marketing", false, false, true));
-                    break;
-                case 8:
-                    array_data_sub.add(new DrawerModel("category/marketing/customer-experience/", "Customer Experience", false, false, true));
-                    break;
-                case 9:
-                    array_data_sub.add(new DrawerModel("category/marketing/design-development/", "Design & Development", false, false, true));
-                    break;
-                case 10:
-                    array_data_sub.add(new DrawerModel("category/marketing/digital-intelligence/", "Digital Intelligence", false, false, true));
-                    break;
-                case 11:
-                    array_data_sub.add(new DrawerModel("category/marketing/digital-strategy/", "Digital Strategy", false, false, true));
-                    break;
-                case 12:
-                    array_data_sub.add(new DrawerModel("category/marketing/ecommerce-marketing/", "Ecommerce", false, false, true));
-                    break;
-                case 13:
-                    array_data_sub.add(new DrawerModel("category/marketing/email-marketing/", "Email Marketing", false, false, true));
-                    break;
-                case 14:
-                    array_data_sub.add(new DrawerModel("category/marketing/holiday-marketing/", "Holiday Marketing", false, false, true));
-                    break;
-                case 15:
-                    array_data_sub.add(new DrawerModel("category/marketing/influencer-marketing/", "Influencer Marketing", false, false, true));
-                    break;
-                case 16:
-                    array_data_sub.add(new DrawerModel("category/marketing/insights/", "Insights", false, false, true));
-                    break;
-                case 17:
-                    array_data_sub.add(new DrawerModel("category/marketing/marketing/", "Marketing", false, false, true));
-                    break;
-                case 18:
-                    array_data_sub.add(new DrawerModel("category/marketing/marketing-automation/", "Marketing Automation", false, false, true));
-                    break;
-                case 19:
-                    array_data_sub.add(new DrawerModel("category/marketing/mobile-marketing/", "Mobile Marketing", false, false, true));
-                    break;
-                case 20:
-                    array_data_sub.add(new DrawerModel("category/marketing/news/", "News", false, false, true));
-                    break;
-                case 21:
-                    array_data_sub.add(new DrawerModel("category/marketing/ppc/", "PPC", false, false, true));
-                    break;
-                case 22:
-                    array_data_sub.add(new DrawerModel("category/marketing/search/", "Search", false, false, true));
-                    break;
-                case 23:
-                    array_data_sub.add(new DrawerModel("category/marketing/seo/", "SEO", false, false, true));
-                    break;
-                case 24:
-                    array_data_sub.add(new DrawerModel("category/marketing/slider/", "Slider", false, false, true));
-                    break;
-                case 25:
-                    array_data_sub.add(new DrawerModel("category/marketing/social-media/", "Social Media", false, false, true));
-                    break;
-                case 26:
-                    array_data_sub.add(new DrawerModel("category/marketing/video-marketing/", "Video Marketing", false, false, true));
-                    break;
+        //ArrayList<DrawerModel> array_data_sub = new ArrayList<DrawerModel>();
 
-            }
-        }
+        ArrayList<TopicModel> array_data_sub = DashboardController.getTopics(getActivity());
+
 
         rv_Drawer.hasFixedSize();
         rv_Drawer.setLayoutManager(new LinearLayoutManager(getActivity()));
