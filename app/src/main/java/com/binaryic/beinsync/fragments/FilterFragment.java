@@ -20,6 +20,13 @@ import android.widget.TextView;
 
 import com.binaryic.beinsync.R;
 import com.binaryic.beinsync.activities.MainActivity;
+import com.binaryic.beinsync.adapters.TagAdapter;
+import com.binaryic.beinsync.controllers.DashboardController;
+import com.binaryic.beinsync.models.TagModel;
+
+import java.util.ArrayList;
+
+import static android.R.id.list;
 
 
 /**
@@ -43,12 +50,19 @@ public class FilterFragment extends Fragment implements View.OnClickListener {
     private int boolean_LanguageEnglish = 0;
     private Button bt_apply;
     private Fragment fragment;
+    TagAdapter adapter;
 
     public static FilterFragment newInstance() {
         Bundle args = new Bundle();
         FilterFragment fragment = new FilterFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    private CloseListner closeListner;
+
+    public void setCloseListner(CloseListner closeListner) {
+        this.closeListner = closeListner;
     }
 
     @Nullable
@@ -75,15 +89,38 @@ public class FilterFragment extends Fragment implements View.OnClickListener {
         lastChanges();
         ta_Refresh.setOnClickListener(this);
         ta_Close.setOnClickListener(this);
-        bt_apply.setOnClickListener(this);
+        bt_apply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(adapter.list.size() > 0){
+                    String selected_tag = "";
+                    for(TagModel tagModel : adapter.list){
+                        if(tagModel.isSelect())
+                            selected_tag = selected_tag + ",'" + tagModel.getTag() + "'";
+                    }
+                    if(!selected_tag.equals("")) {
+                        selected_tag = selected_tag.substring(1);
+                        if(closeListner != null)
+                            closeListner.onClose(selected_tag);
+                    }
+                }
+            }
+        });
         ll_LanguageHindi.setOnClickListener(this);
         ll_LanguageEnglish.setOnClickListener(this);
         return view;
     }
 
+    public interface CloseListner{
+        public void onClose(String tags);
+    }
+
     private void setupRecyclerView(RecyclerView recyclerview) {
-        recyclerview.setLayoutManager(new GridLayoutManager(recyclerview.getContext(), 2));
+        ArrayList<TagModel> list = DashboardController.getDistinctTag(getActivity());
+        adapter = new TagAdapter(getActivity(), list);
+        recyclerview.setLayoutManager(new GridLayoutManager(recyclerview.getContext(), 1));
         recyclerview.setHasFixedSize(true);
+        recyclerview.setAdapter(adapter);
     }
 
     private void clearLanguage() {

@@ -35,6 +35,12 @@ public class Utils {
         transaction.add(containerId, fragment).addToBackStack(fragment.getClass().getName()).commit();
     }
 
+    public static int getScreenWidth(Activity context) {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        context.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        return displayMetrics.widthPixels;
+    }
+
     public static void addFragmentBack(int containerId, Fragment fragment, Activity context) {
         FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -42,7 +48,7 @@ public class Utils {
         transaction.add(containerId, fragment).addToBackStack(fragment.getClass().getName()).commit();
     }
 
-    public static void addFragment(Activity context, Fragment fragment,int containerId ) {
+    public static void addFragment(Activity context, Fragment fragment, int containerId) {
         FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
 

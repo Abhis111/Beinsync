@@ -8,7 +8,35 @@ public class TagModel {
     private String tag;
     private String title;
     private String id;
+    String story_id;
 
+    public String getStory_id() {
+        return story_id;
+    }
+
+    public void setStory_id(String story_id) {
+        this.story_id = story_id;
+    }
+
+    boolean isSelect = false;
+
+    public boolean isSelect() {
+        return isSelect;
+    }
+
+    public void setSelect(boolean select) {
+        isSelect = select;
+    }
+
+    public TagModel(String tag, String title, String id,String story_id) {
+        this.tag = tag;
+        this.title = title;
+        this.story_id=story_id;
+        this.id = id;
+    }
+
+    public TagModel() {
+    }
 
     public String getTag() {
         return tag;
