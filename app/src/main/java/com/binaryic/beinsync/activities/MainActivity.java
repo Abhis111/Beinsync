@@ -240,6 +240,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.rl_Filter:
+                //
                 FilterFragment filterFragment = new FilterFragment();
                 filterFragment.setCloseListner(new FilterFragment.CloseListner() {
                     @Override
