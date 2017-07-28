@@ -16,6 +16,7 @@
         <ImageView
             android:id="@+id/iv_Image"
             android:layout_width="@dimen/activity_80dp_margin"
+
             android:layout_height="@dimen/activity_50dp_margin"
             android:scaleType="fitXY"
             android:src="@drawable/logo" />
