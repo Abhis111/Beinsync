@@ -61,6 +61,7 @@ public class SubDrawerAdapter extends RecyclerView.Adapter<SubDrawerAdapter.View
                     drawer.closeDrawer(Gravity.LEFT);
                     // Toast.makeText(context, list.get(getPosition()).getTitle(), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(context, NewsActivity.class);
+                    intent.putExtra("category",list.get(getPosition()).getTitle());
                     intent.putExtra("link", Constants.URL + list.get(getPosition()).getId());
                     context.startActivity(intent);
                 }

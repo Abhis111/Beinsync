@@ -3,7 +3,6 @@ package com.binaryic.beinsync.fragments;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -26,6 +25,7 @@ public class FragmentNews extends Fragment {
     private RecyclerView rv_Home;
     private SwipeRefreshLayout swipeContainer;
     private String link = "";
+    private String category = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,16 +34,12 @@ public class FragmentNews extends Fragment {
         view = inflater.inflate(R.layout.fragment_home, container, false);
         rv_Home = (RecyclerView) view.findViewById(R.id.rv_Home);
 
-        rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             link = (bundle.getString("link")) + "?json=1";
+            category = (bundle.getString("category"));
         }
-       /* ArrayList<HomeModel> array_Data = new ArrayList<>();
-        array_Data = getDashboardDataFromDatabase(getActivity());
-        rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data));*/
-
 
         swipeContainer.setRefreshing(false);
         getDashboardData();
@@ -70,8 +66,10 @@ public class FragmentNews extends Fragment {
                 ArrayList<HomeModel> array_Data = (ArrayList<HomeModel>) (success);
 
                 swipeContainer.setRefreshing(false);
-                rv_Home.setLayoutManager(new LinearLayoutManager(getActivity()));
-                rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data, array_Data.get(0).getTitle()));
+                if (array_Data.size() > 0) {
+                    rv_Home.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data, category));
+                }
             }
 
             @Override
@@ -80,8 +78,10 @@ public class FragmentNews extends Fragment {
 
 
                 swipeContainer.setRefreshing(false);
-                rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-                rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data, array_Data.get(0).getTitle()));
+                if (array_Data.size() > 0) {
+                    rv_Home.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data, category));
+                }
             }
         });
     }

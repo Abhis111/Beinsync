@@ -13,19 +13,22 @@ import com.binaryic.beinsync.fragments.FragmentNews;
 
 public class NewsActivity extends AppCompatActivity {
     private FrameLayout fl_Main;
+    private String category = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
-        init();
         getExtra();
+        init();
     }
 
     private void getExtra() {
         if (getIntent().hasExtra("link")) {
             Fragment fragment = new FragmentNews();
             Bundle bundle = new Bundle();
+            category = getIntent().getStringExtra("category");
+            bundle.putString("category", getIntent().getStringExtra("category"));
             bundle.putString("link", getIntent().getStringExtra("link"));
             fragment.setArguments(bundle);
             Utils.addFragment(this, fragment, R.id.fl_Main);
@@ -46,10 +49,10 @@ public class NewsActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        setActionBarTitle(R.string.app_name);
+        setActionBarTitle(category);
     }
 
-    void setActionBarTitle(int title) {
+    void setActionBarTitle(String title) {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(title);
         }

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
@@ -13,6 +14,7 @@ import com.binaryic.beinsync.fragments.StoryViewtFragment;
 
 public class StoryViewActivity extends AppCompatActivity {
     private FrameLayout fl_Main;
+    private String category = "";
 
 
     @Override
@@ -28,7 +30,10 @@ public class StoryViewActivity extends AppCompatActivity {
             Fragment fragment = new StoryViewtFragment();
             Bundle bundle = new Bundle();
             bundle.putString("id", getIntent().getStringExtra("id"));
+            category = getIntent().getStringExtra("category");
             bundle.putString("category", getIntent().getStringExtra("category"));
+            Log.e("StoryViewActivity","category=="+category);
+
             bundle.putString("title", getIntent().getStringExtra("title"));
             bundle.putString("image", getIntent().getStringExtra("image"));
             bundle.putString("content", getIntent().getStringExtra("content"));
@@ -41,10 +46,8 @@ public class StoryViewActivity extends AppCompatActivity {
 
     private void init() {
         fl_Main = (FrameLayout) findViewById(R.id.fl_Main);
-        setToolBar();
         getExtra();
-
-
+        setToolBar();
     }
 
 
@@ -55,10 +58,10 @@ public class StoryViewActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        setActionBarTitle(R.string.app_name);
+        setActionBarTitle(category.toString());
     }
 
-    void setActionBarTitle(int title) {
+    void setActionBarTitle(String title) {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(title);
         }
