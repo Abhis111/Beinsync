@@ -92,14 +92,10 @@ public class StoryViewtFragment extends Fragment {
                 font_Name = cursorSetFont.getString(cursorSetFont.getColumnIndex(COLUMN_FONT_NAME));
             }
             if (cursorSetFont.getString(cursorSetFont.getColumnIndex(COLUMN_TEXT_SIZE)) != null) {
-
                 String data = "<html><body><head><link href='https://fonts.googleapis.com/css?family=" + cursorSetFont.getString(cursorSetFont.getColumnIndex(COLUMN_FONT_NAME)) + "' rel='stylesheet' type='text/css'><style>div {text-align: justify;text-justify: inter-word;color:#7f7f7f;font-family: '" + cursorSetFont.getString(cursorSetFont.getColumnIndex(COLUMN_FONT_NAME)) + "', sans-serif;font-size:"+ cursorSetFont.getString(cursorSetFont.getColumnIndex(COLUMN_TEXT_SIZE)) + ";margin:0 0 5px;padding:0;}.sharedaddy.sd-sharing-enabled{display:none;}</style></head><div>"+content +"</div></br></body></html>";
                 webview.loadDataWithBaseURL(null, data, "text/html", "utf-8", null);
-
                 if (cursorSetFont.getString(cursorSetFont.getColumnIndex(COLUMN_TEXT_STYLE)) != null) {
-
                     switch (cursorSetFont.getString(cursorSetFont.getColumnIndex(COLUMN_TEXT_STYLE))) {
-
                         case "bold":
                             open_Tag = "<b>";
                             close_Tag = "<\b>";

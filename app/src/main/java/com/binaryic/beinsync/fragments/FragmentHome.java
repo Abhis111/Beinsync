@@ -10,8 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.binaryic.beinsync.R;
+import com.binaryic.beinsync.activities.MainActivity;
 import com.binaryic.beinsync.adapters.HomeAdapter;
 import com.binaryic.beinsync.common.ApiCallBack;
 import com.binaryic.beinsync.controllers.DashboardController;
@@ -73,7 +75,6 @@ public class FragmentHome extends Fragment {
     }
 
     private void getDashboardData(ArrayList<HomeModel> array_Data) {
-
 
         DashboardController.getDashboardApiCall(getActivity(), link, new ApiCallBack() {
             @Override
@@ -138,6 +139,8 @@ public class FragmentHome extends Fragment {
         }
 
     }
+
+
 
 
 }

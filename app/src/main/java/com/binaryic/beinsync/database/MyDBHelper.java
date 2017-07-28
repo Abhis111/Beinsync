@@ -5,22 +5,19 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import static android.os.Build.ID;
 import static android.provider.MediaStore.Video.VideoColumns.CATEGORY;
 import static com.binaryic.beinsync.common.Constants.AGE;
 import static com.binaryic.beinsync.common.Constants.AHARCARDNO;
 import static com.binaryic.beinsync.common.Constants.AREA;
 import static com.binaryic.beinsync.common.Constants.COLUMN_BACKGROUND_COLOR;
 import static com.binaryic.beinsync.common.Constants.COLUMN_CATEGORY;
-import static com.binaryic.beinsync.common.Constants.COLUMN_DESCRIPTION;
 import static com.binaryic.beinsync.common.Constants.COLUMN_FONT_NAME;
 import static com.binaryic.beinsync.common.Constants.COLUMN_ID;
 import static com.binaryic.beinsync.common.Constants.COLUMN_IMAGE;
 import static com.binaryic.beinsync.common.Constants.COLUMN_INFO;
 import static com.binaryic.beinsync.common.Constants.COLUMN_LINE_SPACING;
 import static com.binaryic.beinsync.common.Constants.COLUMN_LINK;
-import static com.binaryic.beinsync.common.Constants.COLUMN_PARENT;
-import static com.binaryic.beinsync.common.Constants.COLUMN_POST_COUNT;
-import static com.binaryic.beinsync.common.Constants.COLUMN_SLUG;
 import static com.binaryic.beinsync.common.Constants.COLUMN_TAGS;
 import static com.binaryic.beinsync.common.Constants.COLUMN_TEXT_ALIGNMENT;
 import static com.binaryic.beinsync.common.Constants.COLUMN_TEXT_COLOR;
@@ -35,7 +32,6 @@ import static com.binaryic.beinsync.common.Constants.MOBILE_NO;
 import static com.binaryic.beinsync.common.Constants.OCCUPATION;
 import static com.binaryic.beinsync.common.Constants.SECTOR;
 import static com.binaryic.beinsync.common.Constants.SECTOR_ID;
-import static com.binaryic.beinsync.common.Constants.TABLE_CATEGORY;
 import static com.binaryic.beinsync.common.Constants.TABLE_DASHBOARD;
 import static com.binaryic.beinsync.common.Constants.TABLE_SECTOR;
 import static com.binaryic.beinsync.common.Constants.TABLE_SETTING;
@@ -54,14 +50,13 @@ import static com.binaryic.beinsync.common.Constants.VEHICLE_USED;
 public class MyDBHelper extends SQLiteOpenHelper {
 
     public static String DATABASE_NAME = "com.binaryic.beinsync";
-    public static int DATABASE_VERSION = 7;
+    public static int DATABASE_VERSION = 6;
 
     static String DATABASE_SETTING = "create table " + TABLE_SETTING + "( " + COLUMN_TEXT_SIZE + " text, " + COLUMN_TEXT_STYLE + " text, " + COLUMN_TEXT_MODE + " text, " + COLUMN_TEXT_ALIGNMENT + " text, " + COLUMN_LINE_SPACING + " text, " + COLUMN_BACKGROUND_COLOR + " text, " + COLUMN_FONT_NAME + " text, " + COLUMN_TEXT_COLOR + " text );";
     static String CREATE_DASHBOARD = "create table " + TABLE_DASHBOARD + "( " + COLUMN_ID + " text, " + COLUMN_TITLE + " text, " + COLUMN_LINK + " text, " + COLUMN_IMAGE + " text, " + COLUMN_CATEGORY + " text, " + COLUMN_INFO + " text );";
-    static String DATABASE_CATEGORY = "create table " + TABLE_CATEGORY + "( " + COLUMN_ID + " text, " + COLUMN_TITLE + " text, " + COLUMN_SLUG + " text, " + COLUMN_DESCRIPTION + " text, " + COLUMN_PARENT + " text, " + COLUMN_POST_COUNT + " text );";
     static String CREATE_TAGS = "create table " + TABLE_TAGS + "( " + COLUMN_ID + " text, " + COLUMN_TITLE + " text, " + COLUMN_TAGS + " text );";
     static String CREATE_SECTOR = "create table " + TABLE_SECTOR + "( " + SECTOR_ID + " text, " + SECTOR + " text, " + AREA + " text, " + LATITUDE + " text, " + LONGITUDE + " text );";
-    static String CREATE_USER = "create table " + TABLE_USER + "( " + COLUMN_ID + " text, " + USER_NAME + " text, " + AHARCARDNO + " text, " + AGE + " text, " + CATEGORY + " text, " + OCCUPATION + " text, " + LOCATION_OF_WORK + " text, " + TIME_WORK + " text, " + TRANSPORT_MODE + " text, " + VEHICLE_USED + " text, " + MOBILE_NO + " text );";
+    static String CREATE_USER = "create table " + TABLE_USER + "( " + ID + " text, " + USER_NAME + " text, " + AHARCARDNO + " text, " + AGE + " text, " + CATEGORY + " text, " + OCCUPATION + " text, " + LOCATION_OF_WORK + " text, " + TIME_WORK + " text, " + TRANSPORT_MODE + " text, " + VEHICLE_USED + " text, " + MOBILE_NO + " text );";
 
     public MyDBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -73,7 +68,6 @@ public class MyDBHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_DASHBOARD);
         Log.e("CREATE_DASHBOARD", "==" + CREATE_DASHBOARD);
         db.execSQL(CREATE_SECTOR);
-        db.execSQL(DATABASE_CATEGORY);
         db.execSQL(CREATE_USER);
         db.execSQL(CREATE_TAGS);
     }
@@ -85,7 +79,6 @@ public class MyDBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SECTOR);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_TAGS);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CATEGORY);
         onCreate(db);
     }
 }

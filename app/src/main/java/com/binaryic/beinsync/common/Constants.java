@@ -49,6 +49,7 @@ public class Constants {
     public static String TABLE_USER = "TABLE_USER";
     public static String TABLE_TAGS = "TABLE_TAGS";
     public static final String ID = "ID";
+    public static final String STORY_ID = "STORY_ID";
     public static final String USER_NAME = "USER_NAME";
     public static final String AGE = "AGE";
     public static final String AHARCARDNO = "AHARCARDNO";

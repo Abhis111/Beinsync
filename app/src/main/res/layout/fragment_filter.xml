@@ -90,7 +90,6 @@
 
                 <ImageView
                     android:id="@+id/ta_LanguageHindi"
-
                     android:layout_width="@dimen/activity_15dp_margin"
                     android:layout_height="@dimen/activity_15dp_margin"
                     android:layout_gravity="center"
@@ -101,7 +100,6 @@
 
                 <ImageView
                     android:id="@+id/ta_blankLanguageHindi"
-
                     android:layout_width="@dimen/activity_15dp_margin"
                     android:layout_height="@dimen/activity_15dp_margin"
                     android:layout_gravity="center"

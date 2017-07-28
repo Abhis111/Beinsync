@@ -63,13 +63,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView iv_Add;
     FragmentHome fragmentHome;
     MainFragment mainFragment;
-    public static Dialog downloading_Dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Utils.createDialog(this);
         setSideMenu();
     }
 
@@ -124,14 +122,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void getDashboardData() {
-        downloading_Dialog.show();
-
         DashboardController.getDashboardApiCall(this, Constants.URL_DASHBOARD, new ApiCallBack() {
             @Override
             public void onSuccess(Object success) {
-                downloading_Dialog.dismiss();
-
                 addTabsFragment();
+
                 /*ArrayList<HomeModel> array_Data = new ArrayList<>();
                 array_Data = getDashboardDataFromDatabase(getActivity());
                 if (array_Data.size() > 0) {
@@ -151,8 +146,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onError(String error) {
-                downloading_Dialog.dismiss();
-
                 addTabsFragment();
 
                 Log.e("MainActivity", "errror==" + error);
@@ -227,8 +220,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(Intent.createChooser(sendIntent, getResources().getString(R.string.share_app)));
         } else if (item.getItemId() == R.id.about_us) {
             aboutDialog();
-        } else if (item.getItemId() == R.id.sync) {
-            getDashboardData();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -249,11 +240,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.rl_Filter:
-
-                fragment = FilterFragment.newInstance();
-                if (fragment != null) {
-                    Utils.addFragmentBack(R.id.fl_Main, fragment, this);
-                }
+                //
+                FilterFragment filterFragment = new FilterFragment();
+                filterFragment.setCloseListner(new FilterFragment.CloseListner() {
+                    @Override
+                    public void onClose(String tags) {
+                        if (mainFragment != null)
+                            mainFragment.filter(tags);
+                        onBackPressed();
+                    }
+                });
+                Utils.addFragmentBack(R.id.fl_Main, filterFragment, this);
                 break;
         }
     }
@@ -277,7 +274,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Fragment f = getSupportFragmentManager().findFragmentById(R.id.fl_Main);
         // ll_textFormatOptions.setVisibility(View.VISIBLE);
-        if (f instanceof MainFragment) {
+        if (f instanceof FragmentHome) {
             alertForExit();
         } else {
             super.onBackPressed();
