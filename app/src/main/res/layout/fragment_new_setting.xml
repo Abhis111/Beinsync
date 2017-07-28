@@ -174,7 +174,7 @@
                             android:id="@+id/ta_blankFontRobota"
                             android:layout_width="@dimen/activity_15dp_margin"
                             android:layout_height="@dimen/activity_15dp_margin"
-                            android:src="@drawable/ic_radio_button_unchecked_black_24dp"
+                            android:src="@drawable/ic_brightness_1_black_24dp"
                             android:textSize="@dimen/activity_15dp_margin" />
 
                         <WebView
@@ -212,7 +212,7 @@
                             android:id="@+id/ta_blankFontPTSans"
                             android:layout_width="@dimen/activity_15dp_margin"
                             android:layout_height="@dimen/activity_15dp_margin"
-                            android:src="@drawable/ic_radio_button_unchecked_black_24dp"
+                            android:src="@drawable/ic_brightness_1_black_24dp"
                             android:textSize="@dimen/activity_15dp_margin" />
 
                         <WebView
@@ -247,7 +247,7 @@
                             android:id="@+id/ta_blankFontRobotaCondensed"
                             android:layout_width="@dimen/activity_15dp_margin"
                             android:layout_height="@dimen/activity_15dp_margin"
-                            android:src="@drawable/ic_radio_button_unchecked_black_24dp"
+                            android:src="@drawable/ic_brightness_1_black_24dp"
                             android:textSize="@dimen/activity_15dp_margin" />
 
                         <WebView
@@ -285,7 +285,7 @@
                             android:id="@+id/ta_blankFontDroidSans"
                             android:layout_width="@dimen/activity_15dp_margin"
                             android:layout_height="@dimen/activity_15dp_margin"
-                            android:src="@drawable/ic_radio_button_unchecked_black_24dp"
+                            android:src="@drawable/ic_brightness_1_black_24dp"
                             android:textSize="@dimen/activity_15dp_margin" />
 
                         <WebView
@@ -459,7 +459,7 @@
                                 android:id="@+id/ta_blankReading_DayMode"
                                 android:layout_width="@dimen/activity_15dp_margin"
                                 android:layout_height="@dimen/activity_15dp_margin"
-                                android:src="@drawable/ic_radio_button_unchecked_black_24dp"
+                                android:src="@drawable/ic_brightness_1_black_24dp"
                                 android:textSize="@dimen/activity_15dp_margin" />
 
                             <TextView
@@ -513,7 +513,7 @@
                             android:id="@+id/ta_blankAligmentLeft"
                             android:layout_width="@dimen/activity_15dp_margin"
                             android:layout_height="@dimen/activity_15dp_margin"
-                            android:src="@drawable/ic_radio_button_unchecked_black_24dp"
+                            android:src="@drawable/ic_brightness_1_black_24dp"
                             android:textSize="@dimen/activity_15dp_margin" />
 
                         <ImageView
@@ -555,7 +555,7 @@
                             android:id="@+id/ta_blankAligmentCenter"
                             android:layout_width="@dimen/activity_15dp_margin"
                             android:layout_height="@dimen/activity_15dp_margin"
-                            android:src="@drawable/ic_radio_button_unchecked_black_24dp"
+                            android:src="@drawable/ic_brightness_1_black_24dp"
                             android:textSize="@dimen/activity_15dp_margin" />
 
                         <ImageView
@@ -597,7 +597,7 @@
                             android:id="@+id/ta_blankAligmentRight"
                             android:layout_width="@dimen/activity_15dp_margin"
                             android:layout_height="@dimen/activity_15dp_margin"
-                            android:src="@drawable/ic_radio_button_unchecked_black_24dp"
+                            android:src="@drawable/ic_brightness_1_black_24dp"
                             android:textSize="@dimen/activity_15dp_margin" />
 
                         <ImageView
@@ -638,7 +638,7 @@
                             android:id="@+id/ta_blankAligmentJustify"
                             android:layout_width="@dimen/activity_15dp_margin"
                             android:layout_height="@dimen/activity_15dp_margin"
-                            android:src="@drawable/ic_radio_button_unchecked_black_24dp"
+                            android:src="@drawable/ic_brightness_1_black_24dp"
                             android:textSize="@dimen/activity_15dp_margin" />
 
                         <ImageView
@@ -832,7 +832,7 @@
                                 android:id="@+id/ta_blankReading_NightMode"
                                 android:layout_width="@dimen/activity_15dp_margin"
                                 android:layout_height="@dimen/activity_15dp_margin"
-                                android:src="@drawable/ic_radio_button_unchecked_black_24dp"
+                                android:src="@drawable/ic_brightness_1_black_24dp"
                                 android:textSize="@dimen/activity_15dp_margin" />
 
                             <TextView

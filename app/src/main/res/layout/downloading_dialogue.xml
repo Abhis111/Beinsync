@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/textDialog"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="Downloading..."
+        android:textColor="@color/white"
+        android:textSize="@dimen/activity_15dp_margin" />
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_5dp_margin"
+        android:orientation="horizontal"
+        android:padding="@dimen/activity_5dp_margin">
+        <ProgressBar
+            android:id="@+id/progressBar_Downloading"
+            android:layout_width="@dimen/activity_50dp_margin"
+            android:layout_height="@dimen/activity_50dp_margin" />
+
+
+    </LinearLayout>
+
+</LinearLayout>
