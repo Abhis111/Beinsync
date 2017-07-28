@@ -82,6 +82,7 @@ public class FragmentNews extends Fragment implements NewsAdapter.ScrollListener
     }
 
     private void setUpRecyclerView(ArrayList<HomeModel> list){
+        //
         for(HomeModel homeModel : list){
             array_Data.add(homeModel);
         }
