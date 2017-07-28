@@ -68,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Utils.createDialog(this);
         setSideMenu();
     }
 
@@ -110,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         rl_Setting = (RelativeLayout) findViewById(R.id.rl_Setting);
         rl_Filter = (RelativeLayout) findViewById(R.id.rl_Filter);
 
-        // ll_textFormatOptions.setVisibility(View.VISIBLE);
+        ll_textFormatOptions.setVisibility(View.VISIBLE);
         rl_Filter.setOnClickListener(this);
         rl_Setting.setOnClickListener(this);
         toolbarTitle.setVisibility(View.GONE);
@@ -125,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         DashboardController.getDashboardApiCall(this, Constants.URL_DASHBOARD, new ApiCallBack() {
             @Override
             public void onSuccess(Object success) {
+                Utils.downloading_Dialog.dismiss();
                 addTabsFragment();
 
                 /*ArrayList<HomeModel> array_Data = new ArrayList<>();
@@ -146,6 +148,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onError(String error) {
+                Utils.downloading_Dialog.dismiss();
+
                 addTabsFragment();
 
                 Log.e("MainActivity", "errror==" + error);
@@ -220,6 +224,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(Intent.createChooser(sendIntent, getResources().getString(R.string.share_app)));
         } else if (item.getItemId() == R.id.about_us) {
             aboutDialog();
+        } else if (item.getItemId() == R.id.sync) {
+            Utils.downloading_Dialog.show();
+            getDashboardData();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -273,7 +280,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
 
         Fragment f = getSupportFragmentManager().findFragmentById(R.id.fl_Main);
-        // ll_textFormatOptions.setVisibility(View.VISIBLE);
+        ll_textFormatOptions.setVisibility(View.VISIBLE);
         if (f instanceof FragmentHome) {
             alertForExit();
         } else {

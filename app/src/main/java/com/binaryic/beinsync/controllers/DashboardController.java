@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static android.R.attr.filter;
 import static com.binaryic.beinsync.common.Constants.COLUMN_CATEGORY;
 import static com.binaryic.beinsync.common.Constants.COLUMN_ID;
 import static com.binaryic.beinsync.common.Constants.COLUMN_IMAGE;
@@ -340,7 +339,7 @@ public class DashboardController {
         String selection = COLUMN_CATEGORY + " like  '" + "%" + category + "%" + "'";
         MyDBHelper helper = new MyDBHelper(context);
         SQLiteDatabase database = helper.getWritableDatabase();
-        Cursor cursor = database.rawQuery("Select COLUMN_ID,COLUMN_TITLE,COLUMN_LINK,COLUMN_CATEGORY,COLUMN_IMAGE,COLUMN_INFO from TABLE_DASHBOARD where lower(COLUMN_CATEGORY) like '%" + category.toLowerCase() + "%'", null);
+        Cursor cursor = database.rawQuery("Select COLUMN_ID,COLUMN_TITLE,COLUMN_LINK,COLUMN_CATEGORY,COLUMN_IMAGE,COLUMN_INFO from TABLE_DASHBOARD where lower(COLUMN_CATEGORY) like '%" + category + "%'", null);
 
         ArrayList<HomeModel> array_Data = new ArrayList<HomeModel>();
         //Cursor cursor_test = context.getContentResolver().query(CONTENT_DASHBOARD, null, null, null, null);
