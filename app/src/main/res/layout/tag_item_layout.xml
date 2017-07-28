@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="4dp">
+    <ImageView
+        android:id="@+id/iv_check"
+        android:layout_width="@dimen/activity_15dp_margin"
+        android:layout_height="@dimen/activity_15dp_margin"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_check_box_outline_blank_black_24dp"
+        android:textSize="@dimen/activity_15dp_margin" />
+
+    <TextView
+        android:id="@+id/tv_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_10dp_margin"
+        android:text="Hindi"
+        android:textSize="@dimen/activity_15dp_margin" />
+</LinearLayout>

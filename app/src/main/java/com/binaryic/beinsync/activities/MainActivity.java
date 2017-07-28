@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         rl_Setting = (RelativeLayout) findViewById(R.id.rl_Setting);
         rl_Filter = (RelativeLayout) findViewById(R.id.rl_Filter);
 
-       // ll_textFormatOptions.setVisibility(View.VISIBLE);
+        // ll_textFormatOptions.setVisibility(View.VISIBLE);
         rl_Filter.setOnClickListener(this);
         rl_Setting.setOnClickListener(this);
         toolbarTitle.setVisibility(View.GONE);
@@ -120,6 +120,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         addDrawerFragment();
 
     }
+
     private void getDashboardData() {
         DashboardController.getDashboardApiCall(this, Constants.URL_DASHBOARD, new ApiCallBack() {
             @Override
@@ -147,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onError(String error) {
                 addTabsFragment();
 
-                Log.e("MainActivity","errror=="+error);
+                Log.e("MainActivity", "errror==" + error);
                /* ArrayList<HomeModel> array_Data = new ArrayList<>();
                 tv_No_Data.setVisibility(View.VISIBLE);
                 swipeContainer.setVisibility(View.GONE);
@@ -239,11 +240,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
             case R.id.rl_Filter:
-
-                fragment = FilterFragment.newInstance();
-                if (fragment != null) {
-                    Utils.addFragmentBack(R.id.fl_Main, fragment, this);
-                }
+                FilterFragment filterFragment = new FilterFragment();
+                filterFragment.setCloseListner(new FilterFragment.CloseListner() {
+                    @Override
+                    public void onClose(String tags) {
+                        if (mainFragment != null)
+                            mainFragment.filter(tags);
+                        onBackPressed();
+                    }
+                });
+                Utils.addFragmentBack(R.id.fl_Main, filterFragment, this);
                 break;
         }
     }
@@ -266,7 +272,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
 
         Fragment f = getSupportFragmentManager().findFragmentById(R.id.fl_Main);
-       // ll_textFormatOptions.setVisibility(View.VISIBLE);
+        // ll_textFormatOptions.setVisibility(View.VISIBLE);
         if (f instanceof FragmentHome) {
             alertForExit();
         } else {
