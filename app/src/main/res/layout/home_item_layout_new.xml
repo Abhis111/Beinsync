@@ -12,24 +12,27 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/activity_200dp_margin">
+        android:layout_height="wrap_content">
 
-        <ImageView
+        <com.binaryic.beinsync.common.ImageViewBanner
             android:id="@+id/iv_Image"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:src="@drawable/logo" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignBottom="@+id/iv_Image"
             android:background="#77000000"></RelativeLayout>
 
         <com.binaryic.beinsync.common.TextViewPrimary
             android:id="@+id/tv_Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_alignBottom="@+id/iv_Image"
+
             android:layout_margin="5dp"
             android:text="Name"
             android:textColor="@color/white"

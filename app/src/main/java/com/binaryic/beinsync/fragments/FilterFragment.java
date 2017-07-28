@@ -19,14 +19,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.binaryic.beinsync.R;
-import com.binaryic.beinsync.activities.MainActivity;
 import com.binaryic.beinsync.adapters.TagAdapter;
 import com.binaryic.beinsync.controllers.DashboardController;
 import com.binaryic.beinsync.models.TagModel;
 
 import java.util.ArrayList;
 
-import static android.R.id.list;
+import static com.binaryic.beinsync.activities.MainActivity.ll_textFormatOptions;
 
 
 /**
@@ -83,7 +82,7 @@ public class FilterFragment extends Fragment implements View.OnClickListener {
         ll_LanguageHindi = (LinearLayout) view.findViewById(R.id.ll_LanguageHindi);
         ll_LanguageEnglish = (LinearLayout) view.findViewById(R.id.ll_LanguageEnglish);
         bt_apply = (Button) view.findViewById(R.id.bt_apply);
-        MainActivity.ll_textFormatOptions.setVisibility(View.GONE);
+        ll_textFormatOptions.setVisibility(View.GONE);
         underLinetheWords(tv_Language_Header, "Language");
         underLinetheWords(tv_Tags_Header, "Tags");
         lastChanges();
@@ -102,9 +101,16 @@ public class FilterFragment extends Fragment implements View.OnClickListener {
                         selected_tag = selected_tag.substring(1);
                         if(closeListner != null)
                             closeListner.onClose(selected_tag);
+                        ll_textFormatOptions.setVisibility(View.VISIBLE);
                     }
+                }else {
+                    getActivity().onBackPressed();
+                    ll_textFormatOptions.setVisibility(View.VISIBLE);
                 }
             }
+
+
+
         });
         ll_LanguageHindi.setOnClickListener(this);
         ll_LanguageEnglish.setOnClickListener(this);
