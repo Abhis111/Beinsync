@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         rl_Setting = (RelativeLayout) findViewById(R.id.rl_Setting);
         rl_Filter = (RelativeLayout) findViewById(R.id.rl_Filter);
 
-        // ll_textFormatOptions.setVisibility(View.VISIBLE);
+        ll_textFormatOptions.setVisibility(View.VISIBLE);
         rl_Filter.setOnClickListener(this);
         rl_Setting.setOnClickListener(this);
         toolbarTitle.setVisibility(View.GONE);
@@ -273,7 +273,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
 
         Fragment f = getSupportFragmentManager().findFragmentById(R.id.fl_Main);
-        // ll_textFormatOptions.setVisibility(View.VISIBLE);
+         ll_textFormatOptions.setVisibility(View.VISIBLE);
         if (f instanceof FragmentHome) {
             alertForExit();
         } else {
