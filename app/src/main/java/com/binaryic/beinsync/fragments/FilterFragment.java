@@ -19,14 +19,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.binaryic.beinsync.R;
-import com.binaryic.beinsync.activities.MainActivity;
 import com.binaryic.beinsync.adapters.TagAdapter;
 import com.binaryic.beinsync.controllers.DashboardController;
 import com.binaryic.beinsync.models.TagModel;
 
 import java.util.ArrayList;
 
-import static android.R.id.list;
 import static com.binaryic.beinsync.activities.MainActivity.ll_textFormatOptions;
 
 
@@ -105,9 +103,10 @@ public class FilterFragment extends Fragment implements View.OnClickListener {
                             closeListner.onClose(selected_tag);
                         ll_textFormatOptions.setVisibility(View.VISIBLE);
                     }
+                }else {
+                    getActivity().onBackPressed();
+                    ll_textFormatOptions.setVisibility(View.VISIBLE);
                 }
-                getActivity().onBackPressed();
-                ll_textFormatOptions.setVisibility(View.VISIBLE);
             }
 
 

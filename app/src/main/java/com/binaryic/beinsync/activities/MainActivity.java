@@ -63,11 +63,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView iv_Add;
     FragmentHome fragmentHome;
     MainFragment mainFragment;
+    public static Dialog downloading_Dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Utils.createDialog(MainActivity.this);
         setSideMenu();
     }
 
@@ -219,6 +221,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             sendIntent.setType("text/plain");
             startActivity(Intent.createChooser(sendIntent, getResources().getString(R.string.share_app)));
         } else if (item.getItemId() == R.id.about_us) {
+            aboutDialog();
+        }else if (item.getItemId() == R.id.sync) {
             aboutDialog();
         }
         return super.onOptionsItemSelected(item);
