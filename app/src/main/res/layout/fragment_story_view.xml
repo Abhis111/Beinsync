@@ -62,6 +62,11 @@
 
             </RelativeLayout>
 
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_RelatedStories"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/activity_200dp_margin"></android.support.v7.widget.RecyclerView>
+
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

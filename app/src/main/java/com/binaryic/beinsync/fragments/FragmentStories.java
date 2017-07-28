@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.binaryic.beinsync.R;
-import com.binaryic.beinsync.adapters.HomeAdapter;
 import com.binaryic.beinsync.common.ApiCallBack;
 import com.binaryic.beinsync.controllers.DashboardController;
 import com.binaryic.beinsync.models.HomeModel;
@@ -41,7 +40,7 @@ public class FragmentStories extends Fragment {
 
         ArrayList<HomeModel> array_Data = new ArrayList<>();
         array_Data = getDashboardDataFromDatabase(getActivity(), "");
-        rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data));
+     //   rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data));
 
         swipeContainer.setRefreshing(false);
         getDashboardData();
@@ -70,7 +69,7 @@ public class FragmentStories extends Fragment {
                 array_Data = getDashboardDataFromDatabase(getActivity(), "");
                 swipeContainer.setRefreshing(false);
                 rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-                rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data));
+               // rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data));
             }
 
             @Override
@@ -81,7 +80,7 @@ public class FragmentStories extends Fragment {
 
                 swipeContainer.setRefreshing(false);
                 rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-                rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data));
+                //rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data));
             }
         });
     }

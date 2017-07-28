@@ -14,6 +14,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.binaryic.beinsync.common.ApiCallBack;
 import com.binaryic.beinsync.common.MyApplication;
 import com.binaryic.beinsync.database.MyDBHelper;
+import com.binaryic.beinsync.models.CategoryModel;
 import com.binaryic.beinsync.models.HomeModel;
 import com.binaryic.beinsync.models.TagModel;
 
@@ -42,6 +43,59 @@ import static com.binaryic.beinsync.common.Constants.STORY_ID;
 
 public class DashboardController {
 
+
+    public static void getCategoriesApiCall(final Activity context, String url, final ApiCallBack callback) {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.e("getDashboardApiCall", "response =" + response);
+
+                try {
+                    JSONObject object = new JSONObject(response);
+                    if (object.getString("status").matches("ok")) {
+                        JSONArray jsonArray_Categorues = object.getJSONArray("categories");
+                        for (int i = 0; i < jsonArray_Categorues.length(); i++) {
+                            JSONObject jsonObject = jsonArray_Categorues.getJSONObject(i);
+                            CategoryModel categoryModel = new CategoryModel();
+                            categoryModel.setId(jsonObject.getString("id"));
+                            categoryModel.setSlug(jsonObject.getString("slug"));
+                            categoryModel.setTitle(jsonObject.getString("title"));
+                            categoryModel.setDescription(jsonObject.getString("description"));
+                            categoryModel.setParent(jsonObject.getString("parent"));
+                            categoryModel.setPost_count(jsonObject.getString("post_count"));
+                        }
+                    } else {
+                        callback.onError("success value is 0. please check responce");
+                    }
+
+                } catch (Exception e) {
+                    callback.onError(e.getMessage());
+                    Log.e("errrorrrr", e.toString());
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("getAccessTokenApiCall", error.toString());
+                callback.onError(error.getMessage());
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("client_name", "Seller App");
+
+                Log.e("getAccessTokenApiCall", "params" + params.toString());
+                return params;
+            }
+        };
+        MyApplication.getInstance().addToRequestQueue(stringRequest, "getAccessTokenApiCall");
+
+
+    }
 
     public static void getDashboardApiCall(final Activity context, String url, final ApiCallBack callback) {
 

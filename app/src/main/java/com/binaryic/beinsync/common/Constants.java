@@ -26,13 +26,18 @@ public class Constants {
     public static final Uri CONTENT_TAGS = Uri.parse(CONTENT_PROTOCOL + AUTHORITY + "/" + PATH_TAGS);
 
     public static String TABLE_DASHBOARD = "TABLE_DASHBOARD";
+    public static String TABLE_CATEGORY = "TABLE_CATEGORY";
     public static String COLUMN_ID = "COLUMN_ID";
     public static String COLUMN_TITLE = "COLUMN_TITLE";
+    public static String COLUMN_SLUG = "COLUMN_SLUG";
     public static String COLUMN_TAGS = "COLUMN_TAGS";
     public static String COLUMN_CATEGORY = "COLUMN_CATEGORY";
+    public static String COLUMN_PARENT = "COLUMN_PARENT";
+    public static String COLUMN_DESCRIPTION = "COLUMN_DESCRIPTION";
     public static String COLUMN_LINK = "COLUMN_LINK";
     public static String COLUMN_IMAGE = "COLUMN_IMAGE";
     public static String COLUMN_INFO = "COLUMN_INFO";
+    public static String COLUMN_POST_COUNT = "COLUMN_POST_COUNT";
 
     public static String TABLE_SECTOR = "TABLE_SECTOR";
     public static String SECTOR_ID = "SECTOR_ID";
