@@ -281,9 +281,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Fragment f = getSupportFragmentManager().findFragmentById(R.id.fl_Main);
         ll_textFormatOptions.setVisibility(View.VISIBLE);
-        if (f instanceof FragmentHome) {
+        if (f instanceof MainFragment) {
             alertForExit();
         } else {
+
             super.onBackPressed();
         }
 

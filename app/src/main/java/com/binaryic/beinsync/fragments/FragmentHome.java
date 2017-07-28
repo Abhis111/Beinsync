@@ -10,10 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.binaryic.beinsync.R;
-import com.binaryic.beinsync.activities.MainActivity;
 import com.binaryic.beinsync.adapters.HomeAdapter;
 import com.binaryic.beinsync.common.ApiCallBack;
 import com.binaryic.beinsync.controllers.DashboardController;
@@ -55,6 +53,7 @@ public class FragmentHome extends Fragment {
             link = (bundle.getString("link"));
             category = (bundle.getString("category"));
         }
+        getDashboardData();
 
         array_Data = getDashboardDataFromDatabase(getActivity(), category);
         rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data, category));
@@ -67,14 +66,14 @@ public class FragmentHome extends Fragment {
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getDashboardData(array_Data);
+                getDashboardData();
             }
         });
 
         return view;
     }
 
-    private void getDashboardData(ArrayList<HomeModel> array_Data) {
+    private void getDashboardData() {
 
         DashboardController.getDashboardApiCall(getActivity(), link, new ApiCallBack() {
             @Override

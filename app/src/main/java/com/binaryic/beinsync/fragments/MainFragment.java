@@ -7,24 +7,18 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.binaryic.beinsync.R;
-import com.binaryic.beinsync.adapters.HomeAdapter;
 import com.binaryic.beinsync.common.Constants;
 import com.binaryic.beinsync.controllers.DashboardController;
 import com.binaryic.beinsync.models.HomeModel;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.binaryic.beinsync.R.id.rv_Home;
-import static com.binaryic.beinsync.R.id.swipeContainer;
-import static com.binaryic.beinsync.R.id.tv_No_Data;
 
 /**
  * Created by admin on 4/11/2016.
@@ -33,12 +27,7 @@ public class MainFragment extends Fragment {
     private TabLayout tabs;
     private ViewPager viewpager;
 
-    public static MainFragment newInstance() {
-        Bundle args = new Bundle();
-        MainFragment fragment = new MainFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
+
 
     @Override
     public void onResume() {
