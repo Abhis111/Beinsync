@@ -6,6 +6,15 @@ package com.binaryic.beinsync.models;
 
 public class TopicModel {
     String id,slug,title,post_count;
+boolean isOpen = false;
+
+    public boolean isOpen() {
+        return isOpen;
+    }
+
+    public void setOpen(boolean open) {
+        isOpen = open;
+    }
 
     public String getId() {
         return id;

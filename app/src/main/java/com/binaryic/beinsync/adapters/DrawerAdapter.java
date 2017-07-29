@@ -16,6 +16,7 @@ import com.binaryic.beinsync.R;
 import com.binaryic.beinsync.activities.NewsActivity;
 import com.binaryic.beinsync.common.Constants;
 import com.binaryic.beinsync.models.DrawerModel;
+import com.binaryic.beinsync.models.TopicModel;
 
 import java.util.ArrayList;
 
@@ -26,11 +27,11 @@ import static com.binaryic.beinsync.activities.MainActivity.drawer;
  * Created by Asd on 10-10-2016.
  */
 public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder> {
-    public ArrayList<DrawerModel> list;
+    public ArrayList<TopicModel> list;
     Context context;
     RecyclerView rv_sub;
 
-    public DrawerAdapter(Activity context, ArrayList<DrawerModel> list, RecyclerView rv_sub) {
+    public DrawerAdapter(Activity context, ArrayList<TopicModel> list, RecyclerView rv_sub) {
         this.context = context;
         this.list = list;
         this.rv_sub = rv_sub;
@@ -47,16 +48,15 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
     public void onBindViewHolder(ViewHolder holder, int position) {
 
         holder.tv_Name.setText(list.get(position).getTitle());
-        if (list.get(position).isHeader()) {
+        if (list.get(position).getTitle().equals("Topics")) {
             holder.iv_expand.setVisibility(View.VISIBLE);
+            holder.iv_arrow.setVisibility(View.GONE);
             if (list.get(position).isOpen()) {
                 holder.iv_expand.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_remove_black_24dp));
                 rv_sub.setVisibility(View.VISIBLE);
-                holder.iv_arrow.setVisibility(View.GONE);
             } else {
                 holder.iv_expand.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_add));
                 rv_sub.setVisibility(View.GONE);
-                holder.iv_arrow.setVisibility(View.GONE);
             }
         } else {
             holder.iv_expand.setVisibility(View.GONE);
@@ -87,16 +87,17 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
                 @Override
                 public void onClick(View v) {
 
-                    if (list.get(getPosition()).isHeader()) {
+                    if (list.get(getPosition()).getTitle().equals("Topics")) {
                         list.get(getPosition()).setOpen(!list.get(getPosition()).isOpen());
                         notifyDataSetChanged();
                     } else {
-
                         drawer.closeDrawer(Gravity.LEFT);
                         // Toast.makeText(context, list.get(getPosition()).getTitle(), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(context, NewsActivity.class);
+                        //intent.putExtra("link", Constants.URL + list.get(getPosition()).getId());
                         intent.putExtra("category",list.get(getPosition()).getTitle());
-                        intent.putExtra("link", Constants.URL + list.get(getPosition()).getId());
+                        intent.putExtra("id",list.get(getPosition()).getId());
+                        intent.putExtra("page_count",list.get(getPosition()).getPost_count());
                         context.startActivity(intent);
 
                     }

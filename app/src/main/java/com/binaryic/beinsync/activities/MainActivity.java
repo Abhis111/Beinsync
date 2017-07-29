@@ -243,7 +243,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void alertForExit() {
-
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Do you want to Exit ?")
                 .setCancelable(false)

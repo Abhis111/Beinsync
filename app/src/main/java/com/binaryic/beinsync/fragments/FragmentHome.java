@@ -62,6 +62,7 @@ public class FragmentHome extends Fragment implements HomeAdapter.ScrollListener
         if (topicModel != null) {
             id = topicModel.getId();
             max_count = topicModel.getPost_count();
+            page_no = 1;
             getDashboardData();
         }
     }
