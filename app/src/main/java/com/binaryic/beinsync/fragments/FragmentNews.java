@@ -55,8 +55,6 @@ public class FragmentNews extends Fragment implements NewsAdapter.ScrollListener
 
         }
         getDashboardData();
-
-
         return view;
     }
 
