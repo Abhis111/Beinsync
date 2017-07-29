@@ -86,7 +86,7 @@ public class FragmentNews extends Fragment implements NewsAdapter.ScrollListener
         for (HomeModel homeModel : list) {
             array_Data.add(homeModel);
         }
-        if (list.size() > 0) {
+        if (array_Data.size() > 0) {
             tv_No_Data.setVisibility(View.GONE);
             if (page_no == 1) {
                 rv_Home.setLayoutManager(new LinearLayoutManager(getActivity()));
