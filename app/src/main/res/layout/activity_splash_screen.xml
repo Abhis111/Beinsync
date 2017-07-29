@@ -7,32 +7,11 @@
     tools:context="com.binaryic.beinsync.activities.SplashScreen">
 
 
-    <LinearLayout
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <com.binaryic.beinsync.common.ImageViewBannerSplash
-            android:id="@+id/iv_Logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/activity_20dp_margin"
-            android:background="@drawable/logo_250" />
+        android:layout_height="match_parent"
+        android:background="@drawable/splash_banner_02">
 
 
-        <com.binaryic.beinsync.common.TextViewPrimary
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/iv_Logo"
-            android:layout_centerHorizontal="true"
-            android:gravity="center"
-            android:text="Enabling Digital Commerce"
-            android:textColor="@color/black"
-            android:textSize="@dimen/activity_25dp_margin"
-            android:textStyle="bold" />
-    </LinearLayout>
+    </ImageView>
 </RelativeLayout>

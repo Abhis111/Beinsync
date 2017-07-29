@@ -8,17 +8,21 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="0.0dip"
-        android:layout_weight="1.0"
+        android:layout_height="wrap_content"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
         app:layout_scrollFlags="enterAlways|scroll"
         app:theme="@style/ToolbarColoredBackArrow">
 
         <RelativeLayout
+
             android:id="@+id/toolbarWrap"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+           >
 
-            <ImageView
+            <com.binaryic.beinsync.common.ImageViewBannerToolbar
                 android:id="@+id/iv_Logo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -36,20 +40,20 @@
                 android:ellipsize="marquee"
                 android:lines="1"
                 android:singleLine="true"
-
                 android:text="Beinsync"
                 android:textAllCaps="true"
                 android:textColor="@color/black"
                 android:textSize="@dimen/activity_18dp_margin"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone" />
 
             <LinearLayout
-                android:visibility="gone"
                 android:id="@+id/ll_textFormatOptions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true">
+                android:layout_centerVertical="true"
+                android:visibility="gone">
 
                 <RelativeLayout
                     android:id="@+id/rl_Setting"

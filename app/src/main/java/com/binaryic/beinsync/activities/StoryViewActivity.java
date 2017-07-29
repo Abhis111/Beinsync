@@ -53,7 +53,7 @@ public class StoryViewActivity extends AppCompatActivity {
 
     private void setToolBar() {
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_group_chat);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

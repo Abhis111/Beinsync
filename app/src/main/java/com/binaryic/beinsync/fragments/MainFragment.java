@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.binaryic.beinsync.R;
-import com.binaryic.beinsync.common.Constants;
 import com.binaryic.beinsync.controllers.DashboardController;
 import com.binaryic.beinsync.models.HomeModel;
 
@@ -142,7 +141,7 @@ public class MainFragment extends Fragment {
             adapter.addFragment(fragmentMarketing, "Marketing");
             adapter.addFragment(fragmentDD, "Design & Development");
             adapter.addFragment(fragmentEcommerce, "Ecommerce");
-            adapter.addFragment(fragmentEvent, "Event");
+           // adapter.addFragment(fragmentEvent, "Event");
 
             viewpager.setAdapter(adapter);
         }

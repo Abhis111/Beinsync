@@ -4,16 +4,16 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-public class ImageViewBannerSplash extends ImageView {
-    public ImageViewBannerSplash(Context paramContext) {
+public class ImageViewBannerToolbar extends ImageView {
+    public ImageViewBannerToolbar(Context paramContext) {
         super(paramContext);
     }
 
-    public ImageViewBannerSplash(Context paramContext, AttributeSet paramAttributeSet) {
+    public ImageViewBannerToolbar(Context paramContext, AttributeSet paramAttributeSet) {
         super(paramContext, paramAttributeSet);
     }
 
-    public ImageViewBannerSplash(Context paramContext, AttributeSet paramAttributeSet, int paramInt) {
+    public ImageViewBannerToolbar(Context paramContext, AttributeSet paramAttributeSet, int paramInt) {
         super(paramContext, paramAttributeSet, paramInt);
     }
 
@@ -25,7 +25,7 @@ public class ImageViewBannerSplash extends ImageView {
             setMeasuredDimension(i, i);
             return;
         }
-        Double h = (i*0.56);
+        Double h = (i*0.24);
         setMeasuredDimension(i, h.intValue());
     }
 }

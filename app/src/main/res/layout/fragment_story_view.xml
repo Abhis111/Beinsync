@@ -48,13 +48,13 @@
 
                 style="@style/Widget.CardContent"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@color/white">
 
                 <WebView
                     android:id="@+id/webview"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="wrap_content" />
 
             </RelativeLayout>
 
@@ -62,7 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/activity_8dp_margin"
-                android:text="Related Articals"
+                android:text="Related Articles"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
