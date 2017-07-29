@@ -19,6 +19,7 @@ import com.binaryic.beinsync.models.TopicModel;
 
 import java.util.ArrayList;
 
+import static android.R.attr.id;
 import static com.binaryic.beinsync.activities.MainActivity.drawer;
 
 
@@ -46,32 +47,46 @@ public class FragmentDrawer extends Fragment {
             }
         });
 
-        ArrayList<DrawerModel> array_Data = new ArrayList<DrawerModel>();
-
+        ArrayList<TopicModel> array_Data = new ArrayList<TopicModel>();
+        TopicModel topicModel =null;
         for (int i = 0; i < 6; i++) {
             switch (i) {
                 case 0:
-                    array_Data.add(new DrawerModel("category/marketing/", "Marketing", false, false, false));
+                    topicModel = DashboardController.getTopicId(getActivity(), "Marketing");
+                    if (topicModel != null)
+                        array_Data.add(topicModel);
                     break;
                 case 1:
-                    array_Data.add(new DrawerModel("category/design-development/", "Design and Development", false, false, false));
+                    topicModel = DashboardController.getTopicId(getActivity(), "Design &amp; Development");
+                    topicModel.setTitle("Design & Development");
+                    if (topicModel != null)
+                        array_Data.add(topicModel);
                     break;
                 case 2:
-                    array_Data.add(new DrawerModel("category/news/", "News", false, false, false));
+                    topicModel = DashboardController.getTopicId(getActivity(), "News");
+                    if (topicModel != null)
+                        array_Data.add(topicModel);
                     break;
                 case 3:
-                    array_Data.add(new DrawerModel("learning-lab/events/", "Events", false, false, false));
+                    topicModel = DashboardController.getTopicId(getActivity(), "Events");
+                    if (topicModel != null)
+                        array_Data.add(topicModel);
                     break;
                 case 4:
-                    array_Data.add(new DrawerModel("learning-lab/webinar/", "Webinar", false, false, false));
+                    topicModel = DashboardController.getTopicId(getActivity(), "Webinar");
+                    if (topicModel != null)
+                        array_Data.add(topicModel);
                     break;
                 case 5:
-                    array_Data.add(new DrawerModel("learning-lab/Topics/", "Topics", false, true, false));
+                    topicModel = new TopicModel();
+                    topicModel.setTitle("Topics");
+                    array_Data.add(topicModel);
                     break;
 
             }
 
         }
+
         //ArrayList<DrawerModel> array_data_sub = new ArrayList<DrawerModel>();
 
         ArrayList<TopicModel> array_data_sub = DashboardController.getTopics(getActivity());
