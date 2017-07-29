@@ -1,9 +1,11 @@
 package com.binaryic.beinsync.fragments;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -23,6 +25,7 @@ import com.binaryic.beinsync.adapters.RelatedStoriesAdapter;
 import com.binaryic.beinsync.controllers.DashboardController;
 import com.binaryic.beinsync.models.HomeModel;
 import com.bumptech.glide.Glide;
+import com.pddstudio.urlshortener.URLShortener;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -223,15 +226,49 @@ public class StoryViewtFragment extends Fragment {
     }
 
     private void share() {
-        try {
-            Intent i = new Intent(Intent.ACTION_SEND);
-            i.setType("text/plain");
-            i.putExtra(Intent.EXTRA_SUBJECT, R.string.app_name);
-            String sAux = url;
-            i.putExtra(Intent.EXTRA_TEXT, sAux);
-            startActivity(Intent.createChooser(i, "choose one"));
-        } catch (Exception e) {
-            Log.e("StoryViewFragment", "error==" + e.getMessage());
+        AsyncTaskRunner runner = new AsyncTaskRunner();
+        runner.execute();
+    }
+
+    private class AsyncTaskRunner extends AsyncTask<String, String, String> {
+
+        private String resp;
+        ProgressDialog progressDialog;
+
+        @Override
+        protected String doInBackground(String... params) {
+            String longUrl = url;
+            String shortUrl = URLShortener.shortUrl(longUrl);
+            return shortUrl;
+        }
+
+
+        @Override
+        protected void onPostExecute(String result) {
+            // execution of result of Long time consuming operation
+            progressDialog.dismiss();
+            try {
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("text/plain");
+                i.putExtra(Intent.EXTRA_SUBJECT, R.string.app_name);
+                i.putExtra(Intent.EXTRA_TEXT, result);
+                startActivity(Intent.createChooser(i, "choose one"));
+            } catch (Exception e) {
+                Log.e("StoryViewFragment", "error==" + e.getMessage());
+            }
+        }
+
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog = ProgressDialog.show(getActivity(), "Wait", "Loading...!!");
+        }
+
+
+        @Override
+        protected void onProgressUpdate(String... text) {
+
         }
     }
+
 }
