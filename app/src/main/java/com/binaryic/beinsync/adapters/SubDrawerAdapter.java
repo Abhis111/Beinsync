@@ -13,8 +13,6 @@ import android.widget.TextView;
 
 import com.binaryic.beinsync.R;
 import com.binaryic.beinsync.activities.NewsActivity;
-import com.binaryic.beinsync.common.Constants;
-import com.binaryic.beinsync.models.DrawerModel;
 import com.binaryic.beinsync.models.TopicModel;
 
 import java.util.ArrayList;
@@ -63,6 +61,7 @@ public class SubDrawerAdapter extends RecyclerView.Adapter<SubDrawerAdapter.View
                     // Toast.makeText(context, list.get(getPosition()).getTitle(), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(context, NewsActivity.class);
                     //intent.putExtra("link", Constants.URL + list.get(getPosition()).getId());
+                    intent.putExtra("category",list.get(getPosition()).getTitle());
                     intent.putExtra("id",list.get(getPosition()).getId());
                     intent.putExtra("page_count",list.get(getPosition()).getPost_count());
                     context.startActivity(intent);

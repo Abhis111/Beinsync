@@ -27,6 +27,7 @@ import java.util.ArrayList;
 public class FragmentNews extends Fragment implements NewsAdapter.ScrollListener {
 
     private RecyclerView rv_Home;
+    private TextView tv_CategoryName;
     private String link = "";
     String id = "";
     String max_count = "1";
@@ -39,18 +40,23 @@ public class FragmentNews extends Fragment implements NewsAdapter.ScrollListener
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = null;
+
         view = inflater.inflate(R.layout.fragment_news, container, false);
+        tv_CategoryName = (TextView) view.findViewById(R.id.tv_CategoryName);
         rv_Home = (RecyclerView) view.findViewById(R.id.rv_Home);
         ll_progress = (LinearLayout) view.findViewById(R.id.ll_progress);
         tv_No_Data = (TextView) view.findViewById(R.id.tv_No_Data);
         rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         Bundle bundle = this.getArguments();
         if (bundle != null) {
+            tv_CategoryName.setText((bundle.getString("category")));
             id = (bundle.getString("id"));
             max_count = (bundle.getString("page_count"));
 
         }
         getDashboardData();
+
+
         return view;
     }
 
@@ -76,6 +82,7 @@ public class FragmentNews extends Fragment implements NewsAdapter.ScrollListener
     }
 
     private void setUpRecyclerView(ArrayList<HomeModel> list) {
+        //
         for (HomeModel homeModel : list) {
             array_Data.add(homeModel);
         }

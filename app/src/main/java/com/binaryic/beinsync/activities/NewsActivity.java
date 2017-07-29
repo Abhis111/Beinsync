@@ -26,6 +26,7 @@ public class NewsActivity extends AppCompatActivity {
         if (getIntent().hasExtra("id")) {
             Fragment fragment = new FragmentNews();
             Bundle bundle = new Bundle();
+            bundle.putString("category", getIntent().getStringExtra("category"));
             bundle.putString("id", getIntent().getStringExtra("id"));
             bundle.putString("page_count", getIntent().getStringExtra("page_count"));
             fragment.setArguments(bundle);

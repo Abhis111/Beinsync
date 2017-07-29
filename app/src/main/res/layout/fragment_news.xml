@@ -6,11 +6,32 @@
     android:background="@color/white"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:id="@+id/ll_CategoryName"
+        android:layout_width="match_parent"
+        android:layout_height="60.0dip"
+        android:background="@color/theme_orange"
+        android:orientation="vertical">
+
+        <com.binaryic.beinsync.common.TextViewPrimary
+            android:layout_marginLeft="@dimen/activity_15dp_margin"
+            android:id="@+id/tv_CategoryName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:gravity="center_vertical"
+            android:text="hello"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="@dimen/activity_5dp_margin"
         android:id="@+id/rv_Home"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ll_CategoryName">
 
     </android.support.v7.widget.RecyclerView>
 
@@ -20,22 +41,23 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:gravity="center"
-        android:visibility="gone"
         android:text="No Data Available...!!"
         android:textColor="@color/black"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:visibility="gone" />
+
     <LinearLayout
         android:id="@+id/ll_progress"
         android:layout_width="fill_parent"
-        android:visibility="visible"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="visible">
 
         <ProgressBar
+            android:id="@+id/progressBar"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/progressBar" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </RelativeLayout>

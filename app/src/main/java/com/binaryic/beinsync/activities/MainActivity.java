@@ -9,14 +9,12 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,10 +29,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.binaryic.beinsync.R;
-import com.binaryic.beinsync.common.ApiCallBack;
 import com.binaryic.beinsync.common.Constants;
 import com.binaryic.beinsync.common.Utils;
-import com.binaryic.beinsync.controllers.DashboardController;
 import com.binaryic.beinsync.fragments.FilterFragment;
 import com.binaryic.beinsync.fragments.FragmentDrawer;
 import com.binaryic.beinsync.fragments.FragmentHome;
@@ -111,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         rl_Setting = (RelativeLayout) findViewById(R.id.rl_Setting);
         rl_Filter = (RelativeLayout) findViewById(R.id.rl_Filter);
 
-        ll_textFormatOptions.setVisibility(View.VISIBLE);
+       // ll_textFormatOptions.setVisibility(View.VISIBLE);
         rl_Filter.setOnClickListener(this);
         rl_Setting.setOnClickListener(this);
         toolbarTitle.setVisibility(View.GONE);
@@ -160,11 +156,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+       /* getMenuInflater().inflate(R.menu.menu_main, menu);
         MenuItem menuItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
         searchView.setOnQueryTextListener(this);
-
+*/
         return true;
     }
 
@@ -236,7 +232,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
 
         Fragment f = getSupportFragmentManager().findFragmentById(R.id.fl_Main);
-        ll_textFormatOptions.setVisibility(View.VISIBLE);
+       // ll_textFormatOptions.setVisibility(View.VISIBLE);
         if (f instanceof MainFragment) {
             alertForExit();
         } else {
