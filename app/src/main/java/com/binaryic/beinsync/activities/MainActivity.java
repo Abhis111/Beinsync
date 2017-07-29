@@ -116,57 +116,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         rl_Setting.setOnClickListener(this);
         toolbarTitle.setVisibility(View.GONE);
         defaultSetting();
-        getDashboardData();
+        addTabsFragment();
         //addHomeFragment();
         addDrawerFragment();
 
     }
 
-    private void getDashboardData() {
-        DashboardController.getDashboardApiCall(this, Constants.URL_DASHBOARD,"", new ApiCallBack() {
-            @Override
-            public void onSuccess(Object success) {
-                Utils.downloading_Dialog.dismiss();
-                addTabsFragment();
 
-                /*ArrayList<HomeModel> array_Data = new ArrayList<>();
-                array_Data = getDashboardDataFromDatabase(getActivity());
-                if (array_Data.size() > 0) {
-                    tv_No_Data.setVisibility(View.GONE);
-                    swipeContainer.setVisibility(View.VISIBLE);
-                    swipeContainer.setRefreshing(false);
-                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-                    linearLayoutManager.setAutoMeasureEnabled(true);
-                    rv_Home.setLayoutManager(linearLayoutManager);
-                    //rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-                    rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data));
-                } else {
-                    tv_No_Data.setVisibility(View.VISIBLE);
-                    swipeContainer.setVisibility(View.GONE);
-                }*/
-            }
-
-            @Override
-            public void onError(String error) {
-                Utils.downloading_Dialog.dismiss();
-
-                addTabsFragment();
-
-                Log.e("MainActivity", "errror==" + error);
-               /* ArrayList<HomeModel> array_Data = new ArrayList<>();
-                tv_No_Data.setVisibility(View.VISIBLE);
-                swipeContainer.setVisibility(View.GONE);
-                array_Data = getDashboardDataFromDatabase(getActivity());
-
-                swipeContainer.setRefreshing(false);
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-                linearLayoutManager.setAutoMeasureEnabled(true);
-                rv_Home.setLayoutManager(linearLayoutManager);
-                //rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-                rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data));*/
-            }
-        });
-    }
 
     private void defaultSetting() {
         Cursor cursor = getContentResolver().query(CONTENT_SETTING, null, null, null, null);
@@ -226,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             aboutDialog();
         } else if (item.getItemId() == R.id.sync) {
             Utils.downloading_Dialog.show();
-            getDashboardData();
+           addTabsFragment();
         }
         return super.onOptionsItemSelected(item);
     }
