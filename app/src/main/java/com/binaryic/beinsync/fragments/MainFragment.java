@@ -113,30 +113,36 @@ public class MainFragment extends Fragment {
         if (viewpager != null) {
             Adapter adapter = new Adapter(getChildFragmentManager());
 
-            FragmentHome fragmentHome = new FragmentHome();
+            FragmentHome fragmentNews = new FragmentHome();
             Bundle bundle = new Bundle();
-            bundle.putString("link", Constants.URL_DASHBOARD);
             bundle.putString("category", "News");
-            fragmentHome.setArguments(bundle);
+            fragmentNews.setArguments(bundle);
 
-            FragmentHome fragmentHome1 = new FragmentHome();
+            FragmentHome fragmentMarketing = new FragmentHome();
             Bundle bundle1 = new Bundle();
-            bundle1.putString("link", Constants.URL_DASHBOARD);
             bundle1.putString("category", "Marketing");
-            fragmentHome1.setArguments(bundle1);
+            fragmentMarketing.setArguments(bundle1);
 
-            FragmentHome fragmentHome2 = new FragmentHome();
+            FragmentHome fragmentDD = new FragmentHome();
             Bundle bundle2 = new Bundle();
-            bundle2.putString("link", Constants.URL_DASHBOARD);
             bundle2.putString("category", "Design &amp; Development");
-            fragmentHome2.setArguments(bundle2);
+            fragmentDD.setArguments(bundle2);
 
+            FragmentHome fragmentEcommerce = new FragmentHome();
+            Bundle bundle3 = new Bundle();
+            bundle3.putString("category", "Ecommerce");
+            fragmentEcommerce.setArguments(bundle3);
 
-            adapter.addFragment(new FragmentHome(), "News");
-            adapter.addFragment(new FragmentHome(), "Marketing");
-            adapter.addFragment(new FragmentHome(), "Design & Development");
-            adapter.addFragment(new FragmentHome(), "Ecommerce");
-            adapter.addFragment(new FragmentHome(), "Event");
+            FragmentHome fragmentEvent = new FragmentHome();
+            Bundle bundle4 = new Bundle();
+            bundle4.putString("category", "Event");
+            fragmentEvent.setArguments(bundle4);
+
+            adapter.addFragment(fragmentNews, "News");
+            adapter.addFragment(fragmentMarketing, "Marketing");
+            adapter.addFragment(fragmentDD, "Design & Development");
+            adapter.addFragment(fragmentEcommerce, "Ecommerce");
+            adapter.addFragment(fragmentEvent, "Event");
 
             viewpager.setAdapter(adapter);
         }

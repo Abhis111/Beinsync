@@ -42,6 +42,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        if ((list.size() - 1) == position) {
+            if (scrollListener != null)
+                scrollListener.Scrolled();
+        }
         Glide.with(context).load(list.get(position).getImage()).into(holder.iv_Image);
         holder.tv_Name.setText(list.get(position).getTitle());
     }
@@ -82,5 +86,13 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         }
 
 
+    }
+
+    private ScrollListener scrollListener;
+    public void setScrollListener(ScrollListener scrollListener) {
+        this.scrollListener = scrollListener;
+    }
+    public interface ScrollListener {
+        public void Scrolled();
     }
 }

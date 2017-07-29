@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static android.R.id.list;
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 import static com.binaryic.beinsync.common.Constants.COLUMN_CATEGORY;
 import static com.binaryic.beinsync.common.Constants.COLUMN_ID;
@@ -182,8 +183,24 @@ public class DashboardController {
         }catch (Exception ex){}
         return list;
     }
+    public static TopicModel getTopicId(Activity context,String title){
+        TopicModel topicModel = null;
+        try{
+            String selection = TOPIC_TITLE + " = '" + title + "'";
+            Cursor cursor = context.getContentResolver().query(CONTENT_TOPICS, null, selection, null, null);
+            if(cursor.getCount() > 0){
+                    cursor.moveToFirst();
+                    topicModel = new TopicModel();
+                    topicModel.setSlug(cursor.getString(cursor.getColumnIndex(TOPIC_SLUG)));
+                    topicModel.setId(cursor.getString(cursor.getColumnIndex(TOPIC_ID)));
+                    topicModel.setTitle(cursor.getString(cursor.getColumnIndex(TOPIC_TITLE)));
+                    topicModel.setPost_count(cursor.getString(cursor.getColumnIndex(TOPIC_COUNT)));
+            }
+        }catch (Exception ex){}
+        return topicModel;
+    }
 
-    public static void getDashboardApiCall(final Activity context, String url, final ApiCallBack callback) {
+    public static void getDashboardApiCall(final Activity context, String url,final String category, final ApiCallBack callback) {
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -193,7 +210,6 @@ public class DashboardController {
                 try {
                     JSONObject object = new JSONObject(response);
                     if (object.getString("status").matches("ok")) {
-                        ArrayList<HomeModel> array_Data = new ArrayList<HomeModel>();
                         if (object.has("posts")) {
                             JSONArray jsonArray = object.getJSONArray("posts");
                             for (int i = 0; i < jsonArray.length(); i++) {
@@ -207,54 +223,33 @@ public class DashboardController {
                                     homeModel.setUrl(jsonObject.getString("url"));
                                 if (jsonObject.has("content"))
                                     homeModel.setContent(jsonObject.getString("content"));
+                                if (jsonObject.has("thumbnail_images")) {
+                                    try {
+                                        JSONObject imags_Object = jsonObject.getJSONObject("thumbnail_images");
+                                        if (imags_Object.has("medium_large")) {
+                                            JSONObject medium_Images_Object = imags_Object.getJSONObject("medium_large");
+                                            if (medium_Images_Object.has("url")) {
+                                                homeModel.setImage(medium_Images_Object.getString("url"));
 
-                                if (jsonObject.has("categories")) {
-                                    JSONArray array_Categories = jsonObject.getJSONArray("categories");
-                                    String title = "";
-                                    homeModel.setTitle_Category(array_Categories.toString());
-                                    /*for (int j = 0; j < array_Categories.length(); j++) {
-                                        JSONObject jsonObject_Categories = array_Categories.getJSONObject(j);
-                                        if (j == 0) {
-                                            title = jsonObject_Categories.getString("title");
-                                            arrayList.add(jsonObject_Categories.getString("title"));
-                                        } else {
-                                            arrayList.add(jsonObject_Categories.getString("title"));
-                                            title = title + "," + jsonObject_Categories.getString("title");
+                                            }
                                         }
-                                        homeModel.setTitle_Category(arrayList.toString());
-                                        //homeModel.setTitle_Category(title);
-                                    }*/
-                                    Log.e("category_Title", "==" + array_Categories.toString());
-
+                                    } catch (Exception e) {
+                                    }
                                 }
-
+                                homeModel.setTitle_Category(category);
+                                addDashboardDataInDatabase(context, homeModel);
                                 if (jsonObject.has("tags")) {
                                     JSONArray array_Tags = jsonObject.getJSONArray("tags");
                                     for (int j = 0; j < array_Tags.length(); j++) {
                                         JSONObject jsonObject_Tags = array_Tags.getJSONObject(j);
                                         TagModel tagModel = new TagModel();
-                                        tagModel.setId(jsonObject.getString("id"));
+                                        tagModel.setId(jsonObject_Tags.getString("id"));
                                         tagModel.setTag(jsonObject_Tags.getString("title"));
                                         tagModel.setTitle(jsonObject.getString("title"));
                                         tagModel.setStory_id(homeModel.getId());
                                         addTagsDataInDatabase(context, tagModel);
-
                                     }
                                 }
-                                if (jsonObject.has("thumbnail_images")) {
-                                    JSONObject imags_Object = jsonObject.getJSONObject("thumbnail_images");
-                                    if (imags_Object.has("medium_large")) {
-                                        JSONObject medium_Images_Object = imags_Object.getJSONObject("medium_large");
-                                        if (medium_Images_Object.has("url")) {
-                                            homeModel.setImage(medium_Images_Object.getString("url"));
-
-                                        }
-                                    }
-                                }
-
-                                addDashboardDataInDatabase(context, homeModel);
-
-                                array_Data.add(homeModel);
                             }
                         } else {
                             JSONArray jsonArray = object.getJSONArray("page");
@@ -270,53 +265,47 @@ public class DashboardController {
                                 if (jsonObject.has("content"))
                                     homeModel.setContent(jsonObject.getString("content"));
                                 if (jsonObject.has("thumbnail_images")) {
-                                    JSONObject imags_Object = jsonObject.getJSONObject("thumbnail_images");
-                                    if (imags_Object.has("medium_large")) {
-                                        JSONObject medium_Images_Object = imags_Object.getJSONObject("medium_large");
-                                        if (medium_Images_Object.has("url")) {
-                                            homeModel.setImage(medium_Images_Object.getString("url"));
+                                    try {
+                                        JSONObject imags_Object = jsonObject.getJSONObject("thumbnail_images");
+                                        if (imags_Object.has("medium_large")) {
+                                            JSONObject medium_Images_Object = imags_Object.getJSONObject("medium_large");
+                                            if (medium_Images_Object.has("url")) {
+                                                homeModel.setImage(medium_Images_Object.getString("url"));
 
+                                            }
                                         }
+                                    } catch (Exception e) {
                                     }
                                 }
-
                                 addDashboardDataInDatabase(context, homeModel);
-
-                                array_Data.add(homeModel);
                             }
                         }
-                        callback.onSuccess(array_Data);
+                        callback.onSuccess("success");
                     } else {
                         callback.onError("success value is 0. please check responce");
                     }
-
                 } catch (Exception e) {
                     callback.onError(e.getMessage());
-                    Log.e("errroeerrrrr", e.toString());
+                    Log.e("errrorrrr", e.toString());
                 }
-
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e("getAccessTokenApiCall", error.toString());
                 callback.onError(error.getMessage());
-
             }
         }) {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("client_name", "Seller App");
-
-                Log.e("getAccessTokenApiCall", "params" + params.toString());
                 return params;
             }
         };
         MyApplication.getInstance().addToRequestQueue(stringRequest, "getAccessTokenApiCall");
-
-
     }
+
 
     public static void getNewsApiCall(final Activity context, String url, final ApiCallBack callback) {
 
@@ -423,21 +412,12 @@ public class DashboardController {
 
 
     public static ArrayList<HomeModel> getDashboardDataFromDatabase(Activity context, String category) {
-        String selection = COLUMN_CATEGORY + " like  '" + "%" + category + "%" + "'";
         MyDBHelper helper = new MyDBHelper(context);
         SQLiteDatabase database = helper.getWritableDatabase();
         Cursor cursor = database.rawQuery("Select COLUMN_ID,COLUMN_TITLE,COLUMN_LINK,COLUMN_CATEGORY,COLUMN_IMAGE,COLUMN_INFO from TABLE_DASHBOARD where lower(COLUMN_CATEGORY) like '%" + category + "%'", null);
-
         ArrayList<HomeModel> array_Data = new ArrayList<HomeModel>();
-        //Cursor cursor_test = context.getContentResolver().query(CONTENT_DASHBOARD, null, null, null, null);
-        // Log.e("DashboardContro1ller", "cursor==" + cursor_test.getCount());
-
-
-        // Cursor cursor = context.getContentResolver().query(CONTENT_DASHBOARD, null, selection, null, null);
-        // Log.e("DashboardContro1ller", "cursor==" + cursor.getCount());
         for (int i = 0; i < cursor.getCount(); i++) {
             cursor.moveToNext();
-
             HomeModel homeModel = new HomeModel();
             homeModel.setId(cursor.getString(cursor.getColumnIndex(COLUMN_ID)));
             homeModel.setContent(cursor.getString(cursor.getColumnIndex(COLUMN_INFO)));
@@ -461,7 +441,6 @@ public class DashboardController {
         values.put(COLUMN_LINK, homeModel.getUrl());
         values.put(COLUMN_CATEGORY, homeModel.getTitle_Category());
         Log.e("Insert == ", "Insert into TABLE_DASHBOARD(COLUMN_CATEGORY) values ('" + homeModel.getTitle_Category() + "')");
-
         if (cursor.getCount() > 0) {
             context.getContentResolver().update(CONTENT_DASHBOARD, values, selection, null);
 
@@ -471,17 +450,21 @@ public class DashboardController {
     }
 
     public static void addTagsDataInDatabase(Activity context, TagModel tagModel) {
-        ContentValues values = new ContentValues();
-        String selection = COLUMN_ID + "  = '" + tagModel.getId() + "' AND " + COLUMN_TAGS + " = '" + tagModel.getTag() + "'";
-        Cursor cursor = context.getContentResolver().query(CONTENT_TAGS, null, selection, null, null);
-        values.put(COLUMN_ID, tagModel.getId());
-        values.put(COLUMN_TAGS, tagModel.getTag());
-        values.put(COLUMN_TITLE, tagModel.getTitle());
-        values.put(STORY_ID, tagModel.getStory_id());
-        if (cursor.getCount() > 0) {
-            context.getContentResolver().update(CONTENT_TAGS, values, selection, null);
-        } else {
-            context.getContentResolver().insert(CONTENT_TAGS, values);
+        try {
+            ContentValues values = new ContentValues();
+            String selection = COLUMN_ID + "  = '" + tagModel.getId() + "' AND " + COLUMN_TAGS + " = '" + tagModel.getTag() + "'";
+            Cursor cursor = context.getContentResolver().query(CONTENT_TAGS, null, selection, null, null);
+            values.put(COLUMN_ID, tagModel.getId());
+            values.put(COLUMN_TAGS, tagModel.getTag());
+            values.put(COLUMN_TITLE, tagModel.getTitle());
+            values.put(STORY_ID, tagModel.getStory_id());
+            if (cursor.getCount() > 0) {
+                context.getContentResolver().update(CONTENT_TAGS, values, selection, null);
+            } else {
+                context.getContentResolver().insert(CONTENT_TAGS, values);
+            }
+        }catch (Exception ex){
+            Log.e("addTag",ex.getMessage());
         }
     }
 

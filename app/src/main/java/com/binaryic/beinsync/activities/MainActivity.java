@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void getDashboardData() {
-        DashboardController.getDashboardApiCall(this, Constants.URL_DASHBOARD, new ApiCallBack() {
+        DashboardController.getDashboardApiCall(this, Constants.URL_DASHBOARD,"", new ApiCallBack() {
             @Override
             public void onSuccess(Object success) {
                 Utils.downloading_Dialog.dismiss();

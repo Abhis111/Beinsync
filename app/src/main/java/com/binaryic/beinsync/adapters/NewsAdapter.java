@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 import static android.R.attr.category;
 
+
 /**
  * Created by HP on 28-Jul-17.
  */
@@ -63,7 +64,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, StoryViewActivity.class);
-                    intent.putExtra("category",category);
+                    intent.putExtra("category","");
                     intent.putExtra("id", list.get(getPosition()).getId());
                     intent.putExtra("title", list.get(getPosition()).getTitle());
                     intent.putExtra("image", list.get(getPosition()).getImage());

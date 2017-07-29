@@ -2,20 +2,22 @@ package com.binaryic.beinsync.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.binaryic.beinsync.R;
 import com.binaryic.beinsync.adapters.HomeAdapter;
 import com.binaryic.beinsync.common.ApiCallBack;
+import com.binaryic.beinsync.common.Constants;
 import com.binaryic.beinsync.controllers.DashboardController;
 import com.binaryic.beinsync.models.HomeModel;
+import com.binaryic.beinsync.models.TopicModel;
 
 import java.util.ArrayList;
 
@@ -24,122 +26,98 @@ import static com.binaryic.beinsync.controllers.DashboardController.getDashboard
 /**
  * Created by Asd on 27-09-2016.
  */
-public class FragmentHome extends Fragment {
+public class FragmentHome extends Fragment implements HomeAdapter.ScrollListener {
 
-    public static LinearLayout ll_MainLayout;
+    public static RelativeLayout ll_MainLayout;
     private RecyclerView rv_Home;
-    private SwipeRefreshLayout swipeContainer;
+
     private String link = "";
     private String category = "";
     private TextView tv_No_Data;
     ArrayList<HomeModel> array_Data = new ArrayList<>();
+    String id = "";
+    String max_count = "1";
+    int page_no = 1;
+    LinearLayout ll_progress;
+    HomeAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = null;
-        //  MainActivity.ll_textFormatOptions.setVisibility(View.VISIBLE);
-
         view = inflater.inflate(R.layout.fragment_home, container, false);
-        ll_MainLayout = (LinearLayout) view.findViewById(R.id.ll_MainLayout);
+        ll_MainLayout = (RelativeLayout) view.findViewById(R.id.ll_MainLayout);
         rv_Home = (RecyclerView) view.findViewById(R.id.rv_Home);
         tv_No_Data = (TextView) view.findViewById(R.id.tv_No_Data);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        linearLayoutManager.setAutoMeasureEnabled(true);
-        rv_Home.setLayoutManager(linearLayoutManager);
-        //rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
+        ll_progress = (LinearLayout) view.findViewById(R.id.ll_progress);
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            link = (bundle.getString("link"));
             category = (bundle.getString("category"));
         }
-        getDashboardData();
-
-        array_Data = getDashboardDataFromDatabase(getActivity(), category);
-        rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data, category));
-        swipeContainer.setRefreshing(false);
-        //    getDashboardData(array_Data);
-        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                getDashboardData();
-            }
-        });
-
+        generateLink();
         return view;
     }
 
-    private void getDashboardData() {
+    private void generateLink() {
+        TopicModel topicModel = DashboardController.getTopicId(getActivity(), category);
+        if (topicModel != null) {
+            id = topicModel.getId();
+            max_count = topicModel.getPost_count();
+            getDashboardData();
+        }
+    }
 
-        DashboardController.getDashboardApiCall(getActivity(), link, new ApiCallBack() {
+    private void getDashboardData() {
+        link = Constants.URL + "?json=get_category_posts&id=" + id + "&count=10&status=publish&page=" + page_no;
+        DashboardController.getDashboardApiCall(getActivity(), link,category, new ApiCallBack() {
             @Override
             public void onSuccess(Object success) {
-                ArrayList<HomeModel> array_Data = new ArrayList<>();
-                array_Data = getDashboardDataFromDatabase(getActivity(), category);
-                if (array_Data.size() > 0) {
-                    tv_No_Data.setVisibility(View.GONE);
-                    swipeContainer.setVisibility(View.VISIBLE);
-                    swipeContainer.setRefreshing(false);
-                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-                    linearLayoutManager.setAutoMeasureEnabled(true);
-                    rv_Home.setLayoutManager(linearLayoutManager);
-                    //rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-                    rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data, category));
-                } else {
-                    tv_No_Data.setVisibility(View.VISIBLE);
-                    swipeContainer.setVisibility(View.GONE);
-                }
+                ArrayList<HomeModel> list = new ArrayList<>();
+                list = getDashboardDataFromDatabase(getActivity(), category);
+                setUpRecyclerView(list);
             }
 
             @Override
             public void onError(String error) {
-                ArrayList<HomeModel> array_Data = new ArrayList<>();
-                tv_No_Data.setVisibility(View.VISIBLE);
-                swipeContainer.setVisibility(View.GONE);
-                array_Data = getDashboardDataFromDatabase(getActivity(), category);
-                if (array_Data.size() > 0) {
-                    tv_No_Data.setVisibility(View.GONE);
-                    swipeContainer.setVisibility(View.VISIBLE);
-                    swipeContainer.setRefreshing(false);
-                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-                    linearLayoutManager.setAutoMeasureEnabled(true);
-                    rv_Home.setLayoutManager(linearLayoutManager);
-                    //rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-                    rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data, category));
-                } else {
-                    tv_No_Data.setVisibility(View.VISIBLE);
-                    swipeContainer.setVisibility(View.GONE);
-                }
+                ArrayList<HomeModel> list = new ArrayList<>();
+                list = getDashboardDataFromDatabase(getActivity(), category);
+                setUpRecyclerView(list);
 
             }
         });
 
+    }
+
+    private void setUpRecyclerView(ArrayList<HomeModel> list) {
+        ll_progress.setVisibility(View.GONE);
+        if (list.size() > 0) {
+            tv_No_Data.setVisibility(View.GONE);
+            if (page_no == 1) {
+                rv_Home.setVisibility(View.VISIBLE);
+                rv_Home.setLayoutManager(new LinearLayoutManager(getActivity()));
+                adapter = new HomeAdapter(getActivity(), list, category);
+                adapter.setScrollListener(FragmentHome.this);
+                rv_Home.setAdapter(adapter);
+            } else {
+                adapter.list = list;
+                adapter.notifyDataSetChanged();
+            }
+        } else {
+            tv_No_Data.setVisibility(View.VISIBLE);
+        }
     }
 
     public void search(String search_text) {
         ArrayList<HomeModel> array_data = new ArrayList<>();
         array_data = DashboardController.search(getActivity(), search_text);
-        if (array_data.size() > 0) {
-            tv_No_Data.setVisibility(View.GONE);
-            swipeContainer.setVisibility(View.VISIBLE);
-            swipeContainer.setRefreshing(false);
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-            linearLayoutManager.setAutoMeasureEnabled(true);
-            rv_Home.setLayoutManager(linearLayoutManager);
-            //rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-            rv_Home.setAdapter(new HomeAdapter(getActivity(), array_data, category));
-        } else {
-            tv_No_Data.setVisibility(View.VISIBLE);
-            swipeContainer.setVisibility(View.GONE);
-        }
-
+        setUpRecyclerView(array_data);
     }
 
 
-
-
+    @Override
+    public void Scrolled() {
+        page_no++;
+        if (page_no <= Integer.parseInt(max_count)) {
+            getDashboardData();
+        }
+    }
 }

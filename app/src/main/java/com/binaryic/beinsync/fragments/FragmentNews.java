@@ -2,7 +2,6 @@ package com.binaryic.beinsync.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,8 +21,6 @@ import com.binaryic.beinsync.models.HomeModel;
 
 import java.util.ArrayList;
 
-import static com.binaryic.beinsync.R.id.swipeContainer;
-
 /**
  * Created by Asd on 27-09-2016.
  */
@@ -42,7 +39,6 @@ public class FragmentNews extends Fragment implements NewsAdapter.ScrollListener
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = null;
-
         view = inflater.inflate(R.layout.fragment_news, container, false);
         rv_Home = (RecyclerView) view.findViewById(R.id.rv_Home);
         ll_progress = (LinearLayout) view.findViewById(R.id.ll_progress);
@@ -55,8 +51,6 @@ public class FragmentNews extends Fragment implements NewsAdapter.ScrollListener
 
         }
         getDashboardData();
-
-
         return view;
     }
 
@@ -68,7 +62,7 @@ public class FragmentNews extends Fragment implements NewsAdapter.ScrollListener
             public void onSuccess(Object success) {
                 ll_progress.setVisibility(View.GONE);
                 ArrayList<HomeModel> list = (ArrayList<HomeModel>) (success);
-               setUpRecyclerView(list);
+                setUpRecyclerView(list);
             }
 
             @Override
@@ -81,12 +75,11 @@ public class FragmentNews extends Fragment implements NewsAdapter.ScrollListener
         });
     }
 
-    private void setUpRecyclerView(ArrayList<HomeModel> list){
-        //
-        for(HomeModel homeModel : list){
+    private void setUpRecyclerView(ArrayList<HomeModel> list) {
+        for (HomeModel homeModel : list) {
             array_Data.add(homeModel);
         }
-        if(list.size() > 0) {
+        if (list.size() > 0) {
             tv_No_Data.setVisibility(View.GONE);
             if (page_no == 1) {
                 rv_Home.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -97,7 +90,7 @@ public class FragmentNews extends Fragment implements NewsAdapter.ScrollListener
                 adapter.list = array_Data;
                 adapter.notifyDataSetChanged();
             }
-        }else{
+        } else {
             tv_No_Data.setVisibility(View.VISIBLE);
         }
     }
@@ -106,7 +99,7 @@ public class FragmentNews extends Fragment implements NewsAdapter.ScrollListener
     @Override
     public void Scrolled() {
         page_no++;
-        if(page_no <= Integer.parseInt(max_count)){
+        if (page_no <= Integer.parseInt(max_count)) {
             getDashboardData();
         }
     }

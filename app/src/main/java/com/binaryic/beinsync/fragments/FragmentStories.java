@@ -25,7 +25,7 @@ import static com.binaryic.beinsync.controllers.DashboardController.getDashboard
 public class FragmentStories extends Fragment {
 
     private RecyclerView rv_Home;
-    private SwipeRefreshLayout swipeContainer;
+    //private SwipeRefreshLayout swipeContainer;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,39 +35,39 @@ public class FragmentStories extends Fragment {
         rv_Home = (RecyclerView) view.findViewById(R.id.rv_Home);
 
         rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-        swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
+        //swipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
 
 
         ArrayList<HomeModel> array_Data = new ArrayList<>();
         array_Data = getDashboardDataFromDatabase(getActivity(), "");
      //   rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data));
 
-        swipeContainer.setRefreshing(false);
+        //swipeContainer.setRefreshing(false);
         getDashboardData();
-        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-
-                getDashboardData();
-
-            }
-        });
+//        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+//                android.R.color.holo_green_light,
+//                android.R.color.holo_orange_light,
+//                android.R.color.holo_red_light);
+//        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//
+//                getDashboardData();
+//
+//            }
+//        });
 
         return view;
     }
 
     private void getDashboardData() {
-        DashboardController.getDashboardApiCall(getActivity(), URL_DASHBOARD, new ApiCallBack() {
+        DashboardController.getDashboardApiCall(getActivity(), URL_DASHBOARD,"", new ApiCallBack() {
             @Override
             public void onSuccess(Object success) {
                 ArrayList<HomeModel> array_Data = new ArrayList<>();
 
                 array_Data = getDashboardDataFromDatabase(getActivity(), "");
-                swipeContainer.setRefreshing(false);
+                //swipeContainer.setRefreshing(false);
                 rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
                // rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data));
             }
@@ -78,7 +78,7 @@ public class FragmentStories extends Fragment {
 
                 array_Data = getDashboardDataFromDatabase(getActivity(), "");
 
-                swipeContainer.setRefreshing(false);
+                //swipeContainer.setRefreshing(false);
                 rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
                 //rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data));
             }

@@ -15,7 +15,7 @@ public class Constants {
     public static final String PATH_USER = "user";
     public static final String PATH_SETTING = "PATH_SETTING";
     public static final String PATH_TAGS = "PATH_TAGS";
-    public static final String PATH_TOPICS = "PATH_TAGS";
+    public static final String PATH_TOPICS = "PATH_TOPICS";
     public static final String URL = "http://www.beinsync.in/";
     public static final String URL_DASHBOARD = URL + "?json=1";
     public static final String SEND_PHONE_DETAILS = "";
