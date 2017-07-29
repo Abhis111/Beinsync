@@ -37,11 +37,11 @@
             android:layout_height="match_parent"
             android:background="@color/white"
             android:orientation="vertical">
+
             <com.binaryic.beinsync.common.ImageViewBanner
                 android:id="@+id/iv_StoryImage"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
+                android:layout_height="wrap_content" />
 
             <RelativeLayout
                 android:id="@+id/sample_main_layout"
@@ -57,6 +57,20 @@
                     android:layout_height="match_parent" />
 
             </RelativeLayout>
+
+            <com.binaryic.beinsync.common.TextViewPrimary
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_8dp_margin"
+                android:text="Related Articals"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <View
+                android:layout_margin="@dimen/activity_8dp_margin"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/colorDarkGray" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_RelatedStories"
