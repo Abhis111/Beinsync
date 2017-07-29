@@ -15,10 +15,8 @@ import android.widget.Toast;
 import com.binaryic.beinsync.R;
 import com.binaryic.beinsync.common.ApiCallBack;
 import com.binaryic.beinsync.common.InternetConnectionDetector;
-import com.binaryic.beinsync.common.Utils;
 import com.binaryic.beinsync.controllers.DashboardController;
 import com.binaryic.beinsync.controllers.LoginController;
-import com.bumptech.glide.util.Util;
 
 public class SplashScreen extends AppCompatActivity {
     RelativeLayout rl_Splash;
@@ -67,6 +65,10 @@ public class SplashScreen extends AppCompatActivity {
                     startActivity(new Intent(SplashScreen.this, MainActivity.class));
                     finish();
                 }
+            }else {
+                // sendPhoneDetails();
+                startActivity(new Intent(SplashScreen.this, MainActivity.class));
+                finish();
             }
         }
     };
