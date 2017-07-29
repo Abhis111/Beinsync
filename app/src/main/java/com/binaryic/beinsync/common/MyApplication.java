@@ -9,6 +9,9 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.RetryPolicy;
 import com.android.volley.toolbox.Volley;
+import com.binaryic.beinsync.R;
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.Tracker;
 
 /**
  * Created by HP on 18-Jul-17.
@@ -20,16 +23,26 @@ public class MyApplication extends Application {
     public static String ApiUrl="http://shoporganikos.binaryicdirect.com/KYA/";
     public static final String TAG = MyApplication.class.getSimpleName();
     public static SharedPreferences setting;
+    private static GoogleAnalytics sAnalytics;
+    private static Tracker sTracker;
     @Override
     public void onCreate() {
         super.onCreate();
         mInstance = this;
         setting = getSharedPreferences("kya", MODE_PRIVATE);
+        sAnalytics = GoogleAnalytics.getInstance(this);
     }
     public static synchronized MyApplication getInstance() {
         return mInstance;
     }
+    synchronized public Tracker getDefaultTracker() {
+        // To enable debug logging use: adb shell setprop log.tag.GAv4 DEBUG
+        if (sTracker == null) {
+            sTracker = sAnalytics.newTracker(R.xml.global_tracker);
+        }
 
+        return sTracker;
+    }
     public RequestQueue getRequestQueue() {
         if (mRequestQueue == null) {
             mRequestQueue = Volley.newRequestQueue(getApplicationContext());

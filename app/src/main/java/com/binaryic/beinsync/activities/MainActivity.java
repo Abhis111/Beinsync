@@ -30,12 +30,15 @@ import android.widget.TextView;
 
 import com.binaryic.beinsync.R;
 import com.binaryic.beinsync.common.Constants;
+import com.binaryic.beinsync.common.MyApplication;
 import com.binaryic.beinsync.common.Utils;
 import com.binaryic.beinsync.fragments.FilterFragment;
 import com.binaryic.beinsync.fragments.FragmentDrawer;
 import com.binaryic.beinsync.fragments.FragmentHome;
 import com.binaryic.beinsync.fragments.MainFragment;
 import com.binaryic.beinsync.fragments.SettingNewFragment;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import static com.binaryic.beinsync.common.Constants.COLUMN_BACKGROUND_COLOR;
 import static com.binaryic.beinsync.common.Constants.COLUMN_FONT_NAME;
@@ -59,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView iv_Add;
     FragmentHome fragmentHome;
     MainFragment mainFragment;
+    private static Tracker mTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +70,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         Utils.createDialog(this);
         setSideMenu();
+        MyApplication application = (MyApplication) getApplication();
+        mTracker = application.getDefaultTracker();
     }
 
     private void setSideMenu() {
@@ -107,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         rl_Setting = (RelativeLayout) findViewById(R.id.rl_Setting);
         rl_Filter = (RelativeLayout) findViewById(R.id.rl_Filter);
 
-       // ll_textFormatOptions.setVisibility(View.VISIBLE);
+        // ll_textFormatOptions.setVisibility(View.VISIBLE);
         rl_Filter.setOnClickListener(this);
         rl_Setting.setOnClickListener(this);
         toolbarTitle.setVisibility(View.GONE);
@@ -117,7 +123,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         addDrawerFragment();
 
     }
-
 
 
     private void defaultSetting() {
@@ -167,18 +172,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.rate_us) {
+            mTracker.setScreenName("Rate us");
+            mTracker.send(new HitBuilders.ScreenViewBuilder().build());
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + MainActivity.this.getPackageName())));
         } else if (item.getItemId() == R.id.share_app) {
+            mTracker.setScreenName("Share app");
+            mTracker.send(new HitBuilders.ScreenViewBuilder().build());
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
             sendIntent.putExtra(Intent.EXTRA_TEXT, getResources().getString(R.string.share_msg));
             sendIntent.setType("text/plain");
             startActivity(Intent.createChooser(sendIntent, getResources().getString(R.string.share_app)));
         } else if (item.getItemId() == R.id.about_us) {
+            mTracker.setScreenName("About us");
+            mTracker.send(new HitBuilders.ScreenViewBuilder().build());
             aboutDialog();
         } else if (item.getItemId() == R.id.sync) {
             Utils.downloading_Dialog.show();
-           addTabsFragment();
+            addTabsFragment();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -232,7 +243,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
 
         Fragment f = getSupportFragmentManager().findFragmentById(R.id.fl_Main);
-       // ll_textFormatOptions.setVisibility(View.VISIBLE);
+        // ll_textFormatOptions.setVisibility(View.VISIBLE);
         if (f instanceof MainFragment) {
             alertForExit();
         } else {

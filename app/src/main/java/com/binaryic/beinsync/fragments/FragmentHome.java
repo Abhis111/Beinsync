@@ -15,9 +15,12 @@ import com.binaryic.beinsync.R;
 import com.binaryic.beinsync.adapters.HomeAdapter;
 import com.binaryic.beinsync.common.ApiCallBack;
 import com.binaryic.beinsync.common.Constants;
+import com.binaryic.beinsync.common.MyApplication;
 import com.binaryic.beinsync.controllers.DashboardController;
 import com.binaryic.beinsync.models.HomeModel;
 import com.binaryic.beinsync.models.TopicModel;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.util.ArrayList;
 
@@ -40,10 +43,13 @@ public class FragmentHome extends Fragment implements HomeAdapter.ScrollListener
     int page_no = 1;
     LinearLayout ll_progress;
     HomeAdapter adapter;
+    private static Tracker mTracker;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = null;
+        MyApplication application = (MyApplication) getActivity().getApplication();
+        mTracker = application.getDefaultTracker();
         view = inflater.inflate(R.layout.fragment_home, container, false);
         ll_MainLayout = (RelativeLayout) view.findViewById(R.id.ll_MainLayout);
         rv_Home = (RecyclerView) view.findViewById(R.id.rv_Home);
@@ -54,6 +60,7 @@ public class FragmentHome extends Fragment implements HomeAdapter.ScrollListener
             category = (bundle.getString("category"));
         }
         generateLink();
+
         return view;
     }
 
@@ -64,6 +71,8 @@ public class FragmentHome extends Fragment implements HomeAdapter.ScrollListener
             max_count = topicModel.getPost_count();
             page_no = 1;
             getDashboardData();
+            mTracker.setScreenName("Stories = " + topicModel.getTitle());
+            mTracker.send(new HitBuilders.ScreenViewBuilder().build());
         }
     }
 

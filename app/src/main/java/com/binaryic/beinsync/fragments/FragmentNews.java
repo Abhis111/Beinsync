@@ -16,8 +16,11 @@ import com.binaryic.beinsync.adapters.HomeAdapter;
 import com.binaryic.beinsync.adapters.NewsAdapter;
 import com.binaryic.beinsync.common.ApiCallBack;
 import com.binaryic.beinsync.common.Constants;
+import com.binaryic.beinsync.common.MyApplication;
 import com.binaryic.beinsync.controllers.DashboardController;
 import com.binaryic.beinsync.models.HomeModel;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.util.ArrayList;
 
@@ -36,11 +39,13 @@ public class FragmentNews extends Fragment implements NewsAdapter.ScrollListener
     NewsAdapter adapter;
     LinearLayout ll_progress;
     TextView tv_No_Data;
+    private static Tracker mTracker;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = null;
-
+        MyApplication application = (MyApplication) getActivity().getApplication();
+        mTracker = application.getDefaultTracker();
         view = inflater.inflate(R.layout.fragment_news, container, false);
         tv_CategoryName = (TextView) view.findViewById(R.id.tv_CategoryName);
         rv_Home = (RecyclerView) view.findViewById(R.id.rv_Home);
@@ -52,7 +57,8 @@ public class FragmentNews extends Fragment implements NewsAdapter.ScrollListener
             tv_CategoryName.setText((bundle.getString("category")));
             id = (bundle.getString("id"));
             max_count = (bundle.getString("page_count"));
-
+            mTracker.setScreenName("Stories = " + bundle.getString("category"));
+            mTracker.send(new HitBuilders.ScreenViewBuilder().build());
         }
         getDashboardData();
         return view;
