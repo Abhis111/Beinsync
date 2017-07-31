@@ -33,7 +33,7 @@ public class InternetConnectionDetector {
         return false;
     }
 
-    public boolean isInternetWorking() {
+    public static boolean isInternetWorking() {
 
         Runtime runtime = Runtime.getRuntime();
         try {

@@ -52,6 +52,7 @@ public class StoryViewtFragment extends Fragment {
     private RelativeLayout rl_MainLayout;
     private RecyclerView rv_RelatedStories;
     private TextView tv_Story_Name;
+    private TextView tv_No_Data;
     private ImageView iv_StoryImage;
     private WebView webview;
     private FloatingActionButton fab_Share;
@@ -83,7 +84,7 @@ public class StoryViewtFragment extends Fragment {
             url = (bundle.getString("url"));
             Glide.with(this)
                     .load(bundle.getString("image"))
-                    .thumbnail( 0.1f )
+                    .thumbnail(0.1f)
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(iv_StoryImage);
             content = bundle.getString("content");
@@ -165,6 +166,7 @@ public class StoryViewtFragment extends Fragment {
                         Log.e("strColor", "==" + strColor);
                         Log.e("open_Tag", "==" + open_Tag);
                         rl_MainLayout.setBackground(colorDrawable);
+
                         String data2 = "<html><body><head><link href='https://fonts.googleapis.com/css?family=" + font_Name + "' rel='stylesheet' type='text/css'><style>div {text-align: "
                                 + cursorSetFont.getString(cursorSetFont.getColumnIndex(COLUMN_TEXT_ALIGNMENT)) + ";text-justify: inter-word; color: " + strColor + "; background-color: " + strBgcolor + ";font-family: '" + font_Name + "',font-style: '"
                                 + cursorSetFont.getString(cursorSetFont.getColumnIndex(COLUMN_TEXT_STYLE)) + "' ,font-weight: "
@@ -187,6 +189,7 @@ public class StoryViewtFragment extends Fragment {
         rv_RelatedStories = (RecyclerView) view.findViewById(R.id.rv_RelatedStories);
         rl_MainLayout = (RelativeLayout) view.findViewById(R.id.rl_MainLayout);
         tv_Story_Name = (TextView) view.findViewById(R.id.tv_Story_Name);
+        tv_No_Data = (TextView) view.findViewById(R.id.tv_No_Data);
         iv_StoryImage = (ImageView) view.findViewById(R.id.iv_StoryImage);
         webview = (WebView) view.findViewById(R.id.webview);
         fab_Share = (FloatingActionButton) view.findViewById(R.id.fab_Share);
@@ -212,7 +215,7 @@ public class StoryViewtFragment extends Fragment {
         ArrayList<HomeModel> temp_array = DashboardController.getDashboardDataFromDatabase(getActivity(), category);
 
         rv_RelatedStories.setVisibility(View.VISIBLE);
-
+        tv_No_Data.setVisibility(View.GONE);
         for (int i = 0; i < temp_array.size(); i++) {
             int j = new Random().nextInt(temp_array.size());
 
@@ -224,8 +227,12 @@ public class StoryViewtFragment extends Fragment {
         }
         if (array_Related.size() == 0) {
             rv_RelatedStories.setVisibility(View.GONE);
+            tv_No_Data.setVisibility(View.VISIBLE);
+
         } else {
             rv_RelatedStories.setVisibility(View.VISIBLE);
+            tv_No_Data.setVisibility(View.GONE);
+
             if (array_Related.size() >= 3) {
                 rv_RelatedStories.setAdapter(new RelatedStoriesAdapter(getActivity(), array_Related, category, 3));
             } else {

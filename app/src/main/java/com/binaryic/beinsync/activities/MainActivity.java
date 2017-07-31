@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             values.put(COLUMN_TEXT_STYLE, "normal");
             values.put(COLUMN_TEXT_MODE, "day");
             values.put(COLUMN_TEXT_ALIGNMENT, "justify");
-            values.put(COLUMN_FONT_NAME, "Roboto");
+            values.put(COLUMN_FONT_NAME, "Proxima Nova");
             values.put(COLUMN_TEXT_COLOR, "" + "#2D292B");
             values.put(COLUMN_BACKGROUND_COLOR, "" + "#EEEAF0");
             getContentResolver().insert(CONTENT_SETTING, values);

@@ -25,61 +25,77 @@
             android:textSize="@dimen/activity_18dp_margin" />
     </LinearLayout>
 
-    <android.support.v4.widget.NestedScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/ll_Header"
-        android:layout_margin="@dimen/activity_10dp_margin"
-        android:background="@color/white">
+        android:layout_below="@+id/ll_Header">
 
-        <LinearLayout
+        <com.binaryic.beinsync.common.TextViewPrimary
+            android:id="@+id/tv_No_Data"
+            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:text="Error connecting server."
+            android:visibility="gone"
+            android:textSize="18sp" />
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/ll_Header"
+            android:layout_margin="@dimen/activity_10dp_margin"
             android:background="@color/white"
-            android:orientation="vertical">
+            android:scrollbars="none">
 
-            <com.binaryic.beinsync.common.ImageViewBanner
-                android:id="@+id/iv_StoryImage"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical">
 
-            <RelativeLayout
-                android:id="@+id/sample_main_layout"
-
-                style="@style/Widget.CardContent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white">
-
-                <WebView
-                    android:id="@+id/webview"
+                <com.binaryic.beinsync.common.ImageViewBanner
+                    android:id="@+id/iv_StoryImage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-            </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/sample_main_layout"
 
-            <com.binaryic.beinsync.common.TextViewPrimary
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_8dp_margin"
-                android:text="Related Articles"
-                android:textColor="@color/black"
-                android:textSize="20sp" />
+                    style="@style/Widget.CardContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white">
 
-            <View
-                android:layout_margin="@dimen/activity_8dp_margin"
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/colorDarkGray" />
+                    <WebView
+                        android:id="@+id/webview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_RelatedStories"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+                </RelativeLayout>
 
-        </LinearLayout>
+                <com.binaryic.beinsync.common.TextViewPrimary
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_8dp_margin"
+                    android:text="Related Articles"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
 
-    </android.support.v4.widget.NestedScrollView>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_margin="@dimen/activity_8dp_margin"
+                    android:background="@color/colorDarkGray" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_RelatedStories"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+    </RelativeLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_Share"
