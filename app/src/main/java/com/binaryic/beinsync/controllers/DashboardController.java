@@ -26,8 +26,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static android.R.id.list;
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
 import static com.binaryic.beinsync.common.Constants.COLUMN_CATEGORY;
 import static com.binaryic.beinsync.common.Constants.COLUMN_ID;
 import static com.binaryic.beinsync.common.Constants.COLUMN_IMAGE;
@@ -102,6 +100,7 @@ public class DashboardController {
 
 
     }
+
     public static void getTopicsApiCall(final Activity context, String url, final ApiCallBack callback) {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override

@@ -20,6 +20,33 @@
             android:layout_marginTop="55.0dip">
 
         </FrameLayout>
+        <LinearLayout
+            android:id="@+id/ll_NoData"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <com.binaryic.beinsync.common.TextViewPrimary
+                android:id="@+id/tv_No_Data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Error connecting server."
+                android:textSize="18sp" />
+
+            <com.binaryic.beinsync.common.TextViewPrimary
+                android:id="@+id/tv_Sync"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_8dp_margin"
+                android:background="@drawable/rounded_border_orange"
+                android:gravity="center"
+                android:padding="@dimen/activity_8dp_margin"
+                android:text="Retry"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/iv_Add"

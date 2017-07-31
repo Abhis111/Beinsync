@@ -25,7 +25,7 @@ public class InternetConnectionDetector {
 
                 }
             if (show_Dialogue) {
-                Utils.showSnackBar(_context, view, "Sorry..!!!!!! No Internet Connection");
+                Utils.showSnackBar(_context, view, "No Internet Connection");
 
             }
         }

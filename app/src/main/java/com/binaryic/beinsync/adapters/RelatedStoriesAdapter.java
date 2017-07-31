@@ -13,6 +13,7 @@ import com.binaryic.beinsync.R;
 import com.binaryic.beinsync.activities.StoryViewActivity;
 import com.binaryic.beinsync.models.HomeModel;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 
@@ -43,7 +44,8 @@ public class RelatedStoriesAdapter extends RecyclerView.Adapter<RelatedStoriesAd
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Glide.with(context).load(list.get(position).getImage()).override(80, 80).into(holder.iv_Image);
+        Glide.with(context).load(list.get(position).getImage()) .thumbnail( 0.1f )
+                .diskCacheStrategy(DiskCacheStrategy.ALL).override(80, 80).into(holder.iv_Image);
         holder.tv_Name.setText(list.get(position).getTitle());
     }
 

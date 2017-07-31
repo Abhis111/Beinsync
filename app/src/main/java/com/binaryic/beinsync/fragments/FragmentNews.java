@@ -39,6 +39,7 @@ public class FragmentNews extends Fragment implements NewsAdapter.ScrollListener
     NewsAdapter adapter;
     LinearLayout ll_progress;
     TextView tv_No_Data;
+    String Category="";
     private static Tracker mTracker;
 
     @Override
@@ -55,6 +56,7 @@ public class FragmentNews extends Fragment implements NewsAdapter.ScrollListener
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             tv_CategoryName.setText((bundle.getString("category")));
+            Category=(bundle.getString("category"));
             id = (bundle.getString("id"));
             max_count = (bundle.getString("page_count"));
             mTracker.setScreenName( bundle.getString("category"));
@@ -80,7 +82,7 @@ public class FragmentNews extends Fragment implements NewsAdapter.ScrollListener
                 ll_progress.setVisibility(View.GONE);
                 ArrayList<HomeModel> array_Data = new ArrayList<>();
                 rv_Home.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-                rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data, array_Data.get(0).getTitle()));
+                rv_Home.setAdapter(new HomeAdapter(getActivity(), array_Data,Category));
             }
         });
     }
@@ -92,6 +94,7 @@ public class FragmentNews extends Fragment implements NewsAdapter.ScrollListener
         }
         if (array_Data.size() > 0) {
             tv_No_Data.setVisibility(View.GONE);
+            rv_Home.setVisibility(View.VISIBLE);
             if (page_no == 1) {
                 rv_Home.setLayoutManager(new LinearLayoutManager(getActivity()));
                 adapter = new NewsAdapter(getActivity(), array_Data);
@@ -103,6 +106,8 @@ public class FragmentNews extends Fragment implements NewsAdapter.ScrollListener
             }
         } else {
             tv_No_Data.setVisibility(View.VISIBLE);
+            rv_Home.setVisibility(View.GONE);
+
         }
     }
 

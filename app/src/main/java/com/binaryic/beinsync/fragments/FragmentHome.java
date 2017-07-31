@@ -36,7 +36,9 @@ public class FragmentHome extends Fragment implements HomeAdapter.ScrollListener
 
     private String link = "";
     private String category = "";
+    private LinearLayout ll_NoData;
     private TextView tv_No_Data;
+    private TextView tv_Sync;
     ArrayList<HomeModel> array_Data = new ArrayList<>();
     String id = "";
     String max_count = "1";
@@ -53,14 +55,20 @@ public class FragmentHome extends Fragment implements HomeAdapter.ScrollListener
         view = inflater.inflate(R.layout.fragment_home, container, false);
         ll_MainLayout = (RelativeLayout) view.findViewById(R.id.ll_MainLayout);
         rv_Home = (RecyclerView) view.findViewById(R.id.rv_Home);
+        ll_NoData = (LinearLayout) view.findViewById(R.id.ll_NoData);
         tv_No_Data = (TextView) view.findViewById(R.id.tv_No_Data);
+        tv_Sync = (TextView) view.findViewById(R.id.tv_Sync);
         ll_progress = (LinearLayout) view.findViewById(R.id.ll_progress);
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             category = (bundle.getString("category"));
         }
         generateLink();
-
+        tv_Sync.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
         return view;
     }
 
@@ -100,7 +108,7 @@ public class FragmentHome extends Fragment implements HomeAdapter.ScrollListener
     private void setUpRecyclerView(ArrayList<HomeModel> list) {
         ll_progress.setVisibility(View.GONE);
         if (list.size() > 0) {
-            tv_No_Data.setVisibility(View.GONE);
+            ll_NoData.setVisibility(View.GONE);
             if (page_no == 1) {
                 rv_Home.setVisibility(View.VISIBLE);
                 rv_Home.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -112,7 +120,7 @@ public class FragmentHome extends Fragment implements HomeAdapter.ScrollListener
                 adapter.notifyDataSetChanged();
             }
         } else {
-            tv_No_Data.setVisibility(View.VISIBLE);
+            ll_NoData.setVisibility(View.VISIBLE);
         }
     }
 

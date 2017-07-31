@@ -29,16 +29,22 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.binaryic.beinsync.R;
+import com.binaryic.beinsync.common.ApiCallBack;
 import com.binaryic.beinsync.common.Constants;
+import com.binaryic.beinsync.common.InternetConnectionDetector;
 import com.binaryic.beinsync.common.MyApplication;
 import com.binaryic.beinsync.common.Utils;
+import com.binaryic.beinsync.controllers.DashboardController;
 import com.binaryic.beinsync.fragments.FilterFragment;
 import com.binaryic.beinsync.fragments.FragmentDrawer;
 import com.binaryic.beinsync.fragments.FragmentHome;
 import com.binaryic.beinsync.fragments.MainFragment;
 import com.binaryic.beinsync.fragments.SettingNewFragment;
+import com.binaryic.beinsync.models.HomeModel;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
+
+import java.util.ArrayList;
 
 import static com.binaryic.beinsync.common.Constants.COLUMN_BACKGROUND_COLOR;
 import static com.binaryic.beinsync.common.Constants.COLUMN_FONT_NAME;
@@ -58,10 +64,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     RelativeLayout btnCart;
     RelativeLayout rl_Setting;
     RelativeLayout rl_Filter;
+    LinearLayout ll_NoData;
+    TextView tv_Sync;
     public static LinearLayout ll_textFormatOptions;
     private ImageView iv_Add;
     FragmentHome fragmentHome;
     MainFragment mainFragment;
+    ArrayList<HomeModel> list;
     private static Tracker mTracker;
 
     @Override
@@ -98,6 +107,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void init() {
 
+        tv_Sync = (TextView) findViewById(R.id.tv_Sync);
+        ll_NoData = (LinearLayout) findViewById(R.id.ll_NoData);
         ll_textFormatOptions = (LinearLayout) findViewById(R.id.ll_textFormatOptions);
         fl_Main = (FrameLayout) findViewById(R.id.fl_Main);
         fl_Main_Drawer = (FrameLayout) findViewById(R.id.fl_Main_Drawer);
@@ -116,7 +127,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // ll_textFormatOptions.setVisibility(View.VISIBLE);
         rl_Filter.setOnClickListener(this);
         rl_Setting.setOnClickListener(this);
+        tv_Sync.setOnClickListener(this);
         toolbarTitle.setVisibility(View.GONE);
+        list = DashboardController.getDashboardDataFromDatabase(this, "");
+
+        if (list.size() > 0) {
+            ll_NoData.setVisibility(View.GONE);
+            fl_Main.setVisibility(View.VISIBLE);
+        } else {
+            ll_NoData.setVisibility(View.VISIBLE);
+            fl_Main.setVisibility(View.GONE);
+
+        }
         defaultSetting();
         addTabsFragment();
         //addHomeFragment();
@@ -158,14 +180,50 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Utils.addFragment(MainActivity.this, mainFragment, R.id.fl_Main);
     }
 
+    private void getTopics() {
+        if (InternetConnectionDetector.isConnectingToInternet(this, drawer, true)) {
+            DashboardController.getTopicsApiCall(this, "http://www.beinsync.in/?json=get_category_index", new ApiCallBack() {
+                @Override
+                public void onSuccess(Object success) {
+                    Utils.downloading_Dialog.dismiss();
+                    ll_NoData.setVisibility(View.GONE);
+                    fl_Main.setVisibility(View.VISIBLE);
+                    addDrawerFragment();
+                    addTabsFragment();
+
+                }
+
+                @Override
+                public void onError(String error) {
+                    if (list.size() > 0) {
+                        ll_NoData.setVisibility(View.GONE);
+                        fl_Main.setVisibility(View.VISIBLE);
+                        addDrawerFragment();
+                        addTabsFragment();
+                    } else {
+                        ll_NoData.setVisibility(View.VISIBLE);
+                        fl_Main.setVisibility(View.GONE);
+                    }
+                    Utils.downloading_Dialog.dismiss();
+
+
+                }
+            });
+        } else {
+            Utils.downloading_Dialog.dismiss();
+            ll_NoData.setVisibility(View.VISIBLE);
+            fl_Main.setVisibility(View.GONE);
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-       /* getMenuInflater().inflate(R.menu.menu_main, menu);
-        MenuItem menuItem = menu.findItem(R.id.action_search);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        /*MenuItem menuItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
-        searchView.setOnQueryTextListener(this);
-*/
+        searchView.setOnQueryTextListener(this);*/
+
         return true;
     }
 
@@ -189,7 +247,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             aboutDialog();
         } else if (item.getItemId() == R.id.sync) {
             Utils.downloading_Dialog.show();
-            addTabsFragment();
+            getTopics();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -203,6 +261,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Fragment fragment;
 
         switch (v.getId()) {
+            case R.id.tv_Sync:
+                Utils.downloading_Dialog.show();
+                getTopics();
+                break;
             case R.id.rl_Setting:
                 fragment = SettingNewFragment.newInstance();
                 if (fragment != null) {

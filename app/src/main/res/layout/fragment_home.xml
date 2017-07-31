@@ -3,41 +3,58 @@
     android:id="@+id/ll_MainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:layout_marginTop="@dimen/activity_5dp_margin"
+    android:background="@color/white"
     android:orientation="vertical">
 
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_Home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_Home"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
 
-        </android.support.v7.widget.RecyclerView>
-
-    <com.binaryic.beinsync.common.TextViewPrimary
-        android:id="@+id/tv_No_Data"
+    <LinearLayout
+        android:id="@+id/ll_NoData"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
         android:gravity="center"
-        android:visibility="gone"
-        android:text="No Data Available...!!"
-        android:textColor="@color/black"
-        android:textSize="20dp" />
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <com.binaryic.beinsync.common.TextViewPrimary
+            android:id="@+id/tv_No_Data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Error connecting server."
+            android:textSize="18sp" />
+
+        <com.binaryic.beinsync.common.TextViewPrimary
+            android:id="@+id/tv_Sync"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_8dp_margin"
+            android:background="@drawable/rounded_border_orange"
+            android:gravity="center"
+            android:padding="@dimen/activity_8dp_margin"
+            android:text="Retry"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+    </LinearLayout>
+
     <LinearLayout
         android:id="@+id/ll_progress"
         android:layout_width="fill_parent"
-        android:visibility="visible"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:visibility="visible">
 
         <ProgressBar
+            android:id="@+id/progressBar"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/progressBar" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </RelativeLayout>

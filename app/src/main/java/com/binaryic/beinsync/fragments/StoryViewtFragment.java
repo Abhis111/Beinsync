@@ -26,6 +26,7 @@ import com.binaryic.beinsync.common.MyApplication;
 import com.binaryic.beinsync.controllers.DashboardController;
 import com.binaryic.beinsync.models.HomeModel;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.pddstudio.urlshortener.URLShortener;
@@ -82,6 +83,8 @@ public class StoryViewtFragment extends Fragment {
             url = (bundle.getString("url"));
             Glide.with(this)
                     .load(bundle.getString("image"))
+                    .thumbnail( 0.1f )
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(iv_StoryImage);
             content = bundle.getString("content");
             mTracker.setScreenName(bundle.getString("title"));
