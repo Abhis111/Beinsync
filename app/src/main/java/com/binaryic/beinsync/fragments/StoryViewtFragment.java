@@ -22,9 +22,12 @@ import android.widget.TextView;
 
 import com.binaryic.beinsync.R;
 import com.binaryic.beinsync.adapters.RelatedStoriesAdapter;
+import com.binaryic.beinsync.common.MyApplication;
 import com.binaryic.beinsync.controllers.DashboardController;
 import com.binaryic.beinsync.models.HomeModel;
 import com.bumptech.glide.Glide;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.pddstudio.urlshortener.URLShortener;
 
 import java.util.ArrayList;
@@ -56,6 +59,7 @@ public class StoryViewtFragment extends Fragment {
     private String category = "";
     private String id = "";
     private ArrayList<HomeModel> array_Related = new ArrayList<>();
+    private static Tracker mTracker;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -67,6 +71,9 @@ public class StoryViewtFragment extends Fragment {
 
     private void getExtra() {
         Bundle bundle = this.getArguments();
+        MyApplication application = (MyApplication) getActivity().getApplication();
+
+        mTracker = application.getDefaultTracker();
 
         if (bundle != null) {
             id = (bundle.getString("id"));
@@ -77,7 +84,8 @@ public class StoryViewtFragment extends Fragment {
                     .load(bundle.getString("image"))
                     .into(iv_StoryImage);
             content = bundle.getString("content");
-
+            mTracker.setScreenName("Story Name = " + bundle.getString("title"));
+            mTracker.send(new HitBuilders.ScreenViewBuilder().build());
         }
 
     }
@@ -179,6 +187,7 @@ public class StoryViewtFragment extends Fragment {
         iv_StoryImage = (ImageView) view.findViewById(R.id.iv_StoryImage);
         webview = (WebView) view.findViewById(R.id.webview);
         fab_Share = (FloatingActionButton) view.findViewById(R.id.fab_Share);
+
 
 
         getExtra();
