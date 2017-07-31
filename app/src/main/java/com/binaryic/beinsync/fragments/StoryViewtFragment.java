@@ -84,7 +84,7 @@ public class StoryViewtFragment extends Fragment {
                     .load(bundle.getString("image"))
                     .into(iv_StoryImage);
             content = bundle.getString("content");
-            mTracker.setScreenName("Story Name = " + bundle.getString("title"));
+            mTracker.setScreenName(bundle.getString("title"));
             mTracker.send(new HitBuilders.ScreenViewBuilder().build());
         }
 
@@ -187,7 +187,6 @@ public class StoryViewtFragment extends Fragment {
         iv_StoryImage = (ImageView) view.findViewById(R.id.iv_StoryImage);
         webview = (WebView) view.findViewById(R.id.webview);
         fab_Share = (FloatingActionButton) view.findViewById(R.id.fab_Share);
-
 
 
         getExtra();

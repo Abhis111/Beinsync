@@ -57,7 +57,7 @@ public class FragmentNews extends Fragment implements NewsAdapter.ScrollListener
             tv_CategoryName.setText((bundle.getString("category")));
             id = (bundle.getString("id"));
             max_count = (bundle.getString("page_count"));
-            mTracker.setScreenName("Story category = " + bundle.getString("category"));
+            mTracker.setScreenName( bundle.getString("category"));
             mTracker.send(new HitBuilders.ScreenViewBuilder().build());
         }
         getDashboardData();
