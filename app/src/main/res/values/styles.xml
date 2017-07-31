@@ -9,9 +9,9 @@
     </style>
 
     <style name="MyCustomToolbar" parent="ThemeOverlay.AppCompat.Light">
-        <item name="android:textColorPrimary">@color/white</item>
-        <item name="android:background">@color/theme_blue</item>
-        <item name="android:textColorSecondary">@color/white</item>
+        <item name="android:textColorPrimary">@color/theme_orange</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:textColorSecondary">@color/theme_orange</item>
     </style>
 
     <style name="ToolbarColoredBackArrow" parent="AppTheme">

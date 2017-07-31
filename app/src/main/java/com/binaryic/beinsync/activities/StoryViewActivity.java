@@ -32,7 +32,7 @@ public class StoryViewActivity extends AppCompatActivity {
             bundle.putString("id", getIntent().getStringExtra("id"));
             category = getIntent().getStringExtra("category");
             bundle.putString("category", getIntent().getStringExtra("category"));
-            Log.e("StoryViewActivity","category=="+category);
+            Log.e("StoryViewActivity", "category==" + category);
 
             bundle.putString("title", getIntent().getStringExtra("title"));
             bundle.putString("image", getIntent().getStringExtra("image"));
@@ -52,16 +52,15 @@ public class StoryViewActivity extends AppCompatActivity {
 
 
     private void setToolBar() {
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_group_chat);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-      //  setActionBarTitle(category.toString());
+        setActionBarTitle(R.string.app_name);
     }
 
-    void setActionBarTitle(String title) {
+    void setActionBarTitle(int title) {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(title);
         }
@@ -70,11 +69,9 @@ public class StoryViewActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
         if (id == android.R.id.home) {
             onBackPressed();
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -82,6 +79,7 @@ public class StoryViewActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
     }
+
 
 
 }

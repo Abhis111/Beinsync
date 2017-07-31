@@ -10,17 +10,15 @@
         android:fitsSystemWindows="true">
 
         <android.support.v7.widget.Toolbar
+            app:theme="@style/MyCustomToolbar"
             android:id="@+id/toolbar_group_chat"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:popupTheme="@style/Theme.AppCompat.Light"
-            app:theme="@style/MyCustomToolbar">
-
+            app:popupTheme="@style/Theme.AppCompat.Light">
 
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
-
     <FrameLayout
         android:id="@+id/fl_Main"
         android:layout_width="match_parent"
