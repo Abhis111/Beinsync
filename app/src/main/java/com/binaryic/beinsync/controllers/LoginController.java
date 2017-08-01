@@ -58,6 +58,7 @@ public class LoginController {
                 params.put("device_id", getDeviceID(context));
                 params.put("model_no", getDeviceName());
                 params.put("imei_no", getIMEI(context));
+                params.put("android_version", android.os.Build.VERSION.RELEASE);
 
                 Log.e("sendPhoneDetailsApi", "params" + params.toString());
                 return params;
