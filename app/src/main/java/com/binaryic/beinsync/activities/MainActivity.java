@@ -130,8 +130,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_Sync.setOnClickListener(this);
         toolbarTitle.setVisibility(View.GONE);
         list = DashboardController.getDashboardDataFromDatabase(this, "");
-
-        if (list.size() > 0) {
+        if (InternetConnectionDetector.isInternetWorking()) {
+            ll_NoData.setVisibility(View.GONE);
+            fl_Main.setVisibility(View.VISIBLE);
+        } else if (list.size() > 0) {
             ll_NoData.setVisibility(View.GONE);
             fl_Main.setVisibility(View.VISIBLE);
         } else {
@@ -158,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             values.put(COLUMN_TEXT_ALIGNMENT, "justify");
             values.put(COLUMN_FONT_NAME, "Proxima Nova");
             values.put(COLUMN_TEXT_COLOR, "" + "#2D292B");
-            values.put(COLUMN_BACKGROUND_COLOR, "" + "#EEEAF0");
+            values.put(COLUMN_BACKGROUND_COLOR, "" + "#FFFFFF");
             getContentResolver().insert(CONTENT_SETTING, values);
         }
         cursor.close();

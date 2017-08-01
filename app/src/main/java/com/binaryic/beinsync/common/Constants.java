@@ -50,18 +50,16 @@ public class Constants {
 
     public static String TABLE_USER = "TABLE_USER";
     public static String TABLE_TAGS = "TABLE_TAGS";
-    public static final String ID = "ID";
     public static final String STORY_ID = "STORY_ID";
-    public static final String USER_NAME = "USER_NAME";
-    public static final String AGE = "AGE";
-    public static final String AHARCARDNO = "AHARCARDNO";
-    public static final String CATEGORY = "CATEGORY";
-    public static final String OCCUPATION = "OCCUPATION";
-    public static final String LOCATION_OF_WORK = "LOCATION_OF_WORK";
-    public static final String TIME_WORK = "TIME_WORK";
-    public static final String TRANSPORT_MODE = "TRANSPORT_MODE";
-    public static final String VEHICLE_USED = "VEHICLE_USED";
-    public static final String MOBILE_NO = "MOBILE_NO";
+    public static final String COLUMN_USER_NAME = "COLUMN_USER_NAME";
+    public static final String COLUMN_AGE = "COLUMN_AGE";
+    public static final String COLUMN_AHARCARDNO = "COLUMN_AHARCARDNO";
+    public static final String COLUMN_OCCUPATION = "COLUMN_OCCUPATION";
+    public static final String COLUMN_LOCATION_OF_WORK = "COLUMN_LOCATION_OF_WORK";
+    public static final String COLUMN_TIME_WORK = "COLUMN_TIME_WORK";
+    public static final String COLUMN_TRANSPORT_MODE = "COLUMN_TRANSPORT_MODE";
+    public static final String COLUMN_VEHICLE_USED = "COLUMN_VEHICLE_USED";
+    public static final String COLUMN_MOBILE_NO = "COLUMN_MOBILE_NO";
 
 
      public static String TABLE_SETTING = "TABLE_SETTING";
