@@ -43,6 +43,7 @@ import com.binaryic.beinsync.fragments.SettingNewFragment;
 import com.binaryic.beinsync.models.HomeModel;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
+import com.google.firebase.crash.FirebaseCrash;
 
 import java.util.ArrayList;
 
@@ -77,6 +78,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        FirebaseCrash.report(new Exception("My first Android non-fatal error"));
+
         Utils.createDialog(this);
         setSideMenu();
         MyApplication application = (MyApplication) getApplication();

@@ -258,14 +258,27 @@ public class StoryViewtFragment extends Fragment {
         protected void onPostExecute(String result) {
             // execution of result of Long time consuming operation
             progressDialog.dismiss();
-            try {
-                Intent i = new Intent(Intent.ACTION_SEND);
-                i.setType("text/plain");
-                i.putExtra(Intent.EXTRA_SUBJECT, R.string.app_name);
-                i.putExtra(Intent.EXTRA_TEXT, result);
-                startActivity(Intent.createChooser(i, "choose one"));
-            } catch (Exception e) {
-                Log.e("StoryViewFragment", "error==" + e.getMessage());
+            Log.e("resudasadlt", "==" + result);
+            if (result !=null) {
+                try {
+                    Intent i = new Intent(Intent.ACTION_SEND);
+                    i.setType("text/plain");
+                    i.putExtra(Intent.EXTRA_SUBJECT, R.string.app_name);
+                    i.putExtra(Intent.EXTRA_TEXT, result);
+                    startActivity(Intent.createChooser(i, "choose one"));
+                } catch (Exception e) {
+                    Log.e("StoryViewFragment", "error==" + e.getMessage());
+                }
+            } else {
+                try {
+                    Intent i = new Intent(Intent.ACTION_SEND);
+                    i.setType("text/plain");
+                    i.putExtra(Intent.EXTRA_SUBJECT, R.string.app_name);
+                    i.putExtra(Intent.EXTRA_TEXT, url);
+                    startActivity(Intent.createChooser(i, "choose one"));
+                } catch (Exception e) {
+                    Log.e("StoryViewFragment", "error==" + e.getMessage());
+                }
             }
         }
 
